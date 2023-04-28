@@ -1,0 +1,98 @@
+﻿<Page x:Class="MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserAuthorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserAuthorizationPage"
+      Loaded="UserAuthorizationPage_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" x:Name="NavigateBeforeButton" Click="NavigateBeforeButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateBefore}" Style="{DynamicResource NavigationButtonStyle}"/>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Адрес эл. почты" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBox Name="UserDataLoginTextBox" TextChanged="UserDataLoginTextBox_TextChanged" MaxLength="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
+
+                        <Button Name="ClearLoginButton" Click="ClearLoginButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock Name="UserDataLoginTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 0 0 13" Text="Адрес эл. почты" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+
+                <ComboBox Name="UserDataLoginMailDomainComboBox" Width="115" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 5" Style="{DynamicResource MailDomainComboBoxStyle}">
+                    <ComboBox.ItemContainerStyle>
+                        
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                            <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#5AF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Пароль" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <PasswordBox Name="UserDataPasswordPasswordBox" PasswordChanged="UserDataPasswordPasswordBox_PasswordChanged" MaxLength="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataPasswordBoxStyle}"/>
+
+                        <Button Name="ClearPasswordButton" Click="ClearPasswordButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBox Name="UserDataPasswordTextBox" TextChanged="UserDataPasswordTextBox_TextChanged" MaxLength="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0 5 5 5" Style="{DynamicResource UserDataTextBoxStyle}"/>
+
+                <TextBlock Name="UserDataPasswordTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 0 0 13" Text="Пароль" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+
+                <Button Name="ChangeUserDataPasswordVisibilityButton" Click="ChangeUserDataPasswordVisibilityButton_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 5" Content="{materialDesign:PackIcon Kind=Eye}" Style="{DynamicResource ChangeUserDataPasswordVisibilityButtonStyle}"/>
+            </Grid>
+
+            <CheckBox Name="RememberMeCheckBox" Checked="RememberMeCheckBox_Checked" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Запомнить меня" Style="{DynamicResource RememberMeCheckBoxStyle}"/>
+        </StackPanel>
+
+        <Border Name="AlertBorderMessage" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Name="AlertBorderMessageType" Margin="5" Text="Ошибка" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
+                <TextBlock Text=":" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
+                <TextBlock Name="AlertBorderMessageText" Margin="5" Text="Текст ошибки" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Button Name="NavigateConfirmButton" Click="NavigateConfirmButton_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=Check}" Style="{DynamicResource NavigationButtonStyle}"/>
+    </Grid>
+</Page>

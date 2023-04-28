@@ -1,0 +1,40 @@
+﻿<Window x:Class="MedicineCenterAutomatedProgram.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MEDICINE CENTER" 
+        Height="600" Width="1000"
+        ResizeMode="CanResizeWithGrip"
+        SizeToContent="Manual"
+        ShowInTaskbar="True"
+        Topmost="False"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="None"
+        Loaded="MainWindow_Loaded"
+        MinHeight="500" MinWidth="900">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#5AF" MouseLeftButtonDown="HeaderGrid_MouseLeftButtonDown">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="MEDICINE CENTER" Style="{DynamicResource HeaderTextBlockStyle}"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+                <Button Name="MinimizeWindowButton" Click="MinimizeWindowButton_Click" Content="{materialDesign:PackIcon Kind=WindowMinimize}" Style="{DynamicResource HeaderButtonStyle}"/>
+
+                <Button Name="MaximizeWindowButton" Click="MaximizeWindowButton_Click" Content="{materialDesign:PackIcon Kind=WindowMaximize}" Style="{DynamicResource HeaderButtonStyle}"/>
+
+                <Button Name="CloseWindowButton" Click="CloseWindowButton_Click" Content="{materialDesign:PackIcon Kind=WindowClose}" Style="{DynamicResource HeaderButtonCloseStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <Frame Name="MainFrame" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

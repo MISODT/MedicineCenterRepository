@@ -1,0 +1,129 @@
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
+{
+    public partial class UserAuthorizationPage : Page
+    {
+
+        public UserAuthorizationPage()
+        {
+            InitializeComponent();
+        }
+
+        private void NavigationNextButtonState()
+        {
+            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            {
+                if (!string.IsNullOrWhiteSpace(UserDataLoginTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPasswordTextBox.Text))
+                {
+                    NavigateConfirmButton.IsEnabled = true;
+                }
+
+                else
+                {
+                    NavigateConfirmButton.IsEnabled = false;
+                }
+            }
+
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(UserDataLoginTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPasswordPasswordBox.Password))
+                {
+                    NavigateConfirmButton.IsEnabled = true;
+                }
+
+                else
+                {
+                    NavigateConfirmButton.IsEnabled = false;
+                }
+            }
+        }
+
+        private void UserAuthorizationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserDataPasswordTextBox.Visibility = Visibility.Hidden;
+
+            ClearLoginButton.Visibility = Visibility.Hidden;
+            ClearPasswordButton.Visibility = Visibility.Hidden;
+
+            RememberMeCheckBox.IsChecked = false;
+
+            UserDataLoginMailDomainComboBox.ItemsSource = OuteriorControlsInitializationManager.LoginMailDomainComboBoxInitialization();
+
+            InteriorControlsInitializationManager.MailDomainComboBoxPrimaryInitialization(UserDataLoginMailDomainComboBox);
+
+            AlertBorderMessage.Visibility = Visibility.Hidden;
+
+            NavigationNextButtonState();
+        }
+
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new WelcomePage());
+
+        private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e) 
+        {
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+
+            NavigationNextButtonState();
+        }
+
+        private void ClearLoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataLoginTextBox.Text = "";
+        }
+
+        private void UserDataPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+
+            NavigationNextButtonState();
+        }
+
+        private void UserDataPasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+
+            NavigationNextButtonState();
+        }
+
+        private void ChangeUserDataPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => UserDataFieldsViewManager.ChangeUserDataPasswordVisibility(UserDataPasswordTextBox, UserDataPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
+
+        private void ClearPasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataPasswordTextBox.Text = "";
+            UserDataPasswordPasswordBox.Password = "";
+        }
+
+        private void RememberMeCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NavigateConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            {
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text))
+                {
+                    CredentialsUserDataOperationsManager.UserDataAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
+
+                    //FrameManager.MainFrame.Navigate();
+                }
+            }
+
+            else
+            {
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password))
+                {
+                    CredentialsUserDataOperationsManager.UserDataAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
+
+                    //FrameManager.MainFrame.Navigate();
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\MedicineCenter.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DefaultImages\DefaultUserDataProfilePhotoImage.png" />
+    <None Remove="Resources\Icons\MedicineCenter.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icons\MedicineCenter.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\DefaultImages\DefaultUserDataProfilePhotoImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\MedicineCenter.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.1.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.8" />
+    <PackageReference Include="NPOI" Version="2.6.0" />
+  </ItemGroup>
+
+</Project>

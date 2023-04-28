@@ -1,0 +1,151 @@
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRegistration
+{
+    public partial class UserRegistrationPersonalPage : Page
+    {
+        public UserRegistrationPersonalPage(Users user)
+        {
+            InitializeComponent();
+
+            DataContext = user;
+        }
+
+        private void NavigationNextButtonState()
+        {
+            if (!string.IsNullOrWhiteSpace(UserDataNameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataSurnameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPatronymicTextBox.Text) && UserDataDayOfBirthComboBox.SelectedItem != null && UserDataMonthOfBirthComboBox.SelectedItem != null && UserDataYearOfBirthComboBox.SelectedItem != null && (SelectMaleGenderRadioButton.IsChecked == true || SelectFemaleGenderRadioButton.IsChecked == true))
+            {
+                NavigateNextButton.IsEnabled = true;
+            }
+
+            else
+            {
+                NavigateNextButton.IsEnabled = false;
+            }
+        }
+
+        private void UserRegistrationPersonalDataPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            ClearNameButton.Visibility = Visibility.Hidden;
+            ClearSurnameButton.Visibility = Visibility.Hidden;
+            ClearPatronymicButton.Visibility = Visibility.Hidden;
+
+            UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
+            UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
+            UserDataPatronymicMistakeTextBlock.Visibility = Visibility.Hidden;
+            UserDataDateOfBirthMistakeTextBlock.Visibility = Visibility.Hidden;
+
+            InteriorControlsInitializationManager.DayComboBoxInitialization(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
+            InteriorControlsInitializationManager.MonthComboBoxInitialization(UserDataMonthOfBirthComboBox);
+            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataYearOfBirthComboBox, DateTime.Now.Year);
+
+            NavigationNextButtonState();
+        }
+
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationProfilePhotoPage(UserDataSectionsInstance.User));
+
+        private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+
+            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
+
+            NavigationNextButtonState();
+        }
+
+        private void ClearNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataNameTextBox.Text = "";
+        }
+
+        private void UserDataSurnameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+
+            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
+
+            NavigationNextButtonState();
+        }
+
+        private void ClearSurnameButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataSurnameTextBox.Text = "";
+        }
+
+        private void UserDataPatronymicTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
+
+            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
+
+            NavigationNextButtonState();
+        }
+
+        private void ClearPatronymicButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataPatronymicTextBox.Text = "";
+        }
+
+        private void UserDataDayOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {
+            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataDayOfBirthComboBox, UserDataDayOfBirthComboBoxHintAssist);
+
+            NavigationNextButtonState();
+        }
+
+        private void UserDataMonthOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataMonthOfBirthComboBox, UserDataMonthOfBirthComboBoxHintAssist);
+
+            InteriorControlsInitializationManager.DayComboBoxInitialization(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
+
+            InteriorControlsInitializationManager.MonthNumberComboBoxInitialization(UserDataMonthOfBirthComboBox);
+
+            NavigationNextButtonState();
+        }
+
+        private void UserDataYearOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {
+            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataYearOfBirthComboBox, UserDataYearOfBirthComboBoxHintAssist);
+
+            UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock);
+
+            NavigationNextButtonState();
+        }
+
+        private void SelectMaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsInstance.User.UserGenderIsMale = true;
+
+            UserDataSectionsInstance.User.UserGender = "Мужской";
+
+            NavigationNextButtonState();
+        }
+
+        private void SelectFemaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsInstance.User.UserGenderIsFemale = true;
+
+            UserDataSectionsInstance.User.UserGender = "Женский";
+
+            NavigationNextButtonState();
+        }
+
+        private void NavigateNextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя") && 
+               UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию") &&
+               UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество") &&
+               UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock))
+            {
+                FrameManager.MainFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
+            }
+        }
+    }
+}

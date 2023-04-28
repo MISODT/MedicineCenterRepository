@@ -1,0 +1,37 @@
+﻿<Page x:Class="MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRegistration.UserRegistrationProfilePhotoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRegistration" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserRegistrationProfilePhotoPage"
+      Loaded="UserRegistrationProfilePhotoPage_Loaded">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Button Name="NavigateBeforeButton" Grid.Column="0" Grid.RowSpan="3" Click="NavigateBeforeButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateBefore}" Style="{DynamicResource NavigationButtonStyle}"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Name="UserDataProfilePhotoImage" Width="200" Height="200" Margin="10"/>
+            <Button Name="SelectUserDataProfilePhotoImageButton" Click="SelectUserDataProfilePhotoImageButton_Click" Width="200" Height="30" Margin="10" Content="Выбрать фото" Style="{DynamicResource PrimaryButtonStyle}"/>
+        </StackPanel>
+
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Шаг 1 из 5 - Фото профиля" Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
+
+        <Button Name="NavigateNextButton" Grid.Column="2" Grid.RowSpan="3" Click="NavigateNextButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateNext}" Style="{DynamicResource NavigationButtonStyle}"/>
+    </Grid>
+</Page>
