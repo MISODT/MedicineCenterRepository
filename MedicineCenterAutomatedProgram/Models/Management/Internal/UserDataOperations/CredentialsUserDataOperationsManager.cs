@@ -1,24 +1,69 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
-using System.Windows;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
 {
     public class CredentialsUserDataOperationsManager
     {
-        public static string UserDataAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
+        public static Patients? UserDataPatientAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
-            foreach(var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientId FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}' AND PatientPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientId, PatientName, PatientSurname, PatientDateOfBirth, PatientGender, PatientAddressId, PatientSchoolId, PatientUniversityId, PatientUniversityStartEducationYear, PatientUniversityEndEducationYear, PatientLogin, PatientPassword FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}' AND PatientPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                return patient.PatientId;
+                if(patient.PatientId != "")
+                {
+                    UserDataSectionsInstance.Patient = new Patients()
+                    {
+                        PatientId = patient.PatientId,
+                        PatientName = patient.PatientName,
+                        PatientSurname = patient.PatientSurname,
+                        PatientPatronymic = patient.PatientPatronymic,
+                        PatientDateOfBirth = patient.PatientDateOfBirth,
+                        PatientGender = patient.PatientGender,
+                        PatientAddressId = patient.PatientAddressId,
+                        PatientSchoolId = patient.PatientSchoolId,
+                        PatientUniversityId = patient.PatientUniversityId,
+                        PatientUniversityStartEducationYear = patient.PatientUniversityStartEducationYear,
+                        PatientUniversityEndEducationYear = patient.PatientUniversityEndEducationYear,
+                        PatientLogin = patient.PatientLogin,
+                        PatientPassword = patient.PatientPassword
+                    };
+
+                    return UserDataSectionsInstance.Patient;
+                }
             }
 
-            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT DoctorId FROM Doctors WHERE DoctorLogin = '{userDataLogin}{userDataLoginMailDomain}' AND DoctorPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            return null;
+        }
+
+        public static Doctors? UserDataDoctorAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
+        {
+            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT DoctorId, DoctorName, DoctorSurname, DoctorDateOfBirth, DoctorGender, DoctorAddressId, DoctorSchoolId, DoctorUniversityId, DoctorUniversityStartEducationYear, DoctorUniversityEndEducationYear, DoctorLogin, DoctorPassword FROM Doctors WHERE DoctorLogin = '{userDataLogin}{userDataLoginMailDomain}' AND DoctorPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                return doctor.DoctorId;
+                if (doctor.DoctorId != "")
+                {
+                    UserDataSectionsInstance.Doctor = new Doctors()
+                    {
+                        DoctorId = doctor.DoctorId,
+                        DoctorName = doctor.DoctorName,
+                        DoctorSurname = doctor.DoctorSurname,
+                        DoctorPatronymic = doctor.DoctorPatronymic,
+                        DoctorDateOfBirth = doctor.DoctorDateOfBirth,
+                        DoctorGender = doctor.DoctorGender,
+                        DoctorAddressId = doctor.DoctorAddressId,
+                        DoctorSchoolId = doctor.DoctorSchoolId,
+                        DoctorUniversityId = doctor.DoctorUniversityId,
+                        DoctorUniversityStartEducationYear = doctor.DoctorUniversityStartEducationYear,
+                        DoctorUniversityEndEducationYear = doctor.DoctorUniversityEndEducationYear,
+                        DoctorLogin = doctor.DoctorLogin,
+                        DoctorPassword = doctor.DoctorPassword
+                    };
+
+                    return UserDataSectionsInstance.Doctor;
+                }
             }
 
-            return "";
+            return null;
         }
 
         public static void UserDataRegistrationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)

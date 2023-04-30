@@ -1,7 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +9,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationPersonalPage : Page
     {
-        public UserRegistrationPersonalPage(Users user)
+        public UserRegistrationPersonalPage(UserDataSectionsBinding user)
         {
             InitializeComponent();
 

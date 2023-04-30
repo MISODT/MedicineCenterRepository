@@ -1,5 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages;
+using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -49,7 +52,15 @@ namespace MedicineCenterAutomatedProgram
         {
             FrameManager.MainFrame = MainFrame;
 
-            MainFrame.Navigate(new WelcomePage());
+            if (UserDataSectionsRemember.RememberUserDataConfigExists())
+            {
+                FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsRemember.RememberUserDataPatientUnseal(), UserDataSectionsRemember.RememberUserDataDoctorUnseal()));
+            }
+
+            else
+            {
+                MainFrame.Navigate(new WelcomePage());
+            }
         }
     }
 }

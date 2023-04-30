@@ -2,6 +2,8 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -98,30 +100,31 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
             UserDataPasswordPasswordBox.Password = "";
         }
 
-        private void RememberMeCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void NavigateConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text))
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, AlertBorderMessage, AlertBorderMessageType, AlertBorderMessageText))
                 {
-                    CredentialsUserDataOperationsManager.UserDataAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
+                    FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(CredentialsUserDataOperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), CredentialsUserDataOperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
 
-                    //FrameManager.MainFrame.Navigate();
+                    if (RememberMeCheckBox.IsChecked == true)
+                    {
+                        UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
+                    }
                 }
             }
 
             else
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password))
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, AlertBorderMessage, AlertBorderMessageType, AlertBorderMessageText))
                 {
-                    CredentialsUserDataOperationsManager.UserDataAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
+                    FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(CredentialsUserDataOperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), CredentialsUserDataOperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
 
-                    //FrameManager.MainFrame.Navigate();
+                    if (RememberMeCheckBox.IsChecked == true)
+                    {
+                        UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -54,8 +54,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
             UserDataLoginMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
-
-            AlertBorderMessage.Visibility = Visibility.Hidden;
 
             UserDataLoginMailDomainComboBox.ItemsSource = OuteriorControlsInitializationManager.LoginMailDomainComboBoxInitialization();
 
@@ -128,7 +126,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void NavigateConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserDataInternalMistakesManager.InternalUserDataLoginMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), AlertBorderMessage, AlertBorderMessageType, AlertBorderMessageText))
+            if (UserDataInternalMistakesManager.InternalUserDataLoginMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), "Логин уже зарегистрирован"))
             {
                 if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
                 {

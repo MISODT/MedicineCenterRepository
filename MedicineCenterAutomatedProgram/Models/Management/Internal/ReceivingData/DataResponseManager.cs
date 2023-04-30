@@ -1,4 +1,5 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -6,16 +7,16 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
 {
     public class DataResponseManager
     {
-        public static List<Patients> PatientsJsonDataDeserialize(string patientsDataQuery)
+        public static List<Patients> PatientsJsonDataDeserialize(string patientDataQuery)
         {
-            var patientsDataList = JsonSerializer.Deserialize<List<Patients>>(WebResponseManager.GetJsonResponseFromRequestQuery(patientsDataQuery));
+            var patientsDataList = JsonSerializer.Deserialize<List<Patients>>(WebResponseManager.GetJsonResponseFromRequestQuery(patientDataQuery));
 
             return patientsDataList;
         }
 
-        public static List<Doctors> DoctorsJsonDataDeserialize(string doctorsDataQuery)
+        public static List<Doctors> DoctorsJsonDataDeserialize(string doctorDataQuery)
         {
-            var doctorsDataList = JsonSerializer.Deserialize<List<Doctors>>(WebResponseManager.GetJsonResponseFromRequestQuery(doctorsDataQuery));
+            var doctorsDataList = JsonSerializer.Deserialize<List<Doctors>>(WebResponseManager.GetJsonResponseFromRequestQuery(doctorDataQuery));
 
             return doctorsDataList;
         }

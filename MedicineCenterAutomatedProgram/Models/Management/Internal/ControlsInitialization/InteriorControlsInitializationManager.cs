@@ -1,6 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Views.Windows.AlertWindows;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -132,22 +134,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
         }
 
-        public static void AlertMessageBorderItemsInitialization(Border alertMessageBorder, TextBlock alertMessageTypeTextBlock, string alertMessageType, TextBlock alertMessageTextTextBlock, string alertMessageText)
+        public static void AlertMessageBorderItemsInitialization(string errorAlertWindowText)
         {
-            Application.Current.Dispatcher.InvokeAsync(async () =>
-            {
-                alertMessageBorder.Visibility = Visibility.Visible;
+            ErrorAlertWindow errorAlertWindow = new ErrorAlertWindow(errorAlertWindowText);
 
-                alertMessageBorder.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+            Application.Current.MainWindow.Opacity = 0.6;
 
-                alertMessageTypeTextBlock.Text = alertMessageType;
-
-                alertMessageTextTextBlock.Text = alertMessageText;
-
-                await Task.Delay(2000);
-
-                alertMessageBorder.Visibility = Visibility.Hidden;
-            });
+            errorAlertWindow.ShowDialog();
         }
     }
 }

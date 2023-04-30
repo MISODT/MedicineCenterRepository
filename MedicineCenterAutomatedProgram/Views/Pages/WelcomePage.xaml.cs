@@ -1,6 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction;
 using MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRegistration;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages
 
         private void WelcomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User = new Users();
+            UserDataSectionsInstance.User = new UserDataSectionsBinding();
         }
 
         private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserAuthorizationPage());

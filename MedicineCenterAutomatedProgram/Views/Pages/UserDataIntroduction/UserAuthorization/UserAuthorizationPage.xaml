@@ -16,11 +16,6 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
-
         <Button Grid.Column="0" x:Name="NavigateBeforeButton" Click="NavigateBeforeButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateBefore}" Style="{DynamicResource NavigationButtonStyle}"/>
 
         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -29,7 +24,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Адрес эл. почты" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBox Name="UserDataLoginTextBox" TextChanged="UserDataLoginTextBox_TextChanged" MaxLength="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                        <TextBox Name="UserDataLoginTextBox" Text="{Binding Login}" TextChanged="UserDataLoginTextBox_TextChanged" MaxLength="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
 
                         <Button Name="ClearLoginButton" Click="ClearLoginButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
                     </StackPanel>
@@ -39,11 +34,11 @@
 
                 <ComboBox Name="UserDataLoginMailDomainComboBox" Width="115" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 5" Style="{DynamicResource MailDomainComboBoxStyle}">
                     <ComboBox.ItemContainerStyle>
-                        
+
                         <Style TargetType="{x:Type ComboBoxItem}">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"/>
-                            
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ComboBoxItem}">
@@ -53,7 +48,7 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            
+
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#5AF"/>
@@ -82,16 +77,8 @@
                 <Button Name="ChangeUserDataPasswordVisibilityButton" Click="ChangeUserDataPasswordVisibilityButton_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 5" Content="{materialDesign:PackIcon Kind=Eye}" Style="{DynamicResource ChangeUserDataPasswordVisibilityButtonStyle}"/>
             </Grid>
 
-            <CheckBox Name="RememberMeCheckBox" Checked="RememberMeCheckBox_Checked" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Запомнить меня" Style="{DynamicResource RememberMeCheckBoxStyle}"/>
+            <CheckBox Name="RememberMeCheckBox" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Запомнить меня" Style="{DynamicResource RememberMeCheckBoxStyle}"/>
         </StackPanel>
-
-        <Border Name="AlertBorderMessage" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="3">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Name="AlertBorderMessageType" Margin="5" Text="Ошибка" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
-                <TextBlock Text=":" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
-                <TextBlock Name="AlertBorderMessageText" Margin="5" Text="Текст ошибки" Style="{DynamicResource AlertUserControlItemsTextBlockStyle}"/>
-            </StackPanel>
-        </Border>
 
         <Button Name="NavigateConfirmButton" Click="NavigateConfirmButton_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=Check}" Style="{DynamicResource NavigationButtonStyle}"/>
     </Grid>

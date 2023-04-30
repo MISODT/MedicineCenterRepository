@@ -1,18 +1,19 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
-using System.Windows.Controls;
 
-namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections
+namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations
 {
-    public class Users
+    public class UserDataSectionsBinding
     {
         public bool UserPositionIsPatient { get; set; }
 
         public bool UserPositionIsDoctor { get; set; }
 
 
+        public string UserId { get; set; }
+
         public string UserName { get; set; }
 
-        public string UserSurname{ get; set; }
+        public string UserSurname { get; set; }
 
         public string UserPatronymic { get; set; }
 
@@ -74,6 +75,10 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
         public int UserUniversityStartEducationYear { get; set; }
 
         public int UserUniversityEndEducationYear { get; set; }
+
+        public string UserLogin { get; set; }
+
+        public string UserPassword { get; set; }
 
         public void ExtractUserAddressData()
         {

@@ -1,9 +1,7 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using Microsoft.Win32;
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -12,7 +10,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationProfilePhotoPage : Page
     {
-        public UserRegistrationProfilePhotoPage(Users user)
+        public UserRegistrationProfilePhotoPage(UserDataSectionsBinding user)
         {
             InitializeComponent();
 
