@@ -1,12 +1,11 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
-using System.Windows.Controls;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal
 {
     public class UserDataInternalMistakesManager
     {
-        public static bool InternalUserDataMistakesHandler(string userDataLogin, string userDataLoginMailDomain, string userDataPassword, Border alertMessageBorder, TextBlock alertMessageTypeTextBlock, TextBlock alertMessageTextTextBlock)
+        public static bool InternalUserDataMistakesHandler(string userDataLogin, string userDataLoginMailDomain, string userDataPassword, string errorAlertWindowText)
         {
             foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientLogin, PatientPassword FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}' AND PatientPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
@@ -24,7 +23,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
                 }
             }
 
-            InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization("Логин или пароль указаны неверно");
+            InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
 
             return false;
         }

@@ -59,8 +59,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
             InteriorControlsInitializationManager.MailDomainComboBoxPrimaryInitialization(UserDataLoginMailDomainComboBox);
 
-            AlertBorderMessage.Visibility = Visibility.Hidden;
-
             NavigationNextButtonState();
         }
 
@@ -104,7 +102,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
         {
             if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, AlertBorderMessage, AlertBorderMessageType, AlertBorderMessageText))
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, "Пользователь не найден"))
                 {
                     FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(CredentialsUserDataOperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), CredentialsUserDataOperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
 
@@ -117,7 +115,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
             else
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, AlertBorderMessage, AlertBorderMessageType, AlertBorderMessageText))
+                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, "Пользователь не найден"))
                 {
                     FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(CredentialsUserDataOperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), CredentialsUserDataOperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
 

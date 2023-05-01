@@ -139,7 +139,7 @@
             </Grid>
         </StackPanel>
 
-        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Шаг 3 из 5 - Место жительства" Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Регистрация: Шаг 3 из 5 - Место жительства" Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
 
         <Button Grid.Column="3" x:Name="NavigateNextButton" Click="NavigateNextButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateNext}" Style="{DynamicResource NavigationButtonStyle}"/>
     </Grid>

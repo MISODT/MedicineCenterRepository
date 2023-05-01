@@ -28,13 +28,13 @@
 
             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#DDD" CornerRadius="10" Width="200" Height="50" Margin="5">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <RadioButton Name="SelectPatientRadioButton" Checked="SelectPatientRadioButton_Checked" IsChecked="{Binding UserPositionIsPatient}" Content="Пациент" Style="{DynamicResource UserDataIntroducingRadioButtonStyle}"/>
-                    <RadioButton Name="SelectDoctorRadioButton" Checked="SelectDoctorRadioButton_Checked" IsChecked="{Binding UserPositionIsDoctor}" Content="Врач" Style="{DynamicResource UserDataIntroducingRadioButtonStyle}"/>
+                    <RadioButton Name="SelectPatientRadioButton" Checked="SelectPatientRadioButton_Checked" IsChecked="{Binding UserPositionIsPatient}" Margin="10" Content="Пациент" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                    <RadioButton Name="SelectDoctorRadioButton" Checked="SelectDoctorRadioButton_Checked" IsChecked="{Binding UserPositionIsDoctor}" Margin="10" Content="Врач" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
                 </StackPanel>
             </Border>
         </StackPanel>
 
-        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" Margin="55 0 0 0" Text="Мы готовы принять каждого из вас." Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Мы готовы принять каждого из вас." Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
 
         <Button Grid.Column="2" x:Name="NavigateNextButton" Click="NavigateNextButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateNext}" Style="{DynamicResource NavigationButtonStyle}"/>
     </Grid>

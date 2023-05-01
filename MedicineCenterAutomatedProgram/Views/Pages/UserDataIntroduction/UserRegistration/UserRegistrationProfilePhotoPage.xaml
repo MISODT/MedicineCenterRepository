@@ -27,10 +27,11 @@
 
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Name="UserDataProfilePhotoImage" Width="200" Height="200" Margin="10"/>
-            <Button Name="SelectUserDataProfilePhotoImageButton" Click="SelectUserDataProfilePhotoImageButton_Click" Width="200" Height="30" Margin="10" Content="Выбрать фото" Style="{DynamicResource PrimaryButtonStyle}"/>
+            
+            <Button Name="SelectUserDataProfilePhotoImageButton" Click="SelectUserDataProfilePhotoImageButton_Click" Width="200" Height="30" Margin="10" Content="Выбрать фото" Style="{DynamicResource UserDataIntroductionButtonStyle}"/>
         </StackPanel>
 
-        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Шаг 1 из 5 - Фото профиля" Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55 0 0 0" Text="Регистрация: Шаг 1 из 5 - Фото профиля" Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
 
         <Button Name="NavigateNextButton" Grid.Column="2" Grid.RowSpan="3" Click="NavigateNextButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateNext}" Style="{DynamicResource NavigationButtonStyle}"/>
     </Grid>
