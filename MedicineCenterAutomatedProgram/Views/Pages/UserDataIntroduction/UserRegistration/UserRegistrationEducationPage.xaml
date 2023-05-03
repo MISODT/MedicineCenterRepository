@@ -24,7 +24,7 @@
         <Button Grid.Column="0" x:Name="NavigateBeforeButton" Click="NavigateBeforeButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=NavigateBefore}" Style="{DynamicResource NavigationButtonStyle}"/>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Город" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
@@ -125,7 +125,7 @@
                 </Grid>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Город" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>

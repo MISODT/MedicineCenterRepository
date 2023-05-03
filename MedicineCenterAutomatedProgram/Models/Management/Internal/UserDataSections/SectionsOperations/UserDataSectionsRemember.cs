@@ -65,19 +65,20 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
 
                 UserDataSectionsInstance.Patient = new Patients()
                 {
-                    PatientId = patient.PatientId,
-                    PatientName = patient.PatientName,
-                    PatientSurname = patient.PatientSurname,
-                    PatientPatronymic = patient.PatientPatronymic,
-                    PatientDateOfBirth = patient.PatientDateOfBirth,
-                    PatientGender = patient.PatientGender,
-                    PatientAddressId = patient.PatientAddressId,
-                    PatientSchoolId = patient.PatientSchoolId,
-                    PatientUniversityId = patient.PatientUniversityId,
-                    PatientUniversityStartEducationYear = patient.PatientUniversityStartEducationYear,
-                    PatientUniversityEndEducationYear = patient.PatientUniversityEndEducationYear,
-                    PatientLogin = patient.PatientLogin,
-                    PatientPassword = patient.PatientPassword
+                    Id = patient.Id,
+                    ProfilePhotoUri = patient.ProfilePhotoUri,
+                    Name = patient.Name,
+                    Surname = patient.Surname,
+                    Patronymic = patient.Patronymic,
+                    DateOfBirth = patient.DateOfBirth,
+                    Gender = patient.Gender,
+                    AddressId = patient.AddressId,
+                    SchoolId = patient.SchoolId,
+                    UniversityId = patient.UniversityId,
+                    UniversityStartEducationYear = patient.UniversityStartEducationYear,
+                    UniversityEndEducationYear = patient.UniversityEndEducationYear,
+                    Login = patient.Login,
+                    Password = patient.Password
                 };
 
                 return UserDataSectionsInstance.Patient;
@@ -99,19 +100,20 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
 
                 UserDataSectionsInstance.Doctor = new Doctors()
                 {
-                    DoctorId = doctor.DoctorId,
-                    DoctorName = doctor.DoctorName,
-                    DoctorSurname = doctor.DoctorSurname,
-                    DoctorPatronymic = doctor.DoctorPatronymic,
-                    DoctorDateOfBirth = doctor.DoctorDateOfBirth,
-                    DoctorGender = doctor.DoctorGender,
-                    DoctorAddressId = doctor.DoctorAddressId,
-                    DoctorSchoolId = doctor.DoctorSchoolId,
-                    DoctorUniversityId = doctor.DoctorUniversityId,
-                    DoctorUniversityStartEducationYear = doctor.DoctorUniversityStartEducationYear,
-                    DoctorUniversityEndEducationYear = doctor.DoctorUniversityEndEducationYear,
-                    DoctorLogin = doctor.DoctorLogin,
-                    DoctorPassword = doctor.DoctorPassword
+                    Id = doctor.Id,
+                    ProfilePhotoUri = doctor.ProfilePhotoUri,
+                    Name = doctor.Name,
+                    Surname = doctor.Surname,
+                    Patronymic = doctor.Patronymic,
+                    DateOfBirth = doctor.DateOfBirth,
+                    Gender = doctor.Gender,
+                    AddressId = doctor.AddressId,
+                    SchoolId = doctor.SchoolId,
+                    UniversityId = doctor.UniversityId,
+                    UniversityStartEducationYear = doctor.UniversityStartEducationYear,
+                    UniversityEndEducationYear = doctor.UniversityEndEducationYear,
+                    Login = doctor.Login,
+                    Password = doctor.Password
                 };
 
                 return UserDataSectionsInstance.Doctor;

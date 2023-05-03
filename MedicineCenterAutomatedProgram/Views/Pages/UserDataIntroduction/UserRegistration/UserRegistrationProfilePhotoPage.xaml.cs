@@ -1,6 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
-using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,31 +10,23 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationProfilePhotoPage : Page
     {
-        public UserRegistrationProfilePhotoPage(UserDataSectionsBinding user)
+        public UserRegistrationProfilePhotoPage()
         {
             InitializeComponent();
-
-            DataContext = user;
         }
 
         private void UserRegistrationProfilePhotoPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Uri defaultImageUri = new Uri("/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png", UriKind.Relative);
+            Uri userImageUri = new Uri(UserDataSectionsInstance.User.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
 
-            UserDataProfilePhotoImage.Source = new BitmapImage(defaultImageUri);
+            UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
         }
 
         private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.ShowDialog();
-
-            Uri selectedImageUri = new Uri(openFileDialog.FileName);
-
-            UserDataProfilePhotoImage.Source = new BitmapImage(selectedImageUri);
+            UserDataSectionsInstance.User.UserProfilePhotoUri = InteriorControlsInitializationManager.ProfilePhotoImageInitialization(UserDataProfilePhotoImage);
         }
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));

@@ -1,17 +1,45 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Windows.AlertWindows;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization
 {
     public class InteriorControlsInitializationManager
     {
+        public static string ProfilePhotoImageInitialization(Image profilePhotoImage)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.ShowDialog();
+
+            if (openFileDialog.FileName != "")
+            {
+                Uri selectedImageUri = new Uri($"{openFileDialog.FileName}", UriKind.Absolute);
+
+                profilePhotoImage.Source = new BitmapImage(selectedImageUri);
+
+                return openFileDialog.FileName.Replace('\\', '/');
+            }
+
+            else
+            {
+                Uri defaultImageUri = new Uri("/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png", UriKind.Relative);
+
+                profilePhotoImage.Source = new BitmapImage(defaultImageUri);
+
+                return "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+            }
+        }
+
         public static void DayComboBoxInitialization(ComboBox dayOfBirthComboBox, int monthOfBirthNumber)
         {
             List<int> daysList = new List<int>();

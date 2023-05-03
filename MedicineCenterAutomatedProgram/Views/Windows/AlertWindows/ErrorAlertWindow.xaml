@@ -17,13 +17,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="#A00"/>
 
-        <TextBlock Grid.Row="1" Name="ErrorAlertWindowTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource AlertWindowTextBlockStyle}"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Name="ErrorAlertWindowTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Style="{DynamicResource AlertWindowTextBlockStyle}"/>
 
-        <Button Grid.Row="2" Name="ErrorAlertWindowOKButton" Click="ErrorAlertWindowOKButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Content="OK" Style="{DynamicResource PrimaryButtonStyle}"/>
+            <Button Name="ErrorAlertWindowOKButton" Click="ErrorAlertWindowOKButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Margin="1" Content="OK" Style="{DynamicResource AlertWindowButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -21,10 +21,111 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="HeaderButtonClose.MouseOver.Background" Color="#F55"/>
-    <SolidColorBrush x:Key="HeaderButtonClose.MouseOver.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="HeaderButtonClose.Pressed.Background" Color="#F55"/>
-    <SolidColorBrush x:Key="HeaderButtonClose.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserDataOutProfileButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserDataOutProfileButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserDataOutProfileButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserDataOutProfileButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserDataOutProfileButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserDataOutProfileButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserDataOutProfileButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserDataOutProfileButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserDataOutProfileButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UserDataIntroductionButtonContentTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#222"/>
+    </Style>
+
+    <Style x:Key="UserProfileDataTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#222"/>
+    </Style>
+
+    <SolidColorBrush x:Key="UserDataProfileButton.Static.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.Static.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.MouseOver.Background" Color="#AAA"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.Pressed.Background" Color="#AAA"/>
+    <SolidColorBrush x:Key="UserDataProfileButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserDataProfileButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserDataProfileButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserDataProfileButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserDataProfileButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserDataProfileButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserDataProfileButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserDataProfileButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserDataProfileButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <SolidColorBrush x:Key="UserDataComboBox.Static.Background" Color="#DDD"/>
     <SolidColorBrush x:Key="UserDataComboBox.Static.Border" Color="#DDD"/>
@@ -1004,6 +1105,54 @@
         <Setter Property="Foreground" Value="#222"/>
     </Style>
 
+    <SolidColorBrush x:Key="AlertWindowButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="AlertWindowButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="AlertWindowButton.Static.Glyph" Color="#222"/>
+    <SolidColorBrush x:Key="AlertWindowButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="AlertWindowButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="AlertWindowButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="AlertWindowButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="AlertWindowButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource AlertWindowButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AlertWindowButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource AlertWindowButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#222"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource AlertWindowButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource AlertWindowButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource AlertWindowButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource AlertWindowButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="HeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
@@ -1058,6 +1207,11 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <SolidColorBrush x:Key="HeaderButtonClose.MouseOver.Background" Color="#F55"/>
+    <SolidColorBrush x:Key="HeaderButtonClose.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="HeaderButtonClose.Pressed.Background" Color="#F55"/>
+    <SolidColorBrush x:Key="HeaderButtonClose.Pressed.Border" Color="Transparent"/>
 
     <Style x:Key="HeaderButtonCloseStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>

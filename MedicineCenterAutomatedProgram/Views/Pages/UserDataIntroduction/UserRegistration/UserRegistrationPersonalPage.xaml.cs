@@ -31,9 +31,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserRegistrationPersonalDataPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ClearNameButton.Visibility = Visibility.Hidden;
-            ClearSurnameButton.Visibility = Visibility.Hidden;
-            ClearPatronymicButton.Visibility = Visibility.Hidden;
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -47,7 +47,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationProfilePhotoPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationProfilePhotoPage());
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

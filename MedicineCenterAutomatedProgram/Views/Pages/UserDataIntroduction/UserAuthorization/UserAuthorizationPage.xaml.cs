@@ -50,8 +50,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
         {
             UserDataPasswordTextBox.Visibility = Visibility.Hidden;
 
-            ClearLoginButton.Visibility = Visibility.Hidden;
-            ClearPasswordButton.Visibility = Visibility.Hidden;
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             RememberMeCheckBox.IsChecked = false;
 

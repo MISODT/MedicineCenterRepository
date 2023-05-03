@@ -1,4 +1,4 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System.Windows;
@@ -19,6 +19,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         private void UserMainInteractionHomePage_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UserDataProfileButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor));
+
+        private void UserDataOutProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsRemember.RememberUserDataConfigRemove();
+
+            FrameManager.MainFrame.Navigate(new WelcomePage());
         }
     }
 }

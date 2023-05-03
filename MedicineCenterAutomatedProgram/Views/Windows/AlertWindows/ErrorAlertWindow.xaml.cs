@@ -11,6 +11,11 @@ namespace MedicineCenterAutomatedProgram.Views.Windows.AlertWindows
             ErrorAlertWindowTextBlock.Text = ErrorAlertWindowText;
         }
 
-        private void ErrorAlertWindowOKButton_Click(object sender, RoutedEventArgs e) => Close();
+        private void ErrorAlertWindowOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Opacity = 1;
+
+            Close();
+        }
     }
 }

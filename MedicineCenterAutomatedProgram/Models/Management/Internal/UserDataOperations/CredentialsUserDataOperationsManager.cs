@@ -8,25 +8,26 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
     {
         public static Patients? UserDataPatientAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
-            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientId, PatientName, PatientSurname, PatientDateOfBirth, PatientGender, PatientAddressId, PatientSchoolId, PatientUniversityId, PatientUniversityStartEducationYear, PatientUniversityEndEducationYear, PatientLogin, PatientPassword FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}' AND PatientPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password FROM Patients WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                if(patient.PatientId != "")
+                if(patient.Id != "")
                 {
                     UserDataSectionsInstance.Patient = new Patients()
                     {
-                        PatientId = patient.PatientId,
-                        PatientName = patient.PatientName,
-                        PatientSurname = patient.PatientSurname,
-                        PatientPatronymic = patient.PatientPatronymic,
-                        PatientDateOfBirth = patient.PatientDateOfBirth,
-                        PatientGender = patient.PatientGender,
-                        PatientAddressId = patient.PatientAddressId,
-                        PatientSchoolId = patient.PatientSchoolId,
-                        PatientUniversityId = patient.PatientUniversityId,
-                        PatientUniversityStartEducationYear = patient.PatientUniversityStartEducationYear,
-                        PatientUniversityEndEducationYear = patient.PatientUniversityEndEducationYear,
-                        PatientLogin = patient.PatientLogin,
-                        PatientPassword = patient.PatientPassword
+                        Id = patient.Id,
+                        ProfilePhotoUri = patient.ProfilePhotoUri,
+                        Name = patient.Name,
+                        Surname = patient.Surname,
+                        Patronymic = patient.Patronymic,
+                        DateOfBirth = patient.DateOfBirth,
+                        Gender = patient.Gender,
+                        AddressId = patient.AddressId,
+                        SchoolId = patient.SchoolId,
+                        UniversityId = patient.UniversityId,
+                        UniversityStartEducationYear = patient.UniversityStartEducationYear,
+                        UniversityEndEducationYear = patient.UniversityEndEducationYear,
+                        Login = patient.Login,
+                        Password = patient.Password
                     };
 
                     return UserDataSectionsInstance.Patient;
@@ -38,25 +39,26 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
 
         public static Doctors? UserDataDoctorAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
-            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT DoctorId, DoctorName, DoctorSurname, DoctorDateOfBirth, DoctorGender, DoctorAddressId, DoctorSchoolId, DoctorUniversityId, DoctorUniversityStartEducationYear, DoctorUniversityEndEducationYear, DoctorLogin, DoctorPassword FROM Doctors WHERE DoctorLogin = '{userDataLogin}{userDataLoginMailDomain}' AND DoctorPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password FROM Doctors WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                if (doctor.DoctorId != "")
+                if (doctor.Id != "")
                 {
                     UserDataSectionsInstance.Doctor = new Doctors()
                     {
-                        DoctorId = doctor.DoctorId,
-                        DoctorName = doctor.DoctorName,
-                        DoctorSurname = doctor.DoctorSurname,
-                        DoctorPatronymic = doctor.DoctorPatronymic,
-                        DoctorDateOfBirth = doctor.DoctorDateOfBirth,
-                        DoctorGender = doctor.DoctorGender,
-                        DoctorAddressId = doctor.DoctorAddressId,
-                        DoctorSchoolId = doctor.DoctorSchoolId,
-                        DoctorUniversityId = doctor.DoctorUniversityId,
-                        DoctorUniversityStartEducationYear = doctor.DoctorUniversityStartEducationYear,
-                        DoctorUniversityEndEducationYear = doctor.DoctorUniversityEndEducationYear,
-                        DoctorLogin = doctor.DoctorLogin,
-                        DoctorPassword = doctor.DoctorPassword
+                        Id = doctor.Id,
+                        ProfilePhotoUri = doctor.ProfilePhotoUri,
+                        Name = doctor.Name,
+                        Surname = doctor.Surname,
+                        Patronymic = doctor.Patronymic,
+                        DateOfBirth = doctor.DateOfBirth,
+                        Gender = doctor.Gender,
+                        AddressId = doctor.AddressId,
+                        SchoolId = doctor.SchoolId,
+                        UniversityId = doctor.UniversityId,
+                        UniversityStartEducationYear = doctor.UniversityStartEducationYear,
+                        UniversityEndEducationYear = doctor.UniversityEndEducationYear,
+                        Login = doctor.Login,
+                        Password = doctor.Password
                     };
 
                     return UserDataSectionsInstance.Doctor;
@@ -70,12 +72,12 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
         {
             if (UserDataSectionsInstance.User.UserPositionIsPatient)
             {
-                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Patients (PatientName, PatientSurname, PatientPatronymic, PatientDateOfBirth, PatientGender, PatientAddressId, PatientSchoolId, PatientUniversityId, PatientUniversityStartEducationYear, PatientUniversityEndEducationYear, PatientLogin, PatientPassword) VALUES ('{UserDataSectionsInstance.User.UserName}', '{UserDataSectionsInstance.User.UserSurname}', '{UserDataSectionsInstance.User.UserPatronymic}', '{UserDataSectionsInstance.User.UserYearOfBirth}-{UserDataSectionsInstance.User.UserMonthOfBirthNumber}-{UserDataSectionsInstance.User.UserDayOfBirth}', '{UserDataSectionsInstance.User.UserGender}', {UserDataSectionsInstance.User.UserAddressId}, {UserDataSectionsInstance.User.UserSchoolId}, {UserDataSectionsInstance.User.UserUniversityId}, {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, {UserDataSectionsInstance.User.UserUniversityEndEducationYear}, '{userDataLogin}{userDataLoginMailDomain}', '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}');");
+                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Patients (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{UserDataSectionsInstance.User.UserProfilePhotoUri}', '{UserDataSectionsInstance.User.UserName}', '{UserDataSectionsInstance.User.UserSurname}', '{UserDataSectionsInstance.User.UserPatronymic}', '{UserDataSectionsInstance.User.UserYearOfBirth}-{UserDataSectionsInstance.User.UserMonthOfBirthNumber}-{UserDataSectionsInstance.User.UserDayOfBirth}', '{UserDataSectionsInstance.User.UserGender}', {UserDataSectionsInstance.User.UserAddressId}, {UserDataSectionsInstance.User.UserSchoolId}, {UserDataSectionsInstance.User.UserUniversityId}, {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, {UserDataSectionsInstance.User.UserUniversityEndEducationYear}, '{userDataLogin}{userDataLoginMailDomain}', '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}');");
             }
 
             if (UserDataSectionsInstance.User.UserPositionIsDoctor)
             {
-                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Doctors (DoctorName, DoctorSurname, DoctorPatronymic, DoctorDateOfBirth, DoctorGender, DoctorAddressId, DoctorSchoolId, DoctorUniversityId, DoctorUniversityStartEducationYear, DoctorUniversityEndEducationYear, DoctorLogin, DoctorPassword) VALUES ('{UserDataSectionsInstance.User.UserName}', '{UserDataSectionsInstance.User.UserSurname}', '{UserDataSectionsInstance.User.UserPatronymic}', '{UserDataSectionsInstance.User.UserYearOfBirth}-{UserDataSectionsInstance.User.UserMonthOfBirthNumber}-{UserDataSectionsInstance.User.UserDayOfBirth}', '{UserDataSectionsInstance.User.UserGender}', {UserDataSectionsInstance.User.UserAddressId}, {UserDataSectionsInstance.User.UserSchoolId}, {UserDataSectionsInstance.User.UserUniversityId}, {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, {UserDataSectionsInstance.User.UserUniversityEndEducationYear}, '{userDataLogin}{userDataLoginMailDomain}', '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}');");
+                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Doctors (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{UserDataSectionsInstance.User.UserProfilePhotoUri}', '{UserDataSectionsInstance.User.UserName}', '{UserDataSectionsInstance.User.UserSurname}', '{UserDataSectionsInstance.User.UserPatronymic}', '{UserDataSectionsInstance.User.UserYearOfBirth}-{UserDataSectionsInstance.User.UserMonthOfBirthNumber}-{UserDataSectionsInstance.User.UserDayOfBirth}', '{UserDataSectionsInstance.User.UserGender}', {UserDataSectionsInstance.User.UserAddressId}, {UserDataSectionsInstance.User.UserSchoolId}, {UserDataSectionsInstance.User.UserUniversityId}, {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, {UserDataSectionsInstance.User.UserUniversityEndEducationYear}, '{userDataLogin}{userDataLoginMailDomain}', '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}');");
             }
         }
     }

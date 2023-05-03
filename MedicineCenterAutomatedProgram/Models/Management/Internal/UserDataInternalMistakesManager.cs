@@ -7,17 +7,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
     {
         public static bool InternalUserDataMistakesHandler(string userDataLogin, string userDataLoginMailDomain, string userDataPassword, string errorAlertWindowText)
         {
-            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientLogin, PatientPassword FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}' AND PatientPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Login, Password FROM Patients WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                if (patient.PatientLogin == $"{userDataLogin}{userDataLoginMailDomain}" && patient.PatientPassword == $"{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}")
+                if (patient.Login == $"{userDataLogin}{userDataLoginMailDomain}" && patient.Password == $"{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}")
                 {
                     return true;
                 }
             }
 
-            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT DoctorLogin, DoctorPassword FROM Doctors WHERE DoctorLogin = '{userDataLogin}{userDataLoginMailDomain}' AND DoctorPassword = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Login, Password FROM Doctors WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
-                if (doctor.DoctorLogin == $"{userDataLogin}{userDataLoginMailDomain}" && doctor.DoctorPassword == $"{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}")
+                if (doctor.Login == $"{userDataLogin}{userDataLoginMailDomain}" && doctor.Password == $"{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}")
                 {
                     return true;
                 }
@@ -30,9 +30,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
 
         public static bool InternalUserDataLoginMistakesHandler(string userDataLogin, string userDataLoginMailDomain, string errorAlertWindowText)
         {
-            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT PatientLogin FROM Patients WHERE PatientLogin = '{userDataLogin}{userDataLoginMailDomain}'"))
+            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Login FROM Patients WHERE Login = '{userDataLogin}{userDataLoginMailDomain}'"))
             {
-                if (patient.PatientLogin == $"{userDataLogin}{userDataLoginMailDomain}")
+                if (patient.Login == $"{userDataLogin}{userDataLoginMailDomain}")
                 {
                     InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
 
@@ -40,9 +40,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
                 }
             }
 
-            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT DoctorLogin FROM Doctors WHERE DoctorLogin = '{userDataLogin}{userDataLoginMailDomain}'"))
+            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Login FROM Doctors WHERE Login = '{userDataLogin}{userDataLoginMailDomain}'"))
             {
-                if (doctor.DoctorLogin == $"{userDataLogin}{userDataLoginMailDomain}")
+                if (doctor.Login == $"{userDataLogin}{userDataLoginMailDomain}")
                 {
                     InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
 

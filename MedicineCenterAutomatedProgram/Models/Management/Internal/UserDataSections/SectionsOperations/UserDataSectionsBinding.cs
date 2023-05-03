@@ -8,6 +8,8 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
 
         public bool UserPositionIsDoctor { get; set; }
 
+        public string? UserProfilePhotoUri { get; set; } = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+
 
         public string UserId { get; set; }
 

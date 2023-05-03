@@ -30,7 +30,9 @@
     <PackageReference Include="MaterialDesignColors" Version="2.1.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.8" />
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
     <PackageReference Include="NPOI" Version="2.6.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>
