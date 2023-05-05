@@ -34,6 +34,42 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             return citiesTitleList;
         }
 
+        public static string AddressCityComboBoxSelectedValueInitialization()
+        {
+            string cityTitle = "";
+
+            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            {
+                cityTitle = city.CityTitle;
+            }
+
+            return cityTitle;
+        }
+
+        public static string AddressStreetComboBoxSelectedValueInitialization()
+        {
+            string streetTitle = "";
+
+            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            {
+                streetTitle = street.StreetTitle;
+            }
+
+            return streetTitle;
+        }
+
+        public static string AddressHouseComboBoxSelectedValueInitialization()
+        {
+            string houseNumber = "";
+
+            foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND StreetTitle = '{UserDataSectionsInstance.User.AddressStreetTitle}' AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            {
+                houseNumber = house.HouseNumber;
+            }
+
+            return houseNumber;
+        }
+
         public static List<string> AddressStreetComboBoxInitialization()
         {
             List<string> streetsTitleList = new List<string>();

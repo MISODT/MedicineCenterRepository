@@ -6,10 +6,208 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserMainInteractionProfilePage">
+      Title="UserMainInteractionProfilePage"
+      Loaded="UserMainInteractionProfilePage_Loaded">
 
     <Grid>
-        <Button Name="UserProfileDataSaveButton" Click="UserProfileDataSaveButton_Click" Width="125" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataIntroductionButtonStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" Style="{DynamicResource UserDataProfileScrollViewerStyle}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Text="Личные данные" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 35 0">
+                        <Image Name="UserDataProfilePhotoImage" Source="{Binding UserProfilePhotoUri}" Width="125" Height="125" Margin="5"/>
+
+                        <TextBlock Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding ProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
+
+                        <TextBlock Name="UserDataProfilePhotoUriMistakeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Фото профиля" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="35 0 0 0">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    <TextBlock Text="Имя" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBox Name="UserDataNameTextBox" TextChanged="UserDataNameTextBox_TextChanged" Text="{Binding UserName}" MaxLength="50" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                                    <Button Name="ClearNameButton" Click="ClearNameButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                                </StackPanel>
+
+                                <TextBlock Name="UserDataNameMistakeTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Имя" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <TextBlock Name="UserDataNameTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 3 0 0" Text="Имя" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    <TextBlock Text="Фамилия" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBox Name="UserDataSurnameTextBox" TextChanged="UserDataSurnameTextBox_TextChanged" Text="{Binding UserSurname}" MaxLength="50" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                                    <Button Name="ClearSurnameButton" Click="ClearSurnameButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                                </StackPanel>
+
+                                <TextBlock Name="UserDataSurnameMistakeTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Фамилия" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <TextBlock Name="UserDataSurnameTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 3 0 0" Text="Фамилия" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    <TextBlock Text="Отчество" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBox Name="UserDataPatronymicTextBox" TextChanged="UserDataPatronymicTextBox_TextChanged" Text="{Binding UserPatronymic}" MaxLength="50" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                                    <Button Name="ClearPatronymicButton" Click="ClearPatronymicButton_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                                </StackPanel>
+
+                                <TextBlock Name="UserDataPatronymicMistakeTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Отчество" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <TextBlock Name="UserDataPatronymicTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 3 0 0" Text="Отчество" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <RadioButton x:Name="SelectMaleGenderRadioButton" IsChecked="{Binding UserGenderIsMale}" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+
+                            <RadioButton x:Name="SelectFemaleGenderRadioButton" IsChecked="{Binding UserGenderIsFemale}" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Text="Место жительства" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            <TextBlock Name="UserDataCityTextBoxLabelHintAssist" Text="Город" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <ComboBox Name="UserDataCityComboBox" SelectionChanged="UserDataCityComboBox_SelectionChanged" SelectedValue="{Binding AddressCityTitle}" Width="270" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ComboBoxItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                                    <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#5AF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Name="UserDataCityTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 0 0 7" Text="Город" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                </Grid>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            <TextBlock Text="Улица" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <ComboBox Name="UserDataStreetComboBox" SelectionChanged="UserDataStreetComboBox_SelectionChanged" SelectedValue="{Binding AddressStreetTitle}" Width="270" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ComboBoxItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                                    <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#5AF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Name="UserDataStreetTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 0 7 0" Text="Улица" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                </Grid>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            <TextBlock Text="Дом" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+                        </StackPanel>
+
+                        <ComboBox Name="UserDataHouseComboBox" SelectionChanged="UserDataHouseComboBox_SelectionChanged" SelectedValue="{Binding AddressHouseNumber}" Width="270" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ComboBoxItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                                    <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#5AF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Name="UserDataHouseTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5 0 0 7" Text="Дом" Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="1" Name="UserProfileDataSaveButton" Click="UserProfileDataSaveButton_Click" Width="125" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataIntroductionButtonStyle}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=ContentSave}"/>
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Сохранить" Style="{DynamicResource UserDataIntroductionButtonContentTextBlock}"/>

@@ -21,7 +21,36 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         }
 
-        private void UserDataProfileButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor));
+        private void UserDataProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(UserDataSectionsInstance.Patient != null)
+            {
+                UserDataSectionsInstance.User = new UserDataSectionsBinding()
+                {
+                    UserId = UserDataSectionsInstance.Patient.Id,
+                    UserProfilePhotoUri = UserDataSectionsInstance.Patient.ProfilePhotoUri,
+                    UserName = UserDataSectionsInstance.Patient.Name,
+                    UserSurname = UserDataSectionsInstance.Patient.Surname,
+                    UserPatronymic = UserDataSectionsInstance.Patient.Patronymic,
+                    UserAddressId = UserDataSectionsInstance.Patient.AddressId
+                };
+            }
+
+            if (UserDataSectionsInstance.Doctor != null)
+            {
+                UserDataSectionsInstance.User = new UserDataSectionsBinding()
+                {
+                    UserId = UserDataSectionsInstance.Doctor.Id,
+                    UserProfilePhotoUri = UserDataSectionsInstance.Doctor.ProfilePhotoUri,
+                    UserName = UserDataSectionsInstance.Doctor.Name,
+                    UserSurname = UserDataSectionsInstance.Doctor.Surname,
+                    UserPatronymic = UserDataSectionsInstance.Doctor.Patronymic,
+                    UserAddressId = UserDataSectionsInstance.Doctor.AddressId
+                };
+            }
+
+            FrameManager.MainFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.User));
+        }
 
         private void UserDataOutProfileButton_Click(object sender, RoutedEventArgs e)
         {
