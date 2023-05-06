@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -83,6 +84,27 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
                 userDataDayOfBirthComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
                 userDataMonthOfBirthComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
                 userDataYearOfBirthComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                return true;
+            }
+        }
+
+        public static bool ExternalUserDataProfilePhotoUriMistakesHandler(TextBlock userDataProfilePhotoUriTextBlock, TextBlock userDataProfilePhotoUriMistakeTextBlock, string userDataProfilePhotoUriMistakeString)
+        {
+            if (!File.Exists(userDataProfilePhotoUriTextBlock.Text))
+            {
+                userDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Visible;
+
+                userDataProfilePhotoUriMistakeTextBlock.Text = userDataProfilePhotoUriMistakeString;
+
+                return false;
+            }
+
+            else
+            {
+                userDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
+
+                userDataProfilePhotoUriMistakeTextBlock.Text = "";
 
                 return true;
             }

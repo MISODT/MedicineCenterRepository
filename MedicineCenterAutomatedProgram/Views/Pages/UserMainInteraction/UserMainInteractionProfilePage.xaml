@@ -17,13 +17,20 @@
 
         <ScrollViewer Grid.Row="0" Style="{DynamicResource UserDataProfileScrollViewerStyle}">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Text="Личные данные" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25" Text="Личные данные" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
                 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 35 0">
-                        <Image Name="UserDataProfilePhotoImage" Source="{Binding UserProfilePhotoUri}" Width="125" Height="125" Margin="5"/>
+                        <Image Name="UserDataProfilePhotoImage" Source="{Binding UserProfilePhotoUri}" Width="150" Height="150" Margin="5"/>
 
-                        <TextBlock Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding UserProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
+                        <Button Name="SelectUserDataProfilePhotoImageButton" Click="SelectUserDataProfilePhotoImageButton_Click" Width="125" Height="35" Margin="10" Style="{DynamicResource UserDataIntroductionButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Image}"/>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Выбрать" Style="{DynamicResource UserDataIntroductionButtonContentTextBlock}"/>
+                            </StackPanel>
+                        </Button>
+
+                        <TextBlock Name="UserDataProfilePhotoUriTextBlock" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding UserProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
 
                         <TextBlock Name="UserDataProfilePhotoUriMistakeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Фото профиля" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
                     </StackPanel>
@@ -100,7 +107,7 @@
                     </StackPanel>
                 </Grid>
 
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Text="Место жительства" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25" Text="Место жительства" Style="{DynamicResource UserDataLabelTextBlockStyle}"/>
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

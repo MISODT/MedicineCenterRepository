@@ -1,8 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
-using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -42,6 +40,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
+
+            UserDataExternalMistakesManager.ExternalUserDataProfilePhotoUriMistakesHandler(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден");
+
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataPatronymicMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -55,6 +56,11 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             UserDataCityComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressCityComboBoxInitialization();
             UserDataStreetComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressStreetComboBoxInitialization();
             UserDataHouseComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressHouseComboBoxInitialization();
+        }
+
+        private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsInstance.User.UserProfilePhotoUri = InteriorControlsInitializationManager.ProfilePhotoImageInitialization(UserDataProfilePhotoImage);
         }
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
