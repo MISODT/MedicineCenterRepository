@@ -17,6 +17,24 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             DataContext = user;
         }
 
+        public void UserProfileDataGenderDefinition()
+        {
+            if (UserDataSectionsInstance.User.UserGender == "Мужской")
+            {
+                SelectMaleGenderRadioButton.IsChecked = true;
+            }
+
+            if (UserDataSectionsInstance.User.UserGender == "Женский")
+            {
+                SelectFemaleGenderRadioButton.IsChecked = true;
+            }
+
+            if (UserDataSectionsInstance.User.UserGender == "Не указан")
+            {
+                SelectUndefinedGenderRadioButton.IsChecked = true;
+            }
+        }
+
         private void UserMainInteractionProfilePage_Loaded(object sender, RoutedEventArgs e)
         {
             UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
@@ -27,6 +45,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataPatronymicMistakeTextBlock.Visibility = Visibility.Hidden;
+
+            UserProfileDataGenderDefinition();
 
             UserDataCityComboBox.SelectedValue = OuteriorControlsInitializationManager.AddressCityComboBoxSelectedValueInitialization();
             UserDataStreetComboBox.SelectedValue = OuteriorControlsInitializationManager.AddressStreetComboBoxSelectedValueInitialization();
@@ -75,16 +95,17 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void SelectMaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGenderIsMale = true;
-
             UserDataSectionsInstance.User.UserGender = "Мужской";
         }
 
         private void SelectFemaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGenderIsFemale = true;
-
             UserDataSectionsInstance.User.UserGender = "Женский";
+        }
+
+        private void SelectUndefinedGenderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsInstance.User.UserGender = "Не указан";
         }
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

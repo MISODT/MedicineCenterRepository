@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Row="0" Style="{DynamicResource UserDataProfileScrollViewerStyle}">
@@ -23,7 +23,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 35 0">
                         <Image Name="UserDataProfilePhotoImage" Source="{Binding UserProfilePhotoUri}" Width="125" Height="125" Margin="5"/>
 
-                        <TextBlock Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding ProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
+                        <TextBlock Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding UserProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
 
                         <TextBlock Name="UserDataProfilePhotoUriMistakeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Фото профиля" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
                     </StackPanel>
@@ -33,6 +33,7 @@
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    
                                     <TextBlock Text="Имя" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                                 </StackPanel>
 
@@ -51,6 +52,7 @@
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    
                                     <TextBlock Text="Фамилия" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                                 </StackPanel>
 
@@ -69,6 +71,7 @@
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                                     <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                                    
                                     <TextBlock Text="Отчество" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                                 </StackPanel>
 
@@ -85,12 +88,14 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <RadioButton x:Name="SelectMaleGenderRadioButton" IsChecked="{Binding UserGenderIsMale}" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                            <RadioButton x:Name="SelectMaleGenderRadioButton" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
 
-                            <RadioButton x:Name="SelectFemaleGenderRadioButton" IsChecked="{Binding UserGenderIsFemale}" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                            <RadioButton x:Name="SelectFemaleGenderRadioButton" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+
+                            <RadioButton x:Name="SelectUndefinedGenderRadioButton" Checked="SelectUndefinedGenderRadioButton_Checked" Margin="10" Content="Не указан" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -101,6 +106,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            
                             <TextBlock Name="UserDataCityTextBoxLabelHintAssist" Text="Город" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 
@@ -137,6 +143,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            
                             <TextBlock Text="Улица" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 
@@ -173,6 +180,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
+                            
                             <TextBlock Text="Дом" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 

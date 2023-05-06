@@ -192,6 +192,8 @@
                             <RadioButton x:Name="SelectMaleGenderRadioButton" IsChecked="{Binding UserGenderIsMale}" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
 
                             <RadioButton x:Name="SelectFemaleGenderRadioButton" IsChecked="{Binding UserGenderIsFemale}" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+
+                            <RadioButton x:Name="SelectUndefinedGenderRadioButton" IsChecked="{Binding UserGenderIsUndefined}" Checked="SelectUndefinedGenderRadioButton_Checked" Margin="10" Content="Не указан" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

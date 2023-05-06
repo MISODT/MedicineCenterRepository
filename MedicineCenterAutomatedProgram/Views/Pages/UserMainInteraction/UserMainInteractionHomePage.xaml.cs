@@ -32,6 +32,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserName = UserDataSectionsInstance.Patient.Name,
                     UserSurname = UserDataSectionsInstance.Patient.Surname,
                     UserPatronymic = UserDataSectionsInstance.Patient.Patronymic,
+                    UserGender = UserDataSectionsInstance.Patient.Gender,
                     UserAddressId = UserDataSectionsInstance.Patient.AddressId
                 };
             }
@@ -45,6 +46,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserName = UserDataSectionsInstance.Doctor.Name,
                     UserSurname = UserDataSectionsInstance.Doctor.Surname,
                     UserPatronymic = UserDataSectionsInstance.Doctor.Patronymic,
+                    UserGender = UserDataSectionsInstance.Doctor.Gender,
                     UserAddressId = UserDataSectionsInstance.Doctor.AddressId
                 };
             }

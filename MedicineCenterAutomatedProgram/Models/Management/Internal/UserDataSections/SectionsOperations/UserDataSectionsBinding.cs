@@ -34,6 +34,8 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
 
         public bool UserGenderIsFemale { get; set; }
 
+        public bool UserGenderIsUndefined { get; set; }
+
         public string UserGender { get; set; }
 
 

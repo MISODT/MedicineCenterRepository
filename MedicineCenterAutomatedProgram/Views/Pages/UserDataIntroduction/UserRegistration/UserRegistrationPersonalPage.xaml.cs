@@ -18,7 +18,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void NavigationNextButtonState()
         {
-            if (!string.IsNullOrWhiteSpace(UserDataNameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataSurnameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPatronymicTextBox.Text) && UserDataDayOfBirthComboBox.SelectedItem != null && UserDataMonthOfBirthComboBox.SelectedItem != null && UserDataYearOfBirthComboBox.SelectedItem != null && (SelectMaleGenderRadioButton.IsChecked == true || SelectFemaleGenderRadioButton.IsChecked == true))
+            if (!string.IsNullOrWhiteSpace(UserDataNameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataSurnameTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPatronymicTextBox.Text) && UserDataDayOfBirthComboBox.SelectedItem != null && UserDataMonthOfBirthComboBox.SelectedItem != null && UserDataYearOfBirthComboBox.SelectedItem != null && (SelectMaleGenderRadioButton.IsChecked == true || SelectFemaleGenderRadioButton.IsChecked == true || SelectUndefinedGenderRadioButton.IsChecked == true))
             {
                 NavigateNextButton.IsEnabled = true;
             }
@@ -132,6 +132,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             UserDataSectionsInstance.User.UserGenderIsFemale = true;
 
             UserDataSectionsInstance.User.UserGender = "Женский";
+
+            NavigationNextButtonState();
+        }
+
+        private void SelectUndefinedGenderRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDataSectionsInstance.User.UserGenderIsUndefined = true;
+
+            UserDataSectionsInstance.User.UserGender = "Не указан";
 
             NavigationNextButtonState();
         }
