@@ -93,6 +93,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
                 IsUserDataPasswordVisible = true;
             }
+
             else
             {
                 userCredentialsDataPasswordPasswordBox.Password = userCredentialsDataPasswordTextBox.Text;
@@ -102,6 +103,23 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
                 changeCredentialsDataPasswordVisabilityButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
 
                 IsUserDataPasswordVisible = false;
+            }
+        }
+
+        public static void UserDataHiddenPasswordFieldVisibilityOptions(TextBlock userDataPasswordHintAssist, PasswordBox userDataPasswordPasswordBox, Button clearDataPasswordButton)
+        {
+            if (userDataPasswordPasswordBox.Password != "")
+            {
+                userDataPasswordHintAssist.Visibility = Visibility.Hidden;
+
+                clearDataPasswordButton.Visibility = Visibility.Visible;
+            }
+
+            else
+            {
+                userDataPasswordHintAssist.Visibility = Visibility.Visible;
+
+                clearDataPasswordButton.Visibility = Visibility.Hidden;
             }
         }
     }

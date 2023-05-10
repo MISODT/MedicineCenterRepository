@@ -14,30 +14,41 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
-            <Button Name="UserDataProfileButton" Click="UserDataProfileButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" Style="{DynamicResource UserDataProfileButtonStyle}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Ellipse Height="25" Width="25" Margin="5 0 0 0">
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="UserDataProfilePhotoImage" Stretch="UniformToFill" ImageSource="{Binding ProfilePhotoUri}"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
+        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                    <Border Background="#DDD" BorderBrush="#5AF" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="175" Height="35">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Ellipse Height="25" Width="25" Margin="5 0 0 0">
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="UserDataProfilePhotoImage" Stretch="UniformToFill" ImageSource="{Binding ProfilePhotoUri}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
 
-                    <TextBlock Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding Name}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
+                            <TextBlock Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 0 0 0" Text="{Binding Name}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
-            </Button>
 
-            <Button Name="UserDataOutProfileButton" Click="UserDataOutProfileButton_Click" Width="35" Height="35" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5 0 0 0" Content="{materialDesign:PackIcon Kind=Logout}" Style="{DynamicResource UserDataOutProfileButtonStyle}"/>
-        </StackPanel>
+                <Button Name="UserDataEditProfileButton" Click="UserDataEditProfileButton_Click" Width="150" Height="29" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Style="{DynamicResource UserDataEditProfileButtonStyle}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Edit}"/>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Редактировать" Style="{DynamicResource UserDataIntroductionButtonContentTextBlock}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
 
-        <Grid Grid.Column="0" Grid.Row="1" Background="#5AF">
-            
+            <Button Name="UserDataOutProfileButton" Click="UserDataOutProfileButton_Click" Width="35" Height="35" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 50" Content="{materialDesign:PackIcon Kind=Logout}" Style="{DynamicResource UserDataOutProfileButtonStyle}"/>
         </Grid>
+
+        <Border Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#5AF" CornerRadius="5" Margin="5">
+            
+        </Border>
     </Grid>
 </Page>

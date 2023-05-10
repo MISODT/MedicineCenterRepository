@@ -6,34 +6,6 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class OuteriorControlsInitializationManager
     {
-        public static List<string> LoginMailDomainComboBoxInitialization()
-        {
-            List<string> loginMailDomainsTitleList = new List<string>();
-
-            loginMailDomainsTitleList.Clear();
-
-            foreach (var mailDomain in DataResponseManager.MailDomainsJsonDataDeserialize("SELECT MailDomainTitle FROM MailDomains"))
-            {
-                loginMailDomainsTitleList.Add(mailDomain.MailDomainTitle);
-            }
-
-            return loginMailDomainsTitleList;
-        }
-
-        public static List<string> AddressCityComboBoxInitialization()
-        {
-            List<string> citiesTitleList = new List<string>();
-
-            citiesTitleList.Clear();
-
-            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize("SELECT DISTINCT(CityTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
-            {
-                citiesTitleList.Add(city.CityTitle);
-            }
-
-            return citiesTitleList;
-        }
-
         public static string AddressCityComboBoxSelectedValueInitialization()
         {
             string cityTitle = "";
@@ -68,6 +40,154 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
 
             return houseNumber;
+        }
+
+        public static string SchoolCityComboBoxSelectedValueInitialization()
+        {
+            string schoolCityTitle = "";
+
+            if(UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            {
+                foreach (var school in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                {
+                    schoolCityTitle = school.CityTitle;
+                }
+
+                return schoolCityTitle;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string SchoolTypeComboBoxSelectedValueInitialization()
+        {
+            string schoolType = "";
+
+            if (UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            {
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                {
+                    schoolType = school.SchoolType;
+                }
+
+                return schoolType;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string SchoolTitleComboBoxSelectedValueInitialization()
+        {
+            string schoolTitle = "";
+
+            if (UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            {
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                {
+                    schoolTitle = school.SchoolTitle;
+                }
+
+                return schoolTitle;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string UniversityCityComboBoxSelectedValueInitialization()
+        {
+            string universityCityTitle = "";
+
+            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            {
+                foreach (var university in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                {
+                    universityCityTitle = university.CityTitle;
+                }
+
+                return universityCityTitle;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string UniversityTypeComboBoxSelectedValueInitialization()
+        {
+            string universityType = "";
+
+            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            {
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                {
+                    universityType = university.UniversityType;
+                }
+
+                return universityType;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string UniversityTitleComboBoxSelectedValueInitialization()
+        {
+            string universityTitle = "";
+
+            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            {
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                {
+                    universityTitle = university.UniversityTitle;
+                }
+
+                return universityTitle;
+            }
+
+            else
+            {
+                return "";
+            }
+        }
+
+        public static List<string> LoginMailDomainComboBoxInitialization()
+        {
+            List<string> loginMailDomainsTitleList = new List<string>();
+
+            loginMailDomainsTitleList.Clear();
+
+            foreach (var mailDomain in DataResponseManager.MailDomainsJsonDataDeserialize("SELECT MailDomainTitle FROM MailDomains"))
+            {
+                loginMailDomainsTitleList.Add(mailDomain.MailDomainTitle);
+            }
+
+            return loginMailDomainsTitleList;
+        }
+
+        public static List<string> AddressCityComboBoxInitialization()
+        {
+            List<string> citiesTitleList = new List<string>();
+
+            citiesTitleList.Clear();
+
+            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize("SELECT DISTINCT(CityTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
+            {
+                citiesTitleList.Add(city.CityTitle);
+            }
+
+            return citiesTitleList;
         }
 
         public static List<string> AddressStreetComboBoxInitialization()

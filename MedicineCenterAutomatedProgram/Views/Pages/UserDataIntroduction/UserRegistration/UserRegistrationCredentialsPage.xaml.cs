@@ -83,7 +83,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
+            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock) ;
 
             InteriorControlsInitializationManager.PasswordComplexityProgressBarInitialization(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
 
@@ -94,7 +94,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox,  UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
+            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null,  UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
             InteriorControlsInitializationManager.PasswordComplexityProgressBarInitialization(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
 
@@ -109,13 +109,11 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             UserDataPasswordPasswordBox.Password = "";
         }
 
-        private void ChangeUserDataRepeatPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => UserDataFieldsViewManager.ChangeUserDataPasswordVisibility(null, UserDataRepeatPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
-
         private void UserDataRepeatPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
+            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
             NavigationNextButtonState();
         }

@@ -80,5 +80,18 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
                 WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Doctors (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{UserDataSectionsInstance.User.UserProfilePhotoUri}', '{UserDataSectionsInstance.User.UserName}', '{UserDataSectionsInstance.User.UserSurname}', '{UserDataSectionsInstance.User.UserPatronymic}', '{UserDataSectionsInstance.User.UserYearOfBirth}-{UserDataSectionsInstance.User.UserMonthOfBirthNumber}-{UserDataSectionsInstance.User.UserDayOfBirth}', '{UserDataSectionsInstance.User.UserGender}', {UserDataSectionsInstance.User.UserAddressId}, {UserDataSectionsInstance.User.UserSchoolId}, {UserDataSectionsInstance.User.UserUniversityId}, {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, {UserDataSectionsInstance.User.UserUniversityEndEducationYear}, '{userDataLogin}{userDataLoginMailDomain}', '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}');");
             }
         }
+
+        public static void UserDataUpdateOperation()
+        {
+            if (UserDataSectionsInstance.User.UserPositionIsPatient)
+            {
+                WebResponseManager.ResponseFromRequestQuery($"UPDATE Patients SET ProfilePhotoUri = '{UserDataSectionsInstance.User.UserProfilePhotoUri}', Name = '{UserDataSectionsInstance.User.UserName}', Surname = '{UserDataSectionsInstance.User.UserSurname}', Patronymic = '{UserDataSectionsInstance.User.UserPatronymic}', Gender = '{UserDataSectionsInstance.User.UserGender}', AddressId = {UserDataSectionsInstance.User.UserAddressId}, SchoolId = {UserDataSectionsInstance.User.UserSchoolId}, UniversityId = {UserDataSectionsInstance.User.UserUniversityId}, UniversityStartEducationYear = {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, UniversityEndEducationYear = {UserDataSectionsInstance.User.UserUniversityEndEducationYear} WHERE Id = {UserDataSectionsInstance.User.UserId}");
+            }
+
+            if (UserDataSectionsInstance.User.UserPositionIsDoctor)
+            {
+                WebResponseManager.ResponseFromRequestQuery($"UPDATE Doctors SET ProfilePhotoUri = '{UserDataSectionsInstance.User.UserProfilePhotoUri}', Name = '{UserDataSectionsInstance.User.UserName}', Surname = '{UserDataSectionsInstance.User.UserSurname}', Patronymic = '{UserDataSectionsInstance.User.UserPatronymic}', Gender = '{UserDataSectionsInstance.User.UserGender}', AddressId = {UserDataSectionsInstance.User.UserAddressId}, SchoolId = {UserDataSectionsInstance.User.UserSchoolId}, UniversityId = {UserDataSectionsInstance.User.UserUniversityId}, UniversityStartEducationYear = {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, UniversityEndEducationYear = {UserDataSectionsInstance.User.UserUniversityEndEducationYear} WHERE Id = {UserDataSectionsInstance.User.UserId}");
+            }
+        }
     }
 }

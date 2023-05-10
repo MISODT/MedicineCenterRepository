@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -110,98 +112,147 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
             }
         }
 
-        public static bool ExternalUserDataPasswordMistakesHandler(TextBox userDataPasswordTextBox, PasswordBox userDataPasswordPasswordBox, PasswordBox userDataRepeatPasswordPasswordBox, TextBlock userDataPasswordMistakeTextBlock)
+        public static bool ExternalUserDataPasswordMistakesHandler(TextBox userDataPasswordTextBox, PasswordBox userDataPasswordPasswordBox, PasswordBox userDataOldPasswordPasswordBox, PasswordBox userDataNewPasswordPasswordBox, PasswordBox userDataRepeatPasswordPasswordBox, TextBlock userDataPasswordMistakeTextBlock)
         {
-            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            if(userDataPasswordTextBox != null)
             {
-                if (userDataPasswordTextBox.Text != userDataRepeatPasswordPasswordBox.Password && userDataPasswordTextBox.Text.Length < 8)
+                if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
                 {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                    if (userDataPasswordTextBox.Text != userDataRepeatPasswordPasswordBox.Password && userDataPasswordTextBox.Text.Length < 8)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают \n Пароль должен быть не короче 8 символов";
+                        userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают \n Пароль должен быть не короче 8 символов";
 
-                    userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return false;
-                }
+                        return false;
+                    }
 
-                else if (userDataPasswordTextBox.Text.Length < 8)
-                {
-                    userDataPasswordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
+                    else if (userDataPasswordTextBox.Text.Length < 8)
+                    {
+                        userDataPasswordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
 
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return false;
-                }
+                        return false;
+                    }
 
-                else if (userDataPasswordTextBox.Text != userDataRepeatPasswordPasswordBox.Password)
-                {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                    else if (userDataPasswordTextBox.Text != userDataRepeatPasswordPasswordBox.Password)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают";
+                        userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают";
 
-                    userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return false;
+                        return false;
+                    }
+
+                    else
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
+
+                        userDataPasswordMistakeTextBlock.Text = "";
+
+                        userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                        return true;
+                    }
                 }
 
                 else
                 {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
+                    if (userDataPasswordPasswordBox.Password != userDataRepeatPasswordPasswordBox.Password && userDataPasswordPasswordBox.Password.Length < 8)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordMistakeTextBlock.Text = "";
+                        userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают \n Пароль должен быть не короче 8 символов";
 
-                    userDataPasswordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                        userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return true;
+                        return false;
+                    }
+
+                    else if (userDataPasswordPasswordBox.Password.Length < 8)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+
+                        userDataPasswordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
+
+                        userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                        return false;
+                    }
+
+                    else if (userDataPasswordPasswordBox.Password != userDataRepeatPasswordPasswordBox.Password)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+
+                        userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают";
+
+                        userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                        return false;
+                    }
+
+                    else
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
+
+                        userDataPasswordMistakeTextBlock.Text = "";
+
+                        userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                        return true;
+                    }
                 }
             }
 
             else
             {
-                if (userDataPasswordPasswordBox.Password != userDataRepeatPasswordPasswordBox.Password && userDataPasswordPasswordBox.Password.Length < 8)
+                if(userDataNewPasswordPasswordBox.Password.Length > 0 || userDataOldPasswordPasswordBox.Password.Length > 0)
                 {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                    if (userDataNewPasswordPasswordBox.Password.Length < 8)
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают \n Пароль должен быть не короче 8 символов";
+                        userDataPasswordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
 
-                    userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataNewPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return false;
-                }
+                        return false;
+                    }
 
-                else if (userDataPasswordPasswordBox.Password.Length < 8)
-                {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                    else if (userDataOldPasswordPasswordBox.Password != UserDataCryptionManager.UserDataDecrypt(UserDataSectionsInstance.User.UserPassword))
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
 
-                    userDataPasswordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
+                        userDataPasswordMistakeTextBlock.Text = "Неправильный пароль";
 
-                    userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataOldPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
-                    return false;
-                }
+                        return false;
+                    }
 
-                else if (userDataPasswordPasswordBox.Password != userDataRepeatPasswordPasswordBox.Password)
-                {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Visible;
+                    else
+                    {
+                        userDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
 
-                    userDataPasswordMistakeTextBlock.Text = "Пароли не совпадают";
+                        userDataPasswordMistakeTextBlock.Text = "";
 
-                    userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                        userDataOldPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
 
-                    return false;
+                        userDataNewPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                        return true;
+                    }
                 }
 
                 else
                 {
-                    userDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
-
-                    userDataPasswordMistakeTextBlock.Text = "";
-
-                    userDataPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
-
                     return true;
                 }
             }
