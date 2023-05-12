@@ -35,6 +35,6 @@
             </StackPanel>
         </Grid>
 
-        <Frame Name="MainFrame" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Name="MainWindowFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

@@ -50,16 +50,16 @@ namespace MedicineCenterAutomatedProgram
 
         private void SetStartupFramePage()
         {
-            FrameManager.MainFrame = MainFrame;
+            FrameManager.MainWindowFrame = MainWindowFrame;
 
             if (UserDataSectionsRemember.RememberUserDataConfigExists())
             {
-                FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsRemember.RememberUserDataPatientUnseal(), UserDataSectionsRemember.RememberUserDataDoctorUnseal()));
+                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsRemember.RememberUserDataPatientUnseal(), UserDataSectionsRemember.RememberUserDataDoctorUnseal()));
             }
 
             else
             {
-                MainFrame.Navigate(new WelcomePage());
+                MainWindowFrame.Navigate(new WelcomePage());
             }
         }
     }

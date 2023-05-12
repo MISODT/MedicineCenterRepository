@@ -31,7 +31,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
 
         private void UserDataSchoolCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -73,7 +73,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             UserDataSectionsInstance.User.ExtractUserEducationData();
 
-            FrameManager.MainFrame.Navigate(new UserRegistrationCredentialsPage()); 
+            FrameManager.MainWindowFrame.Navigate(new UserRegistrationCredentialsPage()); 
         }
     }
 }

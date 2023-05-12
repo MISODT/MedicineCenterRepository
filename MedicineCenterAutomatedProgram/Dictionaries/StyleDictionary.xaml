@@ -86,6 +86,55 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.Static.Background" Color="#FFF"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.Static.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.MouseOver.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.Pressed.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="MainInteractionHomeSectionButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="MainInteractionHomeSectionButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource MainInteractionHomeSectionButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainInteractionHomeSectionButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainInteractionHomeSectionButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="Margin" Value="1"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource MainInteractionHomeSectionButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource MainInteractionHomeSectionButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource MainInteractionHomeSectionButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource MainInteractionHomeSectionButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Background" Color="#5AF"/>
     <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="UserDataOutProfileButton.Static.Glyph" Color="#000"/>

@@ -21,8 +21,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages
             UserDataSectionsInstance.User = new UserDataSectionsBinding();
         }
 
-        private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserAuthorizationPage());
+        private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserAuthorizationPage());
 
-        private void RegistrationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
+        private void RegistrationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
     }
 }

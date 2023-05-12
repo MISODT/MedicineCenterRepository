@@ -4,6 +4,8 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 {
     public class FrameManager
     {
-        public static Frame MainFrame { get; set; }
+        public static Frame MainWindowFrame { get; set; }
+
+        public static Frame UserMainInteractionHomePageFrame { get; set; }
     }
 }

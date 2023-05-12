@@ -30,7 +30,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserRegistrationPositionPage_Loaded(object sender, RoutedEventArgs e) => NavigationNextButtonState();
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new WelcomePage());
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new WelcomePage());
 
         private void SelectPatientRadioButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -50,6 +50,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationProfilePhotoPage());
+        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationProfilePhotoPage());
     }
 }

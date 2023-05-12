@@ -63,7 +63,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -131,14 +131,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
                 {
                     CredentialsUserDataOperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
 
-                    FrameManager.MainFrame.Navigate(new WelcomePage());
+                    FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }
 
                 else
                 {
                     CredentialsUserDataOperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
 
-                    FrameManager.MainFrame.Navigate(new WelcomePage());
+                    FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }
             }
         }

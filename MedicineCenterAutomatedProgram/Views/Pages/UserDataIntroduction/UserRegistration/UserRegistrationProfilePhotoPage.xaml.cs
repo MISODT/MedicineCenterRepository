@@ -22,13 +22,13 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataSectionsInstance.User.UserProfilePhotoUri = InteriorControlsInitializationManager.ProfilePhotoImageInitialization(UserDataProfilePhotoImage);
         }
 
-        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
+        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
     }
 }

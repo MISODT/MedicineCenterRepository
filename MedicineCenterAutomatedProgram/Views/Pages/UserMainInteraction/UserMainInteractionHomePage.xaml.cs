@@ -19,9 +19,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             DataContext = doctor;
         }
 
+        private void SetStartupFramePage()
+        {
+            FrameManager.MainWindowFrame = UserMainInteractionHomePageFrame;
+
+            //UserMainInteractionHomePageFrame.Navigate(new WelcomePage());
+        }
+
         private void UserMainInteractionHomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            if(UserDataSectionsInstance.Patient != null)
+            SetStartupFramePage();
+
+            if (UserDataSectionsInstance.Patient != null)
             {
                 if (!File.Exists(UserDataSectionsInstance.Patient.ProfilePhotoUri))
                 {
@@ -84,14 +93,24 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                 };
             }
 
-            FrameManager.MainFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.User));
+            FrameManager.MainWindowFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.User));
         }
 
         private void UserDataOutProfileButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataSectionsRemember.RememberUserDataConfigRemove();
 
-            FrameManager.MainFrame.Navigate(new WelcomePage());
+            FrameManager.MainWindowFrame.Navigate(new WelcomePage());
+        }
+
+        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MainInteractionHomeSectionCheckAppointmensButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

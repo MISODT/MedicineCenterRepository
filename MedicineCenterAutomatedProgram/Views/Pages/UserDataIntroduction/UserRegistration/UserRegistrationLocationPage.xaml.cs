@@ -41,7 +41,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -80,7 +80,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
             NavigationNextButtonState();
 
-            FrameManager.MainFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
+            FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
         }
     }
 }

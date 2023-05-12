@@ -320,7 +320,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
                 }
 
-                FrameManager.MainFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor));
+                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor));
             }
         }
     }

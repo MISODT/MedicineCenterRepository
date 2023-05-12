@@ -47,7 +47,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainFrame.Navigate(new UserRegistrationProfilePhotoPage());
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationProfilePhotoPage());
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -152,7 +152,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
                UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество") &&
                UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock))
             {
-                FrameManager.MainFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
+                FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
             }
         }
     }
