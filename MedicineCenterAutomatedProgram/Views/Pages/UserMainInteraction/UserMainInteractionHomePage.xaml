@@ -57,6 +57,7 @@
                 </Border>
 
                 <Button Name="MainInteractionHomeSectionNewAppointmentButton" Click="MainInteractionHomeSectionNewAppointmentButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Новая запись" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                
                 <Button Name="MainInteractionHomeSectionCheckAppointmentsButton" Click="MainInteractionHomeSectionCheckAppointmensButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Мои записи" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
             </StackPanel>
         </Border>

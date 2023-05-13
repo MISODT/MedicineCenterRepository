@@ -2,6 +2,7 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment;
 using System;
 using System.IO;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void SetStartupFramePage()
         {
-            FrameManager.MainWindowFrame = UserMainInteractionHomePageFrame;
+            FrameManager.UserMainInteractionHomePageFrame = UserMainInteractionHomePageFrame;
 
             //UserMainInteractionHomePageFrame.Navigate(new WelcomePage());
         }
@@ -105,7 +106,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage());
         }
 
         private void MainInteractionHomeSectionCheckAppointmensButton_Click(object sender, RoutedEventArgs e)
