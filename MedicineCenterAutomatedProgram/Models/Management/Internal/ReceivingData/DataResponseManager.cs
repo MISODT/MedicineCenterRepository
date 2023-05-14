@@ -6,6 +6,20 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
 {
     public class DataResponseManager
     {
+        public static List<Shifts> ShiftsJsonDataDeserialize(string shiftsDataQuery)
+        {
+            var shiftsDataList = JsonSerializer.Deserialize<List<Shifts>>(WebResponseManager.GetJsonResponseFromRequestQuery(shiftsDataQuery));
+
+            return shiftsDataList;
+        }
+
+        public static List<HealingDirections> HealingDirectionsJsonDataDeserialize(string healingDirectionsDataQuery)
+        {
+            var healingDirectionsDataList = JsonSerializer.Deserialize<List<HealingDirections>>(WebResponseManager.GetJsonResponseFromRequestQuery(healingDirectionsDataQuery));
+
+            return healingDirectionsDataList;
+        }
+
         public static List<Patients> PatientsJsonDataDeserialize(string patientDataQuery)
         {
             var patientsDataList = JsonSerializer.Deserialize<List<Patients>>(WebResponseManager.GetJsonResponseFromRequestQuery(patientDataQuery));
