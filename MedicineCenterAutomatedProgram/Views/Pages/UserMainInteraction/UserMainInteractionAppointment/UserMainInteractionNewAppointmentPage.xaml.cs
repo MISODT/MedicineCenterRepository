@@ -9,53 +9,48 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 {
     public partial class UserMainInteractionNewAppointmentPage : Page
     {
+        private List<UserMainInteractionDoctorUserControl> userMainInteractionDoctorUserControlList = new List<UserMainInteractionDoctorUserControl>();
+
+        private List<Doctors> doctorsList = new List<Doctors>();
+
         public UserMainInteractionNewAppointmentPage()
         {
             InitializeComponent();
         }
 
-        private List<UserMainInteractionDoctorUserControl> DoctorInfoComboBoxValue()
+        private void DoctorInfoComboBoxValue()
         {
-            List<UserMainInteractionDoctorUserControl> userMainInteractionDoctorUserControlList = new List<UserMainInteractionDoctorUserControl>();
-
-            Doctors doctors = new Doctors();
-
-            Shifts shifts = new Shifts();
-
-            HealingDirections healingDirections = new HealingDirections();
-
-            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, Patronymic FROM Doctors, Shifts WHERE ShiftId = DoctorId"))
+            foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, Patronymic FROM Doctors, Shifts WHERE Id = DoctorId"))
             {
-                doctors.Id = doctor.Id;
-                doctors.ProfilePhotoUri = doctor.ProfilePhotoUri;
-                doctors.Name = doctor.Name;
-                doctors.Surname = doctor.Surname;
-                doctors.Patronymic = doctor.Patronymic;
+                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND DoctorId = {doctor.Id}"))
+                {
+                    userMainInteractionDoctorUserControlList.Add(new UserMainInteractionDoctorUserControl(doctor, healingDirection));
+                }
+
+                doctorsList.Add(doctor);
             }
-
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE DoctorId = {doctors.Id}"))
-            {
-                shifts.ShiftId = shift.ShiftId;
-            }
-
-            foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId"))
-            {
-                healingDirections.HealingDirectionTitle = healingDirection.HealingDirectionTitle;
-            }
-
-            userMainInteractionDoctorUserControlList.Add(new UserMainInteractionDoctorUserControl(doctors, healingDirections));
-
-            return userMainInteractionDoctorUserControlList;
         }
 
         private void UserMainInteractionNewAppointmentPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = DoctorInfoComboBoxValue();
+            DoctorInfoComboBoxValue();
+
+            UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = userMainInteractionDoctorUserControlList;
         }
 
         private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int i = 0;
 
+            foreach(var item in doctorsList)
+            {
+                if(UserMainInteractionNewAppointmentDoctorComboBox.SelectedIndex == i)
+                {
+                    MessageBox.Show(item.Id);
+                }
+
+                i++;
+            }
         }
 
         private void UserMainInteractionNewAppointmentDateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,7 +63,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         }
 
-        private void UserMainInteractionAcceptButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
