@@ -4,6 +4,8 @@
     {
         public string ShiftId { get; set; }
 
+        public string ShiftDate { get; set; }
+
         public string ShiftStartActionTime { get; set; }
 
         public string ShiftEndActionTime { get; set; }

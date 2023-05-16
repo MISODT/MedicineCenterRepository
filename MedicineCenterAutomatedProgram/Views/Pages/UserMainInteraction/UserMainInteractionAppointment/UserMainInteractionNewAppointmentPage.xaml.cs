@@ -18,7 +18,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             InitializeComponent();
         }
 
-        private void DoctorInfoComboBoxValue()
+        private void NewAppointmentDoctorComboBoxValueInitialization()
         {
             foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, Patronymic FROM Doctors, Shifts WHERE Id = DoctorId"))
             {
@@ -31,31 +31,72 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
         }
 
-        private void UserMainInteractionNewAppointmentPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            DoctorInfoComboBoxValue();
-
-            UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = userMainInteractionDoctorUserControlList;
-        }
-
-        private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private string NewAppointmentDoctorComboBoxIndexInitialization()
         {
             int i = 0;
 
-            foreach(var item in doctorsList)
+            foreach (var item in doctorsList)
             {
-                if(UserMainInteractionNewAppointmentDoctorComboBox.SelectedIndex == i)
+                if (UserMainInteractionNewAppointmentDoctorComboBox.SelectedIndex == i)
                 {
-                    MessageBox.Show(item.Id);
+                    return item.Id;
                 }
 
                 i++;
             }
+
+            return "";
+        }
+
+        private List<string> NewAppointmentDateComboBoxValueInitialization()
+        {
+            List<string> shiftDates = new List<string>();
+
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
+            {
+                shiftDates.Add(shift.ShiftDate);
+            }
+
+            return shiftDates;
+        }
+
+        private List<string> NewAppointmentTimeComboBoxValueInitialization()
+        {
+            List<string> shiftTimes = new List<string>();
+
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
+            {
+                shiftTimes.Add($"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}");
+            }
+
+            return shiftTimes;
+        }
+
+        private void UserMainInteractionNewAppointmentPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            NewAppointmentDoctorComboBoxValueInitialization();
+
+            UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = userMainInteractionDoctorUserControlList;
+
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = NewAppointmentDateComboBoxValueInitialization();
+
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
+        }
+
+        private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = NewAppointmentDateComboBoxValueInitialization();
+
+            UserMainInteractionNewAppointmentDateComboBox.SelectedIndex = 0;
+
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
+
+            UserMainInteractionNewAppointmentTimeComboBox.SelectedIndex = 0;
         }
 
         private void UserMainInteractionNewAppointmentDateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         private void UserMainInteractionNewAppointmentTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
