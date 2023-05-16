@@ -1,11 +1,30 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization
 {
     public class OuteriorControlsInitializationManager
     {
+        public static List<string> HospitalAddressComboBoxInitialization(string userId)
+        {
+            List<string> hospitalAddresses = new List<string>();
+
+            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId}"))
+            {
+                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId} AND CityId = {city.CityId}"))
+                {
+                    foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId} AND StreetId = {street.StreetId}"))
+                    {
+                        hospitalAddresses.Add($"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}");
+                    }
+                }
+            }
+
+            return hospitalAddresses;
+        }
+
         public static string AddressCityComboBoxSelectedValueInitialization()
         {
             string cityTitle = "";

@@ -13,5 +13,7 @@
         public string ShiftHealingDicrectionId { get; set; }
 
         public string DoctorId { get; set; }
+
+        public string ShiftHospitalAddressId { get; set; }
     }
 }

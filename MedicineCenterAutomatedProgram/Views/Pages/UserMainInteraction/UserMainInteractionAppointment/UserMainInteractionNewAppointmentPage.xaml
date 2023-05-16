@@ -11,44 +11,77 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Врач" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Врач" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
 
-                        <ComboBox Name="UserMainInteractionNewAppointmentDoctorComboBox" SelectionChanged="UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged" SelectedIndex="0" Width="250" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
-                            <ComboBox.ItemContainerStyle>
-                                <Style TargetType="{x:Type ComboBoxItem}">
-                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <ComboBox Name="UserMainInteractionNewAppointmentDoctorComboBox" SelectionChanged="UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged" SelectedIndex="0" Width="250" Height="125" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
 
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
-                                                    <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                                        <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
 
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#5AF"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ComboBox.ItemContainerStyle>
-                        </ComboBox>
-                    </StackPanel>
-                </Grid>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#5AF"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Больница" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+
+                            <ComboBox Name="UserMainInteractionNewAppointmentHospitalComboBox" SelectedIndex="0" Width="315" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" CornerRadius="3">
+                                                        <ContentPresenter Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#5AF"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Дата" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
 
-                            <ComboBox Name="UserMainInteractionNewAppointmentDateComboBox" SelectionChanged="UserMainInteractionNewAppointmentDateComboBox_SelectionChanged" SelectedIndex="0" Width="250" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                            <ComboBox Name="UserMainInteractionNewAppointmentDateComboBox" SelectedIndex="0" Width="250" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ComboBoxItem}">
                                         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -79,7 +112,7 @@
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Время" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
 
-                            <ComboBox Name="UserMainInteractionNewAppointmentTimeComboBox" SelectionChanged="UserMainInteractionNewAppointmentTimeComboBox_SelectionChanged" SelectedIndex="0" Width="250" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                            <ComboBox Name="UserMainInteractionNewAppointmentTimeComboBox" SelectedIndex="0" Width="250" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ComboBoxItem}">
                                         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -105,10 +138,24 @@
                             </ComboBox>
                         </StackPanel>
                     </Grid>
+
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="5">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Описание" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBox Name="UserMainInteractionNewAppointmentDescriptionTextBox" TextChanged="UserMainInteractionNewAppointmentDescriptionTextBox_TextChanged" MaxLength="500" Width="215" Height="115" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                                
+                                <Button Name="ClearDescriptionButton" Click="ClearDescriptionButton_Click" Height="115" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Clear}" Style="{DynamicResource ClearUserDataButtonStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Name="UserMainInteractionNewAppointmentDescriptionTextBoxHintAssist" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 35 0 0" Text="Описание к записи..." Style="{DynamicResource UserDataFieldHintAssistTextBlockStyle}"/>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
 
-            <Button Name="UserMainInteractionAcceptButton" Click="UserMainInteractionAcceptButton_Click" Width="150" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Style="{DynamicResource MainInteractionAcceptButtonStyle}">
+            <Button Name="UserMainInteractionAcceptButton" Click="UserMainInteractionAcceptButton_Click" Width="150" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource MainInteractionAcceptButtonStyle}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Check}"/>
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Подтвердить" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>

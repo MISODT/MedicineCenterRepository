@@ -62,6 +62,6 @@
             </StackPanel>
         </Border>
 
-        <Frame Grid.Column="1" Grid.Row="1" Name="UserMainInteractionHomePageFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Column="1" Grid.RowSpan="2" Name="UserMainInteractionHomePageFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

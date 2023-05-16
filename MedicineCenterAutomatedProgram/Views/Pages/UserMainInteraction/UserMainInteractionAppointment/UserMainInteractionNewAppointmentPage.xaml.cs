@@ -1,6 +1,9 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Views.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,11 +38,11 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             int i = 0;
 
-            foreach (var item in doctorsList)
+            foreach (var doctor in doctorsList)
             {
                 if (UserMainInteractionNewAppointmentDoctorComboBox.SelectedIndex == i)
                 {
-                    return item.Id;
+                    return doctor.Id;
                 }
 
                 i++;
@@ -54,7 +57,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
             {
-                shiftDates.Add(shift.ShiftDate);
+                shiftDates.Add($"{DateOnly.Parse(shift.ShiftDate)}");
             }
 
             return shiftDates;
@@ -66,7 +69,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
             {
-                shiftTimes.Add($"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}");
+                shiftTimes.Add($"с {TimeOnly.Parse(shift.ShiftStartActionTime)} до {TimeOnly.Parse(shift.ShiftEndActionTime)}");
             }
 
             return shiftTimes;
@@ -78,9 +81,13 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = userMainInteractionDoctorUserControlList;
 
+            UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
+
             UserMainInteractionNewAppointmentDateComboBox.ItemsSource = NewAppointmentDateComboBoxValueInitialization();
 
             UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
+
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionNewAppointmentDescriptionTextBox, UserMainInteractionNewAppointmentDescriptionTextBoxHintAssist, ClearDescriptionButton);
         }
 
         private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,17 +99,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
 
             UserMainInteractionNewAppointmentTimeComboBox.SelectedIndex = 0;
+
+            OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
+
+            UserMainInteractionNewAppointmentHospitalComboBox.SelectedIndex = 0;
         }
 
-        private void UserMainInteractionNewAppointmentDateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClearDescriptionButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            UserMainInteractionNewAppointmentDescriptionTextBox.Text = "";
         }
 
-        private void UserMainInteractionNewAppointmentTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        private void UserMainInteractionNewAppointmentDescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e) => UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionNewAppointmentDescriptionTextBox, UserMainInteractionNewAppointmentDescriptionTextBoxHintAssist, ClearDescriptionButton);
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
