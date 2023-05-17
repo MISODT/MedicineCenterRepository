@@ -129,14 +129,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             {
                 if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
                 {
-                    CredentialsUserDataOperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
+                    OperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
 
                     FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }
 
                 else
                 {
-                    CredentialsUserDataOperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
+                    OperationsManager.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
 
                     FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }

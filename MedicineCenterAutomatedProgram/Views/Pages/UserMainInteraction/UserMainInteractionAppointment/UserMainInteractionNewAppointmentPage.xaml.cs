@@ -1,9 +1,10 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,30 +52,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             return "";
         }
 
-        private List<string> NewAppointmentDateComboBoxValueInitialization()
-        {
-            List<string> shiftDates = new List<string>();
-
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
-            {
-                shiftDates.Add($"{DateOnly.Parse(shift.ShiftDate)}");
-            }
-
-            return shiftDates;
-        }
-
-        private List<string> NewAppointmentTimeComboBoxValueInitialization()
-        {
-            List<string> shiftTimes = new List<string>();
-
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {NewAppointmentDoctorComboBoxIndexInitialization()}"))
-            {
-                shiftTimes.Add($"с {TimeOnly.Parse(shift.ShiftStartActionTime)} до {TimeOnly.Parse(shift.ShiftEndActionTime)}");
-            }
-
-            return shiftTimes;
-        }
-
         private void UserMainInteractionNewAppointmentPage_Loaded(object sender, RoutedEventArgs e)
         {
             NewAppointmentDoctorComboBoxValueInitialization();
@@ -83,20 +60,20 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
 
-            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = NewAppointmentDateComboBoxValueInitialization();
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
 
-            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
 
             UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionNewAppointmentDescriptionTextBox, UserMainInteractionNewAppointmentDescriptionTextBoxHintAssist, ClearDescriptionButton);
         }
 
         private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = NewAppointmentDateComboBoxValueInitialization();
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
 
             UserMainInteractionNewAppointmentDateComboBox.SelectedIndex = 0;
 
-            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = NewAppointmentTimeComboBoxValueInitialization();
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(NewAppointmentDoctorComboBoxIndexInitialization());
 
             UserMainInteractionNewAppointmentTimeComboBox.SelectedIndex = 0;
 
@@ -114,7 +91,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
+            UserDataSectionsInstance.Appointment.AppointmentStatus = "Отправлен";
+            UserDataSectionsInstance.Appointment.AppointmentDescription = UserMainInteractionNewAppointmentDescriptionTextBox.Text;
 
+            OperationsManager.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorComboBoxIndexInitialization());
+
+            //FrameManager.UserMainInteractionHomePageFrame.Navigate(new);
         }
     }
 }

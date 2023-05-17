@@ -9,6 +9,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
         public static Doctors? Doctor { get; set; }
 
 
+        public static Appointments? Appointment { get; set; }
+
+
         public static UserDataSectionsBinding User { get; set; } = new UserDataSectionsBinding();
     }
 }

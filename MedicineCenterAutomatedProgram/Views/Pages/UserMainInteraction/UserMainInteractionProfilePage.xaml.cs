@@ -268,7 +268,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserDataSectionsInstance.User.UserPassword = UserDataCryptionManager.UserDataEncrypt(UserDataNewPasswordPasswordBox.Password);
                 }
 
-                CredentialsUserDataOperationsManager.UserDataUpdateOperation();
+                OperationsManager.UserDataUpdateOperation();
 
                 if (UserDataSectionsInstance.Patient != null)
                 {

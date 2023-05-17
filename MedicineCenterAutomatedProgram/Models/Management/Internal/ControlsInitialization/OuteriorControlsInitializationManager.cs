@@ -1,5 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -23,6 +24,30 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
 
             return hospitalAddresses;
+        }
+
+        public static List<string> AppointmentDateComboBoxValueInitialization(string userId)
+        {
+            List<string> shiftDates = new List<string>();
+
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {userId}"))
+            {
+                shiftDates.Add($"{DateOnly.Parse(shift.ShiftDate)}");
+            }
+
+            return shiftDates;
+        }
+
+        public static List<string> AppointmentTimeComboBoxValueInitialization(string userId)
+        {
+            List<string> shiftTimes = new List<string>();
+
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {userId}"))
+            {
+                shiftTimes.Add($"с {TimeOnly.Parse(shift.ShiftStartActionTime)} до {TimeOnly.Parse(shift.ShiftEndActionTime)}");
+            }
+
+            return shiftTimes;
         }
 
         public static string AddressCityComboBoxSelectedValueInitialization()

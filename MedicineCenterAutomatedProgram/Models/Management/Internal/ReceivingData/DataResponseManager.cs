@@ -13,6 +13,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
             return hospitalAddressesDataList;
         }
 
+        public static List<Appointments> AppointmentsJsonDataDeserialize(string appointmentsDataQuery)
+        {
+            var appointmentsDataList = JsonSerializer.Deserialize<List<Appointments>>(WebResponseManager.GetJsonResponseFromRequestQuery(appointmentsDataQuery));
+
+            return appointmentsDataList;
+        }
+
         public static List<Shifts> ShiftsJsonDataDeserialize(string shiftsDataQuery)
         {
             var shiftsDataList = JsonSerializer.Deserialize<List<Shifts>>(WebResponseManager.GetJsonResponseFromRequestQuery(shiftsDataQuery));

@@ -4,7 +4,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
 {
-    public class CredentialsUserDataOperationsManager
+    public class OperationsManager
     {
         public static Patients? UserDataPatientAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
@@ -91,6 +91,27 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             if (UserDataSectionsInstance.User.UserPositionIsDoctor)
             {
                 WebResponseManager.ResponseFromRequestQuery($"UPDATE Doctors SET ProfilePhotoUri = '{UserDataSectionsInstance.User.UserProfilePhotoUri}', Name = '{UserDataSectionsInstance.User.UserName}', Surname = '{UserDataSectionsInstance.User.UserSurname}', Patronymic = '{UserDataSectionsInstance.User.UserPatronymic}', Gender = '{UserDataSectionsInstance.User.UserGender}', AddressId = {UserDataSectionsInstance.User.UserAddressId}, SchoolId = {UserDataSectionsInstance.User.UserSchoolId}, UniversityId = {UserDataSectionsInstance.User.UserUniversityId}, UniversityStartEducationYear = {UserDataSectionsInstance.User.UserUniversityStartEducationYear}, UniversityEndEducationYear = {UserDataSectionsInstance.User.UserUniversityEndEducationYear} WHERE Id = {UserDataSectionsInstance.User.UserId}");
+            }
+        }
+
+        public static void UserDataMainInteractionNewAppointmentOperation(string userId)
+        {
+            UserDataSectionsInstance.Appointment = new Appointments();
+
+            if (UserDataSectionsInstance.Doctor != null)
+            {
+                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('{UserDataSectionsInstance.Appointment.AppointmentStatus}', '{UserDataSectionsInstance.Appointment.AppointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
+                }
+            }
+
+            if(UserDataSectionsInstance.Patient != null)
+            {
+                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('{UserDataSectionsInstance.Appointment.AppointmentStatus}', '{UserDataSectionsInstance.Appointment.AppointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
+                }
             }
         }
     }
