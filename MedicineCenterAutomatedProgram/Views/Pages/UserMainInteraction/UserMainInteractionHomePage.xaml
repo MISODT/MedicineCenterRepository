@@ -44,7 +44,7 @@
                 </Button>
             </StackPanel>
 
-            <Button Name="UserDataOutProfileButton" Click="UserDataOutProfileButton_Click" Width="35" Height="35" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 50" Content="{materialDesign:PackIcon Kind=Logout}" Style="{DynamicResource UserDataOutProfileButtonStyle}"/>
+            <Button Name="UserDataOutProfileButton" Click="UserDataOutProfileButton_Click" Width="35" Height="35" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 48" Content="{materialDesign:PackIcon Kind=Logout}" Style="{DynamicResource UserDataOutProfileButtonStyle}"/>
         </Grid>
 
         <Border Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#5AF" CornerRadius="5" Margin="5">

@@ -31,7 +31,12 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
 
         public static void RememberUserDataConfigRemove()
         {
-            File.Delete(RememberUserDataConfigPath("patient_config.json"));
+            if (RememberUserDataConfigExists())
+            {
+                File.Delete(RememberUserDataConfigPath("patient_config.json"));
+
+                File.Delete(RememberUserDataConfigPath("doctor_config.json"));
+            }
         }
 
         public static void RememberUserDataSeal(Patients patient, Doctors doctor)

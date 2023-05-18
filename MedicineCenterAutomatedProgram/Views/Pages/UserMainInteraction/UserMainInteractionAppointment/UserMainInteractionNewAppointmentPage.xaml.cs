@@ -91,12 +91,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.Appointment.AppointmentStatus = "Отправлен";
-            UserDataSectionsInstance.Appointment.AppointmentDescription = UserMainInteractionNewAppointmentDescriptionTextBox.Text;
+            OperationsManager.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
 
-            OperationsManager.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorComboBoxIndexInitialization());
-
-            //FrameManager.UserMainInteractionHomePageFrame.Navigate(new);
+            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment;
@@ -24,7 +23,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FrameManager.UserMainInteractionHomePageFrame = UserMainInteractionHomePageFrame;
 
-            //UserMainInteractionHomePageFrame.Navigate(new WelcomePage());
+            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
         }
 
         private void UserMainInteractionHomePage_Loaded(object sender, RoutedEventArgs e)
@@ -104,14 +103,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             FrameManager.MainWindowFrame.Navigate(new WelcomePage());
         }
 
-        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage());
-        }
+        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage());
 
-        private void MainInteractionHomeSectionCheckAppointmensButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void MainInteractionHomeSectionCheckAppointmensButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
     }
 }

@@ -94,15 +94,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             }
         }
 
-        public static void UserDataMainInteractionNewAppointmentOperation(string userId)
+        public static void UserDataMainInteractionNewAppointmentOperation(string userId, string appointmentDescription)
         {
-            UserDataSectionsInstance.Appointment = new Appointments();
-
             if (UserDataSectionsInstance.Doctor != null)
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
                 {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('{UserDataSectionsInstance.Appointment.AppointmentStatus}', '{UserDataSectionsInstance.Appointment.AppointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
                 }
             }
 
@@ -110,7 +108,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
                 {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('{UserDataSectionsInstance.Appointment.AppointmentStatus}', '{UserDataSectionsInstance.Appointment.AppointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
                 }
             }
         }
