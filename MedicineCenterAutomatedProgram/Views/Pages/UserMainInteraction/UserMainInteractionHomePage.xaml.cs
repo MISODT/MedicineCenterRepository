@@ -23,7 +23,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FrameManager.UserMainInteractionHomePageFrame = UserMainInteractionHomePageFrame;
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
+            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }
 
         private void UserMainInteractionHomePage_Loaded(object sender, RoutedEventArgs e)
@@ -105,6 +105,23 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage());
 
-        private void MainInteractionHomeSectionCheckAppointmensButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
+        private void MainInteractionHomeSectionMyAppointmentsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+
+        private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
+
+        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MainInteractionHomeSectionShiftsHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

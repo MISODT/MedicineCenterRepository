@@ -9,18 +9,28 @@ using System.Windows.Controls;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment
 {
-    public partial class UserMainInteractionMyAppointmentsPage : Page
+    public partial class UserMainInteractionAppointmentsPage : Page
     {
         private List<UserMainInteractionAppointmentUserControl> userMainInteractionAppointmentUserControlList = new List<UserMainInteractionAppointmentUserControl>();
 
         private List<Appointments> appointmentsList = new List<Appointments>();
 
-        public UserMainInteractionMyAppointmentsPage()
+        public UserMainInteractionAppointmentsPage(string userMainInteractionAppointmentParameter)
         {
             InitializeComponent();
+
+            if(userMainInteractionAppointmentParameter == "Текущие")
+            {
+                NowAppointmentsInitialization();
+            }
+
+            if(userMainInteractionAppointmentParameter == "Старые")
+            {
+
+            }
         }
 
-        private void AppointmentListBoxBoxValueInitialization()
+        private void NowAppointmentsInitialization()
         {
             if (UserDataSectionsInstance.Patient != null)
             {
@@ -33,6 +43,11 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                         shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
 
                         shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
+
+                        /*if ((DateTime.Parse(shift.ShiftDate) == DateTime.Now.Date) && (DateTime.Now.TimeOfDay > TimeSpan.Parse(shift.ShiftStartActionTime)) && (DateTime.Now.TimeOfDay < TimeSpan.Parse(shift.ShiftEndActionTime)))
+                        {
+                            MessageBox.Show("Сегодняшняя дата");
+                        }*/
 
                         foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Name, Surname, Patronymic FROM Doctors, Shifts WHERE Id = DoctorId AND ShiftId = {shift.ShiftId}"))
                         {
@@ -60,7 +75,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             {
                 foreach (var appointment in DataResponseManager.AppointmentsJsonDataDeserialize($"SELECT AppointmentId, AppointmentStatus, AppointmentDescription FROM Appointments, Doctors WHERE DoctorId = Id AND DoctorId = {UserDataSectionsInstance.Doctor.Id}"))
                 {
-                    MessageBox.Show(appointment.AppointmentId);
                     foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, Shifts.DoctorId, ShiftHospitalAddressId FROM Shifts, Appointments WHERE AppointmentShiftId = ShiftId AND AppointmentId = {appointment.AppointmentId}"))
                     {
                         shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
@@ -92,11 +106,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
         }
 
-        private void UserMainInteractionMyAppointmentsPage_Loaded(object sender, RoutedEventArgs e)
+        private void UserMainInteractionAppointmentsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            AppointmentListBoxBoxValueInitialization();
-
-            UserMainInteractionMyAppointmentsItemsControl.ItemsSource = userMainInteractionAppointmentUserControlList;
+            UserMainInteractionAppointmentsItemsControl.ItemsSource = userMainInteractionAppointmentUserControlList;
         }
     }
 }

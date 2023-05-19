@@ -49,18 +49,43 @@
 
         <Border Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#5AF" CornerRadius="5" Margin="5">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Medicine}"/>
-                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись к врачу" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
-                    </StackPanel>
-                </Border>
+                <Grid Name="MainInteractionHomeSectionsPatientGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Medicine}"/>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись к врачу" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
+                            </StackPanel>
+                        </Border>
 
-                <Button Name="MainInteractionHomeSectionNewAppointmentButton" Click="MainInteractionHomeSectionNewAppointmentButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Новая запись" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
-                
-                <Button Name="MainInteractionHomeSectionCheckAppointmentsButton" Click="MainInteractionHomeSectionCheckAppointmensButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Мои записи" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                        <Button Name="MainInteractionHomeSectionNewAppointmentButton" Click="MainInteractionHomeSectionNewAppointmentButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Новая запись" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                        <Button Name="MainInteractionHomeSectionMyAppointmentsButton" Click="MainInteractionHomeSectionMyAppointmentsButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Мои записи" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                        <Button Name="MainInteractionHomeSectionAppointmentsHistoryButton" Click="MainInteractionHomeSectionAppointmentsHistoryButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="История записей" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Name="MainInteractionHomeSectionsDoctorGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Doctor}"/>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись на смену" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Button Name="MainInteractionHomeSectionNewShiftButton" Click="MainInteractionHomeSectionNewShiftButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Новая смена" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                        <Button Name="MainInteractionHomeSectionMyShiftsButton" Click="MainInteractionHomeSectionMyShiftsButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Мои смены" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                        <Button Name="MainInteractionHomeSectionShiftsHistoryButton" Click="MainInteractionHomeSectionShiftsHistoryButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="История смен" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Border>
+
+
 
         <Frame Grid.Column="1" Grid.RowSpan="2" Name="UserMainInteractionHomePageFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>

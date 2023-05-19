@@ -144,7 +144,7 @@
         <Setter Property="FontStyle" Value="Normal"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="#222"/>
-        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Margin" Value="3"/>
 
         <Setter Property="Template">
             <Setter.Value>
