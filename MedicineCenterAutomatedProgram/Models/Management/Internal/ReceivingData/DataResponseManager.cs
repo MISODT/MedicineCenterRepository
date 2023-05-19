@@ -6,7 +6,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
 {
     public class DataResponseManager
     {
-        public static List<HospitalAddresses> HospitalAddressJsonDataDeserialize(string hospitalAddressesDataQuery)
+        public static List<HospitalAddresses> HospitalAddressesJsonDataDeserialize(string hospitalAddressesDataQuery)
         {
             var hospitalAddressesDataList = JsonSerializer.Deserialize<List<HospitalAddresses>>(WebResponseManager.GetJsonResponseFromRequestQuery(hospitalAddressesDataQuery));
 

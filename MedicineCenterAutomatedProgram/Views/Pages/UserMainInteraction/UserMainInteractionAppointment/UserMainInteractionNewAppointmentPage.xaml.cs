@@ -3,7 +3,6 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitiali
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System.Collections.Generic;
 using System.Windows;
@@ -91,7 +90,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            OperationsManager.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
+            UserDataSectionsDataOperations.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionMyAppointmentsPage());
         }

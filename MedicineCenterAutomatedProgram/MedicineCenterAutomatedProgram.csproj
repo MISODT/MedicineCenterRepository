@@ -6,10 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Icons\MedicineCenter.ico</ApplicationIcon>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\DefaultImages\DefaultUserDataProfilePhotoImage.png" />
+    <None Remove="Resources\DefaultImages\LoadingScreen.png" />
     <None Remove="Resources\Icons\MedicineCenter.ico" />
   </ItemGroup>
 
@@ -19,6 +21,9 @@
 
   <ItemGroup>
     <Resource Include="Resources\DefaultImages\DefaultUserDataProfilePhotoImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\DefaultImages\LoadingScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\MedicineCenter.ico">

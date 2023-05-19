@@ -4,8 +4,6 @@ using MedicineCenterAutomatedProgram.Views.Windows.AlertWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

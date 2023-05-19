@@ -2,17 +2,45 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+            <TextBlock Name="UserMainInteractionAppointmentUserControlShiftDateTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Bold" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+
+            <TextBlock Name="UserMainInteractionAppointmentUserControlShiftTimeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Bold" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border Grid.Row="1" Name="UserMainInteractionAppointmentUserControlBorder" Background="#DDD" BorderThickness="1" CornerRadius="5" Padding="5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Name="UserMainInteractionAppointmentUserControlDoctorFullNameTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Normal" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+
+                        <TextBlock Name="UserMainInteractionAppointmentUserControlShiftHealingDirectionTitleTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Medium" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <TextBlock Name="UserMainInteractionAppointmentUserControlAppointmentDescriptionTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Normal" TextWrapping="Wrap" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+
+                    <TextBlock Name="UserMainInteractionAppointmentUserControlAppointmentHospitalAddressTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" FontWeight="Bold" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <Button Name="UserMainInteractionAppointmentUserControlEditAppointmentButton" Click="UserMainInteractionAppointmentUserControlEditAppointmentButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1" Padding="5" Content="{materialDesign:PackIcon Kind=Edit}" Style="{DynamicResource UserMainInteractionEditAppointmentButtonStyle}"/>
+
+            <Button Name="UserMainInteractionAppointmentUserControlDeleteAppointmentButton" Click="UserMainInteractionAppointmentUserControlDeleteAppointmentButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1" Padding="5" Content="{materialDesign:PackIcon Kind=Delete}" Style="{DynamicResource UserMainInteractionRemoveAppointmentButtonStyle}"/>
+        </StackPanel>
         
-        <Border Grid.Row="1" Name="UserMainInteractionAppointmentUserControlBorder" Background="#DDD" BorderThickness="1" CornerRadius="5" Padding="5">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1" Text="{Binding AppointmentStatus}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
-        </Border>
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <TextBlock Name="UserMainInteractionAppointmentUserControlAppointmentStatusTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Style="{DynamicResource MainInteractionTextBlockStyle}"/>
+        </Grid>
     </Grid>
 </UserControl>

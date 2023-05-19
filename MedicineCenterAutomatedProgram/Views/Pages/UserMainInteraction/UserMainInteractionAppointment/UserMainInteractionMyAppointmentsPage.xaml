@@ -14,12 +14,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Row="1" Name="UserMainInteractionMyAppointmentsListBox" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserMainInteractionListBoxStyle}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+        <ItemsControl Grid.Row="1" Name="UserMainInteractionMyAppointmentsItemsControl" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Page>

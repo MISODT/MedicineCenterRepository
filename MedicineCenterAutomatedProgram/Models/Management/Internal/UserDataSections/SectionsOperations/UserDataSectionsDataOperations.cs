@@ -4,7 +4,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
 {
-    public class OperationsManager
+    public class UserDataSectionsDataOperations
     {
         public static Patients? UserDataPatientAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
@@ -100,7 +100,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
                 {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
                 }
             }
 
@@ -108,9 +108,14 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
                 {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, ShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
                 }
             }
+        }
+
+        public static void UserDataRemoveAppointmentOperation(string appointmentId)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Appointments WHERE AppointmentId = {appointmentId}");
         }
     }
 }

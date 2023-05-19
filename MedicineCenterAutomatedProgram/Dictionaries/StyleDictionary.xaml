@@ -292,6 +292,18 @@
         <Setter Property="Foreground" Value="#222"/>
     </Style>
 
+    <Style x:Key="MainInteractionTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
     <SolidColorBrush x:Key="UserDataComboBox.Static.Background" Color="#DDD"/>
     <SolidColorBrush x:Key="UserDataComboBox.Static.Border" Color="#DDD"/>
     <SolidColorBrush x:Key="UserDataComboBox.Static.Glyph" Color="#000"/>
@@ -770,6 +782,94 @@
                             <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
                             
                             <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Background" Color="#F00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.MouseOver.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Pressed.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionRemoveAppointmentButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionEditAppointmentButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.Pressed.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

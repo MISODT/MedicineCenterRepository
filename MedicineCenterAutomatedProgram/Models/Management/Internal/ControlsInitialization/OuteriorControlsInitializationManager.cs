@@ -2,7 +2,6 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization
 {

@@ -105,7 +105,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
             {
                 if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, "Пользователь не найден"))
                 {
-                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(OperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), OperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
+                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsDataOperations.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), UserDataSectionsDataOperations.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
 
                     if (RememberMeCheckBox.IsChecked == true)
                     {
@@ -118,7 +118,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
             {
                 if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, "Пользователь не найден"))
                 {
-                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(OperationsManager.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), OperationsManager.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
+                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsDataOperations.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), UserDataSectionsDataOperations.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
 
                     if (RememberMeCheckBox.IsChecked == true)
                     {
