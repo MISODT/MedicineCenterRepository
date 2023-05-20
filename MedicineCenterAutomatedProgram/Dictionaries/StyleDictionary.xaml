@@ -1273,6 +1273,19 @@
         </Setter>
     </Style>
 
+    <Style x:Key="UserMainInteractionAppointmentsEmptyTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="#888"/>
+    </Style>
+
     <SolidColorBrush x:Key="UserDataIntroductionRadioButton.Static.Background" Color="#5AF"/>
     <SolidColorBrush x:Key="UserDataIntroductionRadioButton.Static.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="UserDataIntroductionRadioButton.Static.Glyph" Color="#000"/>
@@ -1380,6 +1393,61 @@
         <Setter Property="FontStyle" Value="Normal"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Foreground" Value="#222"/>
+    </Style>
+
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Glyph" Color="#222"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Disabled.Background" Color="#888"/>
+    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Disabled.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionAppointmentsClearButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="#222"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Pressed.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Disabled.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <SolidColorBrush x:Key="AlertWindowButton.Static.Background" Color="#5AF"/>
