@@ -13,6 +13,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class InteriorControlsInitializationManager
     {
+        public static void AppointmentSortingParametersComboBoxInitialization(ComboBox appointmentSortingParametersComboBox)
+        {
+            List<string> appointmentSortingParametersList = new List<string>()
+            {
+                "Все записи",
+                "По дате"
+            };
+
+            appointmentSortingParametersComboBox.ItemsSource = appointmentSortingParametersList;
+        }
+
         public static string ProfilePhotoImageInitialization(Image profilePhotoImage)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

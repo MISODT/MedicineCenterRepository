@@ -1,4 +1,5 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
@@ -8,11 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment
 {
     public partial class UserMainInteractionAppointmentsPage : Page
     {
+        private bool isUserMainInteractionSortingMinButtonClicked = false;
+
+        private bool isUserMainInteractionSortingMaxButtonClicked = false;
+
         private List<UserMainInteractionAppointmentUserControl> userMainInteractionAppointmentUserControlList = new List<UserMainInteractionAppointmentUserControl>();
 
         private List<Appointments> appointmentsList = new List<Appointments>();
@@ -21,14 +27,70 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             InitializeComponent();
 
+            InteriorControlsInitializationManager.AppointmentSortingParametersComboBoxInitialization(UserMainInteractionAppointmentsSortingParametersComboBox);
+
             if(userMainInteractionAppointmentParameter == "Текущие")
             {
                 NowAppointmentsInitialization();
+
+                UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Hidden;
             }
 
             if(userMainInteractionAppointmentParameter == "Старые")
             {
                 OldAppointmentsInitialization();
+
+                UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void UserMainInteractionSortingMinButtonVisibility(Button userMainInteractionSortingMinButton, Button userMainInteractionSortingMaxButton)
+        {
+            if (!isUserMainInteractionSortingMinButtonClicked)
+            {
+                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+
+                isUserMainInteractionSortingMinButtonClicked = true;
+
+                isUserMainInteractionSortingMaxButtonClicked = false;
+
+                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+            }
+
+            else
+            {
+                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                isUserMainInteractionSortingMinButtonClicked = false;
+
+                isUserMainInteractionSortingMaxButtonClicked = true;
+
+                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+            }
+        }
+
+        private void UserMainInteractionSortingMaxButtonVisibility(Button userMainInteractionSortingMaxButton, Button userMainInteractionSortingMinButton)
+        {
+            if (!isUserMainInteractionSortingMaxButtonClicked)
+            {
+                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+
+                isUserMainInteractionSortingMaxButtonClicked = true;
+
+                isUserMainInteractionSortingMinButtonClicked = false;
+
+                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+            }
+
+            else
+            {
+                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                isUserMainInteractionSortingMaxButtonClicked = false;
+
+                isUserMainInteractionSortingMinButtonClicked = true;
+
+                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
             }
         }
 
@@ -198,6 +260,29 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         private void UserMainInteractionAppointmentsPage_Loaded(object sender, RoutedEventArgs e)
         {
             UserMainInteractionAppointmentsItemsControl.ItemsSource = userMainInteractionAppointmentUserControlList;
+        }
+
+        private void UserMainInteractionAppointmentsSortingParametersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все записи" && isUserMainInteractionSortingMinButtonClicked)
+            {
+
+            }
+
+            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате")
+            {
+
+            }
+        }
+
+        private void UserMainInteractionAppointmentsSortingMinButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainInteractionSortingMinButtonVisibility(UserMainInteractionAppointmentsSortingMinButton, UserMainInteractionAppointmentsSortingMaxButton);
+        }
+
+        private void UserMainInteractionAppointmentsSortingMaxButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainInteractionSortingMaxButtonVisibility(UserMainInteractionAppointmentsSortingMaxButton, UserMainInteractionAppointmentsSortingMinButton);
         }
 
         private void UserMainInteractionAppointmentsClearButton_Click(object sender, RoutedEventArgs e)
