@@ -55,7 +55,9 @@
             </Grid>
         </StackPanel>
 
-        <ItemsControl Grid.Row="1" Name="UserMainInteractionAppointmentsItemsControl" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="15">
+            <ItemsControl Grid.Row="1" Name="UserMainInteractionAppointmentsItemsControl" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </ScrollViewer>
 
         <TextBlock Grid.Row="1" Name="UserMainInteractionAppointmentsEmptyTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="Записи отсутствуют" Style="{DynamicResource UserMainInteractionAppointmentsEmptyTextBlockStyle}"/>
 

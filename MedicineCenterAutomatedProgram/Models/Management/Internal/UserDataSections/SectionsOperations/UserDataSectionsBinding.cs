@@ -90,7 +90,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
                 AddressCityId = city.CityId;
             }
 
-            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId FROM Streets WHERE StreetTitle = '{AddressStreetTitle}'"))
+            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetId) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND StreetTitle = '{AddressStreetTitle}' AND CityId = {AddressCityId}"))
             {
                 AddressStreetId = street.StreetId;
             }

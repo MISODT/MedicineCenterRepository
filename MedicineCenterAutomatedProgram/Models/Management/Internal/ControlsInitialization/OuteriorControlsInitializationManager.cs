@@ -7,15 +7,15 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class OuteriorControlsInitializationManager
     {
-        public static List<string> HospitalAddressComboBoxInitialization(string userId)
+        public static List<string> HospitalAddressComboBoxInitialization(string shiftId)
         {
             List<string> hospitalAddresses = new List<string>();
 
-            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId}"))
+            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId}"))
             {
-                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId} AND CityId = {city.CityId}"))
+                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId} AND CityId = {city.CityId}"))
                 {
-                    foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {userId} AND StreetId = {street.StreetId}"))
+                    foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId} AND StreetId = {street.StreetId}"))
                     {
                         hospitalAddresses.Add($"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}");
                     }
@@ -25,11 +25,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             return hospitalAddresses;
         }
 
-        public static List<string> AppointmentDateComboBoxValueInitialization(string userId)
+        public static List<string> AppointmentDateComboBoxValueInitialization(string shiftId)
         {
             List<string> shiftDates = new List<string>();
 
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {userId}"))
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftDate FROM Doctors, Shifts WHERE Id = DoctorId AND ShiftId = {shiftId}"))
             {
                 shiftDates.Add($"{DateOnly.Parse(shift.ShiftDate)}");
             }
@@ -37,11 +37,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             return shiftDates;
         }
 
-        public static List<string> AppointmentTimeComboBoxValueInitialization(string userId)
+        public static List<string> AppointmentTimeComboBoxValueInitialization(string shiftId)
         {
             List<string> shiftTimes = new List<string>();
 
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {userId}"))
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftStartActionTime, ShiftEndActionTime FROM Doctors, Shifts WHERE Id = DoctorId AND ShiftId = {shiftId}"))
             {
                 shiftTimes.Add($"с {TimeOnly.Parse(shift.ShiftStartActionTime)} до {TimeOnly.Parse(shift.ShiftEndActionTime)}");
             }
@@ -89,7 +89,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolCityTitle = "";
 
-            if(UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            if(UserDataSectionsInstance.User.UserSchoolId != null)
             {
                 foreach (var school in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
                 {
@@ -109,7 +109,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolType = "";
 
-            if (UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            if (UserDataSectionsInstance.User.UserSchoolId != null)
             {
                 foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
                 {
@@ -129,7 +129,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolTitle = "";
 
-            if (UserDataSectionsInstance.User.UserSchoolId != "NULL")
+            if (UserDataSectionsInstance.User.UserSchoolId != null)
             {
                 foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
                 {
@@ -149,7 +149,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityCityTitle = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            if (UserDataSectionsInstance.User.UserUniversityId != null)
             {
                 foreach (var university in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
                 {
@@ -169,7 +169,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityType = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            if (UserDataSectionsInstance.User.UserUniversityId != null)
             {
                 foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
                 {
@@ -189,7 +189,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityTitle = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != "NULL")
+            if (UserDataSectionsInstance.User.UserUniversityId != null)
             {
                 foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
                 {

@@ -15,8 +15,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             InitializeComponent();
 
-            DataContext = patient;
-            DataContext = doctor;
+            if(patient != null)
+            {
+                DataContext = patient;
+            }
+
+            if(doctor != null)
+            {
+                DataContext = doctor;
+            }
         }
 
         private void SetStartupFramePage()
@@ -53,7 +60,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             {
                 UserDataSectionsInstance.User = new UserDataSectionsBinding()
                 {
-                    UserPositionIsPatient = true,
+                    UserPositionIsDoctor = true,
                     UserId = UserDataSectionsInstance.Patient.Id,
                     UserProfilePhotoUri = UserDataSectionsInstance.Patient.ProfilePhotoUri,
                     UserName = UserDataSectionsInstance.Patient.Name,

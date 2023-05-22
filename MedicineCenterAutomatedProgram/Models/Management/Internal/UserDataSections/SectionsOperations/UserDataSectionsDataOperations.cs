@@ -1,6 +1,8 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using ControlzEx.Standard;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
 {
@@ -8,7 +10,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
     {
         public static Patients? UserDataPatientAuthorizationOperation(string userDataLogin, string userDataLoginMailDomain, string userDataPassword)
         {
-            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password FROM Patients WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
+            foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password FROM Patients WHERE Login = '{userDataLogin}{userDataLoginMailDomain}' AND Password = '{UserDataCryptionManager.UserDataEncrypt(userDataPassword)}'"))
             {
                 if(patient.Id != "")
                 {
@@ -94,22 +96,16 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             }
         }
 
-        public static void UserDataMainInteractionNewAppointmentOperation(string userId, string appointmentDescription)
+        public static void UserDataMainInteractionNewAppointmentOperation(string shiftId, string appointmentDescription)
         {
-            if (UserDataSectionsInstance.Doctor != null)
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
-                {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
-                }
-            }
-
             if(UserDataSectionsInstance.Patient != null)
             {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE Id = DoctorId AND DoctorId = {userId}"))
-                {
-                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shift.ShiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
-                }
+                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shiftId}, {UserDataSectionsInstance.Patient.Id}, NULL);");
+            }
+
+            if (UserDataSectionsInstance.Doctor != null)
+            {
+                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Appointments (AppointmentStatus, AppointmentDescription, AppointmentShiftId, PatientId, DoctorId) VALUES ('Отправлен', '{appointmentDescription}', {shiftId}, NULL, {UserDataSectionsInstance.Doctor.Id});");
             }
         }
 
