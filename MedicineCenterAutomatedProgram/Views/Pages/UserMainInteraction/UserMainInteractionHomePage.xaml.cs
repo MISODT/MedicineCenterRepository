@@ -2,6 +2,7 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment;
+using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionShift;
 using System;
 using System.IO;
 using System.Windows;
@@ -19,12 +20,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             {
                 DataContext = patient;
 
+                MainInteractionHomeSectionAppointmentReceivingButton.Visibility = Visibility.Hidden;
+
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Hidden;
             }
 
             if(doctor != null)
             {
                 DataContext = doctor;
+
+                MainInteractionHomeSectionAppointmentReceivingButton.Visibility = Visibility.Visible;
 
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Visible;
             }
@@ -34,7 +39,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FrameManager.UserMainInteractionHomePageFrame = UserMainInteractionHomePageFrame;
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+            if(UserDataSectionsInstance.Patient != null)
+            {
+                FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+            }
+
+            if(UserDataSectionsInstance.Doctor != null)
+            {
+                FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+            }
         }
 
         private void UserMainInteractionHomePage_Loaded(object sender, RoutedEventArgs e)
@@ -125,19 +138,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         }
 
+        private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
 
-        }
-
-        private void MainInteractionHomeSectionShiftsHistoryButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void MainInteractionHomeSectionShiftsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
     }
 }

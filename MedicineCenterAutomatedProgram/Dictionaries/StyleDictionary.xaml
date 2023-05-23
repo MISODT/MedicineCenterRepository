@@ -259,7 +259,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="UserDataIntroductionButtonContentTextBlock" TargetType="{x:Type TextBlock}">
+    <Style x:Key="DataIntroductionButtonContentTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="FontFamily" Value="Latha"/>
@@ -292,7 +292,19 @@
         <Setter Property="Foreground" Value="#222"/>
     </Style>
 
-    <Style x:Key="MainInteractionTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Style x:Key="UserMainInteractionUserControlDateTimeTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="UserMainInteractionUserControlInfoTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="FontFamily" Value="Latha"/>
@@ -448,17 +460,17 @@
         <Setter Property="Foreground" Value="#222"/>
     </Style>
 
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Static.Background" Color="#DDD"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Static.Border" Color="#DDD"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Static.Glyph" Color="#000"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.MouseOver.Background" Color="#DDD"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.MouseOver.Border" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.MouseOver.Glyph" Color="#000"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Background" Color="#DDD"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Border" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Static.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Static.Border" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Static.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.MouseOver.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.MouseOver.Border" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.MouseOver.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Pressed.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Pressed.Border" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingParametersComboBox.Pressed.Glyph" Color="#000"/>
 
-    <Style x:Key="UserMainInteractionAppointmentsSortingParametersComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="UserMainInteractionVariablesSortingParametersComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="Focusable" Value="False"/>
@@ -491,9 +503,9 @@
                                 <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="false"/>
                             </MultiDataTrigger.Conditions>
 
-                            <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.MouseOver.Background}"/>
+                            <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.MouseOver.Background}"/>
 
-                            <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.MouseOver.Border}"/>
+                            <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.MouseOver.Border}"/>
                         </MultiDataTrigger>
 
                         <MultiDataTrigger>
@@ -503,16 +515,16 @@
                         </MultiDataTrigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="arrow" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Glyph}"/>
+                            <Setter Property="Fill" TargetName="arrow" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.Pressed.Glyph}"/>
                         </Trigger>
 
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Background}"/>
+                            <Setter Property="Background" TargetName="templateRoot" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.Pressed.Background}"/>
 
-                            <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.Pressed.Border}"/>
+                            <Setter Property="BorderBrush" TargetName="templateRoot" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.Pressed.Border}"/>
                         </MultiDataTrigger>
 
                         <MultiDataTrigger>
@@ -526,7 +538,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="UserMainInteractionAppointmentsSortingParametersComboBoxTemplate" TargetType="{x:Type ComboBox}">
+    <ControlTemplate x:Key="UserMainInteractionVariablesSortingParametersComboBoxTemplate" TargetType="{x:Type ComboBox}">
         <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -546,7 +558,7 @@
                 </Border>
             </Popup>
 
-            <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBoxToggleButton}"/>
+            <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource UserMainInteractionVariablesSortingParametersComboBoxToggleButton}"/>
 
             <ContentPresenter x:Name="contentPresenter" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Grid>
@@ -572,10 +584,10 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="UserMainInteractionAppointmentsSortingParametersComboBoxStyle" TargetType="{x:Type ComboBox}">
+    <Style x:Key="UserMainInteractionVariablesSortingParametersComboBoxStyle" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBox.Static.Border}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBox.Static.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -583,7 +595,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Template" Value="{StaticResource UserMainInteractionAppointmentsSortingParametersComboBoxTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource UserMainInteractionVariablesSortingParametersComboBoxTemplate}"/>
         <Setter Property="FontFamily" Value="Latha"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontStretch" Value="Normal"/>
@@ -933,19 +945,19 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Background" Color="#F00"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Static.Foreground" Color="#000"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.MouseOver.Background" Color="#A00"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.MouseOver.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Pressed.Background" Color="#A00"/>
-    <SolidColorBrush x:Key="UserMainInteractionRemoveAppointmentButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.Static.Background" Color="#F00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.MouseOver.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.Pressed.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionRemoveVariableButton.Pressed.Border" Color="Transparent"/>
 
-    <Style x:Key="UserMainInteractionRemoveAppointmentButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="UserMainInteractionRemoveVariableButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Static.Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionRemoveVariableButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionRemoveVariableButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionRemoveVariableButton.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -963,13 +975,13 @@
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.MouseOver.Border}"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Pressed.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveAppointmentButton.Pressed.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.Pressed.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -977,19 +989,19 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Background" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Static.Foreground" Color="#000"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.MouseOver.Background" Color="#08F"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.MouseOver.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Pressed.Background" Color="#08F"/>
-    <SolidColorBrush x:Key="UserMainInteractionEditAppointmentButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionEditVariableButton.Pressed.Border" Color="Transparent"/>
 
-    <Style x:Key="UserMainInteractionEditAppointmentButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="UserMainInteractionEditVariableButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionEditAppointmentButton.Static.Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionEditVariableButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionEditVariableButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionEditVariableButton.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -1007,13 +1019,13 @@
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditVariableButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditVariableButton.MouseOver.Border}"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.Pressed.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditAppointmentButton.Pressed.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionEditVariableButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionEditVariableButton.Pressed.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1021,19 +1033,19 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.Static.Background" Color="#DDD"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.Static.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.Static.Foreground" Color="#000"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.MouseOver.Background" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.MouseOver.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.Pressed.Background" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsSortingMinMaxButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Background" Color="#DDD"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.MouseOver.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Pressed.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Pressed.Border" Color="Transparent"/>
 
-    <Style x:Key="UserMainInteractionAppointmentsSortingMinMaxButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="UserMainInteractionVariablesSortingMinMaxButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.Static.Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -1053,13 +1065,13 @@
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.MouseOver.Border}"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.Pressed.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsSortingMinMaxButton.Pressed.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionVariablesSortingMinMaxButton.Pressed.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1464,7 +1476,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="UserMainInteractionAppointmentsEmptyTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Style x:Key="UserMainInteractionVariablesEmptyTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="TextTrimming" Value="None"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -1586,21 +1598,21 @@
         <Setter Property="Foreground" Value="#222"/>
     </Style>
 
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Background" Color="#5AF"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Static.Glyph" Color="#222"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.MouseOver.Background" Color="#08F"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.MouseOver.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Pressed.Background" Color="#08F"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Pressed.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Disabled.Background" Color="#888"/>
-    <SolidColorBrush x:Key="UserMainInteractionAppointmentsClearButton.Disabled.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Static.Glyph" Color="#222"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Disabled.Background" Color="#888"/>
+    <SolidColorBrush x:Key="UserMainInteractionVariablesClearButton.Disabled.Border" Color="Transparent"/>
 
-    <Style x:Key="UserMainInteractionAppointmentsClearButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="UserMainInteractionVariablesClearButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Border}"/>
-        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Static.Glyph}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionVariablesClearButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionVariablesClearButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionVariablesClearButton.Static.Glyph}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -1622,18 +1634,18 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.MouseOver.Border}"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Pressed.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Pressed.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.Pressed.Border}"/>
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Disabled.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAppointmentsClearButton.Disabled.Border}"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionVariablesClearButton.Disabled.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -13,15 +13,15 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class InteriorControlsInitializationManager
     {
-        public static void AppointmentSortingParametersComboBoxInitialization(ComboBox appointmentSortingParametersComboBox)
+        public static void VariablesSortingParametersComboBoxInitialization(ComboBox variableSortingParametersComboBox)
         {
-            List<string> appointmentSortingParametersList = new List<string>()
+            List<string> variableSortingParametersList = new List<string>()
             {
-                "Все записи",
+                "Все значения",
                 "По дате"
             };
 
-            appointmentSortingParametersComboBox.ItemsSource = appointmentSortingParametersList;
+            variableSortingParametersComboBox.ItemsSource = variableSortingParametersList;
         }
 
         public static string ProfilePhotoImageInitialization(Image profilePhotoImage)

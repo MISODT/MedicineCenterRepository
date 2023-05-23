@@ -16,96 +16,45 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 {
     public partial class UserMainInteractionAppointmentsPage : Page
     {
-        private string userMainInteractionAppointmentParameterValue = "";
+        private string userMainInteractionAppointmentParameterValue;
 
-        private bool isUserMainInteractionSortingMinButtonClicked = false;
+        private ObservableCollection<UserMainInteractionAppointmentUserControl> userMainInteractionAppointmentUserControlCollection = new ObservableCollection<UserMainInteractionAppointmentUserControl>();
 
-        private bool isUserMainInteractionSortingMaxButtonClicked = false;
+        private ObservableCollection<Appointments> appointmentsCollection = new ObservableCollection<Appointments>();
 
-        private ObservableCollection<UserMainInteractionAppointmentUserControl> userMainInteractionAppointmentUserControlList = new ObservableCollection<UserMainInteractionAppointmentUserControl>();
-
-        private ObservableCollection<Appointments> appointmentsList = new ObservableCollection<Appointments>();
-
-        private ObservableCollection<Shifts> shiftsList = new ObservableCollection<Shifts>();
+        private ObservableCollection<Shifts> shiftsCollection = new ObservableCollection<Shifts>();
 
         public UserMainInteractionAppointmentsPage(string userMainInteractionAppointmentParameter)
         {
             InitializeComponent();
 
-            userMainInteractionAppointmentParameterValue = userMainInteractionAppointmentParameter;
-
-            InteriorControlsInitializationManager.AppointmentSortingParametersComboBoxInitialization(UserMainInteractionAppointmentsSortingParametersComboBox);
-
-            if(userMainInteractionAppointmentParameter == "Текущие")
+            if(userMainInteractionAppointmentParameter != null)
             {
-                NowAppointmentsInitialization();
+                userMainInteractionAppointmentParameterValue = userMainInteractionAppointmentParameter;
 
-                UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Hidden;
+                if (userMainInteractionAppointmentParameter == "Текущие")
+                {
+                    NowAppointmentsInitialization();
+
+                    UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Hidden;
+                }
+
+                if (userMainInteractionAppointmentParameter == "Старые")
+                {
+                    OldAppointmentsInitialization();
+
+                    UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Visible;
+                }
+
+                UserMainInteractionAppointmentsEmptyHandler();
             }
 
-            if(userMainInteractionAppointmentParameter == "Старые")
-            {
-                OldAppointmentsInitialization();
-
-                UserMainInteractionAppointmentsClearButton.Visibility = Visibility.Visible;
-            }
-
-            UserMainInteractionAppointmentsEmptyHandler();
-        }
-
-        private void UserMainInteractionSortingMinButtonVisibility(Button userMainInteractionSortingMinButton, Button userMainInteractionSortingMaxButton)
-        {
-            if (!isUserMainInteractionSortingMinButtonClicked)
-            {
-                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
-
-                isUserMainInteractionSortingMinButtonClicked = true;
-
-                isUserMainInteractionSortingMaxButtonClicked = false;
-
-                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
-            }
-
-            else
-            {
-                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
-
-                isUserMainInteractionSortingMinButtonClicked = false;
-
-                isUserMainInteractionSortingMaxButtonClicked = true;
-
-                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
-            }
-        }
-
-        private void UserMainInteractionSortingMaxButtonVisibility(Button userMainInteractionSortingMaxButton, Button userMainInteractionSortingMinButton)
-        {
-            if (!isUserMainInteractionSortingMaxButtonClicked)
-            {
-                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
-
-                isUserMainInteractionSortingMaxButtonClicked = true;
-
-                isUserMainInteractionSortingMinButtonClicked = false;
-
-                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
-            }
-
-            else
-            {
-                userMainInteractionSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
-
-                isUserMainInteractionSortingMaxButtonClicked = false;
-
-                isUserMainInteractionSortingMinButtonClicked = true;
-
-                userMainInteractionSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
-            }
+            InteriorControlsInitializationManager.VariablesSortingParametersComboBoxInitialization(UserMainInteractionAppointmentsSortingParametersComboBox);
         }
 
         private void UserMainInteractionAppointmentsEmptyHandler()
         {
-            if (userMainInteractionAppointmentUserControlList.Count == 0)
+            if (userMainInteractionAppointmentUserControlCollection.Count == 0)
             {
                 UserMainInteractionAppointmentsEmptyTextBlock.Visibility = Visibility.Visible;
 
@@ -144,17 +93,17 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                     {
                                         foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                         {
-                                            userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                            userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                         }
                                     }
                                 }
                             }
                         }
 
-                        shiftsList.Add(shift);
+                        shiftsCollection.Add(shift);
                     }
 
-                    appointmentsList.Add(appointment);
+                    appointmentsCollection.Add(appointment);
                 }
             }
 
@@ -180,7 +129,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                     {
                                         foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                         {
-                                            userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                            userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                         }
                                     }
                                 }
@@ -188,7 +137,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                         }
                     }
 
-                    appointmentsList.Add(appointment);
+                    appointmentsCollection.Add(appointment);
                 }
             }
 
@@ -219,7 +168,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                     {
                                         foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                         {
-                                            userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                            userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                         }
                                     }
                                 }
@@ -227,7 +176,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                         }
                     }
 
-                    appointmentsList.Add(appointment);
+                    appointmentsCollection.Add(appointment);
                 }
             }
 
@@ -253,7 +202,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                     {
                                         foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                         {
-                                            userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                            userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                         }
                                     }
                                 }
@@ -261,7 +210,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                         }
                     }
 
-                    appointmentsList.Add(appointment);
+                    appointmentsCollection.Add(appointment);
                 }
             }
 
@@ -294,7 +243,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -302,7 +251,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
 
@@ -328,7 +277,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -336,7 +285,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
             }
@@ -365,7 +314,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -373,7 +322,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
 
@@ -399,7 +348,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -407,10 +356,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
             }
+
+            UserMainInteractionAppointmentsEmptyHandler();
         }
 
         private void AllAppointmentsSortingAscendingInitialization()
@@ -439,7 +390,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -447,7 +398,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
 
@@ -473,7 +424,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -481,7 +432,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
             }
@@ -510,7 +461,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -518,7 +469,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
 
@@ -544,7 +495,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
@@ -552,10 +503,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                             }
                         }
 
-                        appointmentsList.Add(appointment);
+                        appointmentsCollection.Add(appointment);
                     }
                 }
             }
+
+            UserMainInteractionAppointmentsEmptyHandler();
         }
 
         private void DateAppointmentsSortingDescendingInitialization()
@@ -584,14 +537,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -618,14 +571,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -655,14 +608,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -689,18 +642,20 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
             }
+
+            UserMainInteractionAppointmentsEmptyHandler();
         }
 
         private void DateAppointmentsSortingAscendingInitialization()
@@ -729,14 +684,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -763,14 +718,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -800,14 +755,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
@@ -834,76 +789,117 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                                         {
                                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND DoctorId = {doctor.Id} AND StreetId = {street.StreetId}"))
                                             {
-                                                userMainInteractionAppointmentUserControlList.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
+                                                userMainInteractionAppointmentUserControlCollection.Add(new UserMainInteractionAppointmentUserControl(appointment, shift, doctor, healingDirection, city, street, house));
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            appointmentsList.Add(appointment);
+                            appointmentsCollection.Add(appointment);
                         }
                     }
                 }
             }
+
+            UserMainInteractionAppointmentsEmptyHandler();
         }
 
         private void UserMainInteractionAppointmentsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserMainInteractionAppointmentsItemsControl.ItemsSource = userMainInteractionAppointmentUserControlList;
+            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+
+            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+
+            UserMainInteractionAppointmentsItemsControl.ItemsSource = userMainInteractionAppointmentUserControlCollection;
         }
 
         private void UserMainInteractionAppointmentsSortingParametersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+            {
+                if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все значения")
+                {
+                    userMainInteractionAppointmentUserControlCollection.Clear();
 
+                    appointmentsCollection.Clear();
+
+                    AllAppointmentsSortingDescendingInitialization();
+                }
+
+                if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате")
+                {
+                    userMainInteractionAppointmentUserControlCollection.Clear();
+
+                    appointmentsCollection.Clear();
+
+                    DateAppointmentsSortingDescendingInitialization();
+                }
+            }
+
+            if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+            {
+                if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все значения")
+                {
+                    userMainInteractionAppointmentUserControlCollection.Clear();
+
+                    appointmentsCollection.Clear();
+
+                    AllAppointmentsSortingAscendingInitialization();
+                }
+
+                if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате")
+                {
+                    userMainInteractionAppointmentUserControlCollection.Clear();
+
+                    appointmentsCollection.Clear();
+
+                    DateAppointmentsSortingAscendingInitialization();
+                }
+            }
         }
 
         private void UserMainInteractionAppointmentsSortingMinButton_Click(object sender, RoutedEventArgs e)
         {
-            UserMainInteractionSortingMinButtonVisibility(UserMainInteractionAppointmentsSortingMinButton, UserMainInteractionAppointmentsSortingMaxButton);
+            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMinButtonFieldVisibilityOptions(UserMainInteractionAppointmentsSortingMinButton, UserMainInteractionAppointmentsSortingMaxButton);
 
-            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все записи" && isUserMainInteractionSortingMinButtonClicked)
+            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все значения" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
             {
-                userMainInteractionAppointmentUserControlList.Clear();
+                userMainInteractionAppointmentUserControlCollection.Clear();
 
-                appointmentsList.Clear();
+                appointmentsCollection.Clear();
 
                 AllAppointmentsSortingDescendingInitialization();
             }
 
-            if(UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате" && isUserMainInteractionSortingMinButtonClicked)
+            if(UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
             {
-                userMainInteractionAppointmentUserControlList.Clear();
+                userMainInteractionAppointmentUserControlCollection.Clear();
 
-                appointmentsList.Clear();
+                appointmentsCollection.Clear();
 
                 DateAppointmentsSortingDescendingInitialization();
-
-                foreach (var appointment in appointmentsList)
-                {
-                    MessageBox.Show(appointment.AppointmentId);
-                }
             }
         }
 
         private void UserMainInteractionAppointmentsSortingMaxButton_Click(object sender, RoutedEventArgs e)
         {
-            UserMainInteractionSortingMaxButtonVisibility(UserMainInteractionAppointmentsSortingMaxButton, UserMainInteractionAppointmentsSortingMinButton);
+            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMaxButtonFieldVisibilityOptions(UserMainInteractionAppointmentsSortingMaxButton, UserMainInteractionAppointmentsSortingMinButton);
 
-            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все записи" && isUserMainInteractionSortingMaxButtonClicked)
+            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все значения" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
             {
-                userMainInteractionAppointmentUserControlList.Clear();
+                userMainInteractionAppointmentUserControlCollection.Clear();
 
-                appointmentsList.Clear();
+                appointmentsCollection.Clear();
 
                 AllAppointmentsSortingAscendingInitialization();
             }
 
-            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате" && isUserMainInteractionSortingMaxButtonClicked)
+            if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
             {
-                userMainInteractionAppointmentUserControlList.Clear();
+                userMainInteractionAppointmentUserControlCollection.Clear();
 
-                appointmentsList.Clear();
+                appointmentsCollection.Clear();
 
                 DateAppointmentsSortingAscendingInitialization();
             }
@@ -911,7 +907,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentsClearButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var appointment in appointmentsList)
+            foreach(var appointment in appointmentsCollection)
             {
                 UserDataSectionsDataOperations.UserDataRemoveAppointmentOperation(appointment.AppointmentId);
             }

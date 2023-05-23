@@ -55,6 +55,7 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Medicine}"/>
+                                    
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись к врачу" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>
@@ -72,11 +73,14 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Tools}"/>
+                                    
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Инструменты" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>
 
                             <Button Name="MainInteractionHomeSectionSymptomHelperButton" Click="MainInteractionHomeSectionSymptomHelperButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Помощник по симптомам" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                            <Button Name="MainInteractionHomeSectionAppointmentReceivingButton" Click="MainInteractionHomeSectionAppointmentReceivingButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Приём записей" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
                         </StackPanel>
                     </Grid>
 
@@ -85,6 +89,7 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Doctor}"/>
+                                    
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись на смену" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>

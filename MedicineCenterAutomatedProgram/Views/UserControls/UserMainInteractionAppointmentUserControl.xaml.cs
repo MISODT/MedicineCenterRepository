@@ -12,7 +12,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
     {
         private string appointmentId;
 
-        public UserMainInteractionAppointmentUserControl(Appointments appointment, Shifts shift, Doctors doctor, HealingDirections healingDirection, Cities hospitalAddressCity, Streets hospitalAddressStreet, Houses hospitalAddressHouse)
+        public UserMainInteractionAppointmentUserControl(Appointments appointment, Shifts shift, Doctors doctor, HealingDirections healingDirection, Cities city, Streets street, Houses house)
         {
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
                 UserMainInteractionAppointmentUserControlAppointmentDescriptionTextBlock.Text = $"Описание: {appointment.AppointmentDescription}";
             }
 
-            UserMainInteractionAppointmentUserControlAppointmentHospitalAddressTextBlock.Text = $"г. {hospitalAddressCity.CityTitle}, ул. {hospitalAddressStreet.StreetTitle} д. {hospitalAddressHouse.HouseNumber}";
+            UserMainInteractionAppointmentUserControlAppointmentHospitalAddressTextBlock.Text = $"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}";
 
             UserMainInteractionAppointmentUserControlAppointmentStatusTextBlock.Text = $"Статус: {appointment.AppointmentStatus}";
         }

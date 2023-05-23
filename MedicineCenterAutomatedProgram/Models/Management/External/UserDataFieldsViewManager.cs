@@ -1,12 +1,67 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.External
 {
     public class UserDataFieldsViewManager
     {
         public static bool IsUserDataPasswordVisible { get; set; } = false;
+
+        public static bool IsUserMainInteractionVariablesSortingMinButtonClicked { get; set; } = false;
+
+        public static bool IsUserMainInteractionVariablesSortingMaxButtonClicked { get; set; } = false;
+
+        public static void UserMainInteractionVariablesSortingMinButtonFieldVisibilityOptions(Button userMainInteractionVariablesSortingMinButtonField, Button userMainInteractionVariablesSortingMaxButtonField)
+        {
+            if (!IsUserMainInteractionVariablesSortingMinButtonClicked)
+            {
+                userMainInteractionVariablesSortingMinButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+
+                IsUserMainInteractionVariablesSortingMinButtonClicked = true;
+
+                IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+
+                userMainInteractionVariablesSortingMaxButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+            }
+
+            else
+            {
+                userMainInteractionVariablesSortingMinButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+
+                IsUserMainInteractionVariablesSortingMaxButtonClicked = true;
+
+                userMainInteractionVariablesSortingMaxButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+            }
+        }
+
+        public static void UserMainInteractionVariablesSortingMaxButtonFieldVisibilityOptions(Button userMainInteractionVariablesSortingMaxButtonField, Button userMainInteractionVariablesSortingMinButtonField)
+        {
+            if (!IsUserMainInteractionVariablesSortingMaxButtonClicked)
+            {
+                userMainInteractionVariablesSortingMaxButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+
+                IsUserMainInteractionVariablesSortingMaxButtonClicked = true;
+
+                IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+
+                userMainInteractionVariablesSortingMinButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+            }
+
+            else
+            {
+                userMainInteractionVariablesSortingMaxButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+
+                IsUserMainInteractionVariablesSortingMinButtonClicked = true;
+
+                userMainInteractionVariablesSortingMinButtonField.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#5AF");
+            }
+        }
 
         public static void UserDataTextBoxFieldVisibilityOptions(TextBox userDataFieldTextBox, TextBlock userDataFieldTextBoxHintAssist, Button clearDataFieldButton)
         {
