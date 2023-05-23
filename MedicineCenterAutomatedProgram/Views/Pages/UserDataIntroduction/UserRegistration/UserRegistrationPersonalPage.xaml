@@ -81,7 +81,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
@@ -90,7 +90,7 @@
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                                <ComboBox x:Name="UserDataDayOfBirthComboBox" SelectionChanged="UserDataDayOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserDayOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                                <ComboBox Name="UserDataDayOfBirthComboBox" SelectionChanged="UserDataDayOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserDayOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                                     <ComboBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ComboBoxItem}">
                                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -119,7 +119,7 @@
                             </Grid>
 
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                                <ComboBox x:Name="UserDataMonthOfBirthComboBox" SelectionChanged="UserDataMonthOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserMonthOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                                <ComboBox Name="UserDataMonthOfBirthComboBox" SelectionChanged="UserDataMonthOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserMonthOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                                     <ComboBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ComboBoxItem}">
                                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -148,7 +148,7 @@
                             </Grid>
 
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                                <ComboBox x:Name="UserDataYearOfBirthComboBox" SelectionChanged="UserDataYearOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserYearOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                                <ComboBox Name="UserDataYearOfBirthComboBox" SelectionChanged="UserDataYearOfBirthComboBox_SelectionChanged" SelectedValue="{Binding UserYearOfBirth}" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                                     <ComboBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ComboBoxItem}">
                                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -181,7 +181,7 @@
                     </StackPanel>
                 </Grid>
 
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>

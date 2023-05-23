@@ -91,6 +91,85 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
             }
         }
 
+        public static bool ExternalUserDataDateOfShiftMistakesHandler(ComboBox userDataDayOfShiftComboBox, ComboBox userDataMonthOfShiftComboBox, ComboBox userDataYearOfShiftComboBox, TextBlock userDataDateOfShiftMistakeTextBlock)
+        {
+            DateOnly userDataDateOfShift = DateOnly.Parse($"{userDataDayOfShiftComboBox.SelectedValue}.{userDataMonthOfShiftComboBox.SelectedValue}.{userDataYearOfShiftComboBox.SelectedValue}");
+
+            if (DateOnly.Parse(DateTime.Now.Date.ToShortDateString()) == userDataDateOfShift)
+            {
+                userDataDateOfShiftMistakeTextBlock.Visibility = Visibility.Visible;
+
+                userDataDateOfShiftMistakeTextBlock.Text = "Смена не может начаться в текущий день";
+
+                userDataDayOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataMonthOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataYearOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                return false;
+            }
+
+            else if(userDataDateOfShift < DateOnly.Parse(DateTime.Now.Date.ToShortDateString()))
+            {
+                userDataDateOfShiftMistakeTextBlock.Visibility = Visibility.Visible;
+
+                userDataDateOfShiftMistakeTextBlock.Text = "Смена не может быть в прошлом времени";
+
+                userDataDayOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataMonthOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataYearOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                return false;
+            }
+
+            else
+            {
+                userDataDateOfShiftMistakeTextBlock.Visibility = Visibility.Hidden;
+
+                userDataDateOfShiftMistakeTextBlock.Text = "";
+
+                userDataDayOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                userDataMonthOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                userDataYearOfShiftComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                return true;
+            }
+        }
+
+        public static bool ExternalUserDataTimeOfShiftMistakesHandler(ComboBox userDataHourOfShiftStartActionTimeComboBox, ComboBox userDataMinuteOfShiftStartActionTimeComboBox, ComboBox userDataHourOfShiftEndActionTimeComboBox, ComboBox userDataMinuteOfShiftEndActionTimeComboBox, TextBlock userDataTimeOfShiftMistakeTextBlock)
+        {
+            TimeOnly userDataShiftStartActionTime = TimeOnly.Parse($"{userDataHourOfShiftStartActionTimeComboBox.SelectedValue}:{userDataMinuteOfShiftStartActionTimeComboBox.SelectedValue}");
+
+            TimeOnly userDataShiftEndActionTime = TimeOnly.Parse($"{userDataHourOfShiftEndActionTimeComboBox.SelectedValue}:{userDataMinuteOfShiftEndActionTimeComboBox.SelectedValue}");
+
+            if (userDataShiftEndActionTime < userDataShiftStartActionTime)
+            {
+                userDataTimeOfShiftMistakeTextBlock.Visibility = Visibility.Visible;
+
+                userDataTimeOfShiftMistakeTextBlock.Text = "Время конца смены не может быть меньше времени начала смены";
+
+                userDataHourOfShiftStartActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataMinuteOfShiftStartActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataHourOfShiftEndActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                userDataMinuteOfShiftEndActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                return false;
+            }
+
+            else
+            {
+                userDataTimeOfShiftMistakeTextBlock.Visibility = Visibility.Hidden;
+
+                userDataTimeOfShiftMistakeTextBlock.Text = "";
+
+                userDataHourOfShiftStartActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                userDataMinuteOfShiftStartActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                userDataHourOfShiftEndActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+                userDataMinuteOfShiftEndActionTimeComboBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
+
+                return true;
+            }
+        }
+
         public static bool ExternalUserDataProfilePhotoUriMistakesHandler(TextBlock userDataProfilePhotoUriTextBlock, TextBlock userDataProfilePhotoUriMistakeTextBlock, string userDataProfilePhotoUriMistakeString)
         {
             if (!File.Exists(userDataProfilePhotoUriTextBlock.Text))

@@ -96,6 +96,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityStartEducationYearComboBox, DateTime.Now.Year);
             InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
+
+            UserDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
         }
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)

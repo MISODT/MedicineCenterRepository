@@ -143,10 +143,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         }
 
-        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage());
 
         private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
 

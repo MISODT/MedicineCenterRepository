@@ -49,17 +49,42 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
         }
 
-        public static void DayComboBoxInitialization(ComboBox dayOfBirthComboBox, int monthOfBirthNumber)
+        public static void HourComboBoxInitialization(ComboBox hourComboBox)
+        {
+            List<int> hoursList = new List<int>();
+
+            for (int i = 0; i <= 23; i++)
+            {
+                hoursList.Add(i);
+            }
+
+            hourComboBox.ItemsSource = hoursList;
+        }
+
+        public static void MinuteComboBoxInitialization(ComboBox minuteComboBox)
+        {
+            List<string> minutesList = new List<string>();
+
+            for (int i = 0; i <= 59; i++)
+            {
+                minutesList.Add(i.ToString("D2"));
+            }
+
+            minuteComboBox.ItemsSource = minutesList;
+        }
+
+        public static void DayComboBoxInitialization(ComboBox dayComboBox, int monthNumber)
         {
             List<int> daysList = new List<int>();
 
-            if (monthOfBirthNumber == 2)
+            if (monthNumber == 2)
             {
                 for (int i = 1; i <= 29; i++)
                 {
                     daysList.Add(i);
                 }
             }
+
             else
             {
                 for (int i = 1; i <= 31; i++)
@@ -68,10 +93,10 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                 }
             }
 
-            dayOfBirthComboBox.ItemsSource = daysList;
+            dayComboBox.ItemsSource = daysList;
         }
 
-        public static void MonthComboBoxInitialization(ComboBox monthOfBirthComboBox)
+        public static void MonthComboBoxInitialization(ComboBox monthComboBox)
         {
             List<string> monthsList = new List<string>()
             {
@@ -85,27 +110,27 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                 "Август"
             };
 
-            monthOfBirthComboBox.ItemsSource = monthsList;
+            monthComboBox.ItemsSource = monthsList;
         }
 
-        public static void MonthNumberComboBoxInitialization(ComboBox monthOfBirthComboBox)
+        public static void MonthNumberComboBoxInitialization(ComboBox monthComboBox)
         {
-            UserDataSectionsInstance.User.UserMonthOfBirthNumber = monthOfBirthComboBox.SelectedIndex + 1;
+            UserDataSectionsInstance.User.UserMonthOfBirthNumber = monthComboBox.SelectedIndex + 1;
         }
 
-        public static void YearComboBoxInitialization(ComboBox yearOfBirthComboBox, int curYear)
+        public static void YearComboBoxInitialization(ComboBox yearComboBox, int nowYear)
         {
             List<int> yearsList = new List<int>();
 
             int minYear = 1900;
-            int maxYear = curYear;
+            int maxYear = nowYear;
 
             for (int i = maxYear; i >= minYear; i--)
             {
                 yearsList.Add(i);
             }
 
-            yearOfBirthComboBox.ItemsSource = yearsList;
+            yearComboBox.ItemsSource = yearsList;
         }
 
         public static void MailDomainComboBoxPrimaryInitialization(ComboBox mailDomainComboBox)
