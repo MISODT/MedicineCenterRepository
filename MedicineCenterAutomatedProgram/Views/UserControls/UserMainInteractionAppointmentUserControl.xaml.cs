@@ -58,10 +58,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             }
         }
 
-        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage(appointmentId, UserMainInteractionAppointmentUserControlAppointmentDescriptionTextBlock.Text));
 
         private void UserMainInteractionAppointmentUserControlDeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {

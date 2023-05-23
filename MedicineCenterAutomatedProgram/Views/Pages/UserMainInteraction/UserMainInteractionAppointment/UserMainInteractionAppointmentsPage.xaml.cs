@@ -7,7 +7,6 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

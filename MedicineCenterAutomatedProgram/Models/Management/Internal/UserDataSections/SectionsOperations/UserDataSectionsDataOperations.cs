@@ -96,6 +96,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             }
         }
 
+        public static void UserDataMainInteractionUpdateAppointmentOperation(string appointmentId, string shiftId, string appointmentDescription)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"UPDATE Appointments SET AppointmentDescription = '{appointmentDescription}', AppointmentShiftId = {shiftId} WHERE AppointmentId = {appointmentId}");
+        }
+
         public static void UserDataMainInteractionNewAppointmentOperation(string shiftId, string appointmentDescription)
         {
             if(UserDataSectionsInstance.Patient != null)

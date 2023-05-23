@@ -18,11 +18,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             if(patient != null)
             {
                 DataContext = patient;
+
+                MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Hidden;
             }
 
             if(doctor != null)
             {
                 DataContext = doctor;
+
+                MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Visible;
             }
         }
 
@@ -110,11 +114,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             FrameManager.MainWindowFrame.Navigate(new WelcomePage());
         }
 
-        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage());
+        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage(null,  ""));
 
         private void MainInteractionHomeSectionMyAppointmentsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
 
         private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
+
+        private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e)
         {

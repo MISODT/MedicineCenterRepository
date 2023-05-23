@@ -13,16 +13,27 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 {
     public partial class UserMainInteractionNewAppointmentPage : Page
     {
+        private string userMainInteractionAppointmentIdValue;
+
         private List<UserMainInteractionDoctorUserControl> userMainInteractionDoctorUserControlList = new List<UserMainInteractionDoctorUserControl>();
 
         private List<Shifts> shiftsList = new List<Shifts>();
 
-        public UserMainInteractionNewAppointmentPage()
+        public UserMainInteractionNewAppointmentPage(string userMainInteractionAppointmentId, string userMainInteractionAppointmentDescription)
         {
             InitializeComponent();
+
+            if(userMainInteractionAppointmentId != null)
+            {
+                userMainInteractionAppointmentIdValue = userMainInteractionAppointmentId;
+
+                UserMainInteractionNewAppointmentDescriptionTextBox.Text = userMainInteractionAppointmentDescription;
+            }
+
+            AppointmentDoctorComboBoxValueInitialization();
         }
 
-        private void NewAppointmentDoctorComboBoxValueInitialization()
+        private void AppointmentDoctorComboBoxValueInitialization()
         {
             foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Doctors WHERE DoctorId = Id"))
             {
@@ -38,7 +49,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
         }
 
-        private string NewAppointmentDoctorShiftComboBoxIndexInitialization()
+        private string AppointmentOperationsDoctorShiftComboBoxIndexInitialization()
         {
             int i = 0;
 
@@ -57,34 +68,30 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionNewAppointmentPage_Loaded(object sender, RoutedEventArgs e)
         {
-            NewAppointmentDoctorComboBoxValueInitialization();
-
             UserMainInteractionNewAppointmentDoctorComboBox.ItemsSource = userMainInteractionDoctorUserControlList;
 
-            UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
-            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
-            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
             UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionNewAppointmentDescriptionTextBox, UserMainInteractionNewAppointmentDescriptionTextBoxHintAssist, ClearDescriptionButton);
         }
 
         private void UserMainInteractionNewAppointmentDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentDateComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentDateComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
             UserMainInteractionNewAppointmentDateComboBox.SelectedIndex = 0;
 
-            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
             UserMainInteractionNewAppointmentTimeComboBox.SelectedIndex = 0;
 
-            UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(NewAppointmentDoctorShiftComboBoxIndexInitialization());
+            UserMainInteractionNewAppointmentHospitalComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
             UserMainInteractionNewAppointmentHospitalComboBox.SelectedIndex = 0;
-
-            MessageBox.Show(NewAppointmentDoctorShiftComboBoxIndexInitialization().ToString());
         }
 
         private void ClearDescriptionButton_Click(object sender, RoutedEventArgs e)
@@ -96,7 +103,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsDataOperations.UserDataMainInteractionNewAppointmentOperation(NewAppointmentDoctorShiftComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
+            if(userMainInteractionAppointmentIdValue != null)
+            {
+                UserDataSectionsDataOperations.UserDataMainInteractionUpdateAppointmentOperation(userMainInteractionAppointmentIdValue, AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
+            }
+
+            else
+            {
+                UserDataSectionsDataOperations.UserDataMainInteractionNewAppointmentOperation(AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionNewAppointmentDescriptionTextBox.Text);
+            }   
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }
