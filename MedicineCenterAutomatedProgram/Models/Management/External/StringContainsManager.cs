@@ -33,5 +33,21 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
             return false;
         }
+
+        public static string UserMainInteractionShiftHospitalAddressStringValue(string valueSource, string valueStart, string valueEnd)
+        {
+            int startIndex, endIndex;
+
+            if (valueSource.Contains(valueStart) && valueSource.Contains(valueEnd))
+            {
+                startIndex = valueSource.IndexOf(valueStart, 0) + valueStart.Length;
+
+                endIndex = valueSource.IndexOf(valueEnd, startIndex);
+
+                return valueSource.Substring(startIndex, endIndex - startIndex);
+            }
+
+            return "";
+        }
     }
 }

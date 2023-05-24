@@ -176,6 +176,8 @@
     <SolidColorBrush x:Key="MainInteractionAcceptButton.MouseOver.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="MainInteractionAcceptButton.Pressed.Background" Color="#08F"/>
     <SolidColorBrush x:Key="MainInteractionAcceptButton.Pressed.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="MainInteractionAcceptButton.Disabled.Background" Color="#888"/>
+    <SolidColorBrush x:Key="MainInteractionAcceptButton.Disabled.Border" Color="Transparent"/>
 
     <Style x:Key="MainInteractionAcceptButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -210,6 +212,11 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Background" TargetName="border" Value="{StaticResource MainInteractionAcceptButton.Pressed.Background}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource MainInteractionAcceptButton.Pressed.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource MainInteractionAcceptButton.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource MainInteractionAcceptButton.Disabled.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

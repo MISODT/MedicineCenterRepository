@@ -1,7 +1,5 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
-using MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRegistration;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,17 +30,21 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             UserMainInteractionShiftOperationsShiftDateMistakeTextBlock.Visibility = Visibility.Hidden;
 
+            UserMainInteractionShiftOperationsShiftTimeMistakeTextBlock.Visibility = Visibility.Hidden;
+
             InteriorControlsInitializationManager.DayComboBoxInitialization(UserMainInteractionShiftOperationsDayOfShiftComboBox, UserMainInteractionShiftOperationsMonthOfShiftComboBox.SelectedIndex + 1);
             InteriorControlsInitializationManager.MonthComboBoxInitialization(UserMainInteractionShiftOperationsMonthOfShiftComboBox);
             InteriorControlsInitializationManager.YearComboBoxInitialization(UserMainInteractionShiftOperationsYearOfShiftComboBox, DateTime.Now.Year);
-
-            UserMainInteractionShiftOperationsShiftTimeMistakeTextBlock.Visibility = Visibility.Hidden;
 
             InteriorControlsInitializationManager.HourComboBoxInitialization(UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox);
             InteriorControlsInitializationManager.MinuteComboBoxInitialization(UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox);
 
             InteriorControlsInitializationManager.HourComboBoxInitialization(UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox);
             InteriorControlsInitializationManager.MinuteComboBoxInitialization(UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox);
+
+            UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.ItemsSource = OuteriorControlsInitializationManager.HealingDirectionComboBoxInitialization();
+
+            UserMainInteractionShiftOperationsHospitalOfShiftComboBox.ItemsSource = OuteriorControlsInitializationManager.HospitalAddressComboBoxInitialization(null);
         }
 
         private void UserMainInteractionShiftOperationsDayOfShiftComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,30 +69,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserMainInteractionShiftOperationsYearOfShiftComboBox, UserMainInteractionShiftOperationsYearOfShiftComboBoxHintAssist);
 
-            UserDataExternalMistakesManager.ExternalUserDataDateOfShiftMistakesHandler(UserMainInteractionShiftOperationsDayOfShiftComboBox, UserMainInteractionShiftOperationsMonthOfShiftComboBox, UserMainInteractionShiftOperationsYearOfShiftComboBox, UserMainInteractionShiftOperationsShiftDateMistakeTextBlock);
-
             UserMainInteractionAcceptButtonState();
         }
 
-        private void UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UserMainInteractionAcceptButtonState();
-        }
+        private void UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserMainInteractionAcceptButtonState();
 
-        private void UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UserMainInteractionAcceptButtonState();
-        }
+        private void UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserMainInteractionAcceptButtonState();
 
-        private void UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UserMainInteractionAcceptButtonState();
-        }
+        private void UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserMainInteractionAcceptButtonState();
 
-        private void UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UserMainInteractionAcceptButtonState();
-        }
+        private void UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserMainInteractionAcceptButtonState();
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {

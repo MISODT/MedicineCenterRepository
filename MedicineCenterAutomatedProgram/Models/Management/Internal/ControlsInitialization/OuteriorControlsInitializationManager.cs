@@ -1,4 +1,5 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.Collections.Generic;
@@ -7,22 +8,83 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class OuteriorControlsInitializationManager
     {
+        public static List<string> HealingDirectionComboBoxInitialization()
+        {
+            List<string> healingDirections = new List<string>();
+
+            foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize("SELECT HealingDirectionTitle FROM HealingDirections"))
+            {
+                healingDirections.Add(healingDirection.HealingDirectionTitle);
+            }
+
+            return healingDirections;
+        }
+
+        public static string HealingDirectionComboBoxSelectedValueInitialization(string shiftId)
+        {
+            foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shiftId}"))
+            {
+                return healingDirection.HealingDirectionTitle;
+            }
+
+            return "";
+        }
+
         public static List<string> HospitalAddressComboBoxInitialization(string shiftId)
         {
             List<string> hospitalAddresses = new List<string>();
 
-            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId}"))
+            if(shiftId == null)
             {
-                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId} AND CityId = {city.CityId}"))
+                foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityId), CityTitle FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId"))
                 {
-                    foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId} AND StreetId = {street.StreetId}"))
+                    foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetId), StreetTitle FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityId = {city.CityId}"))
                     {
-                        hospitalAddresses.Add($"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}");
+                        foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseId), HouseNumber FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityId = {city.CityId} AND StreetId = {street.StreetId}"))
+                        {
+                            hospitalAddresses.Add($" г. {city.CityTitle}, ул. {street.StreetTitle}, д. {house.HouseNumber} ");
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+                foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityId), CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shiftId}"))
+                {
+                    foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetId), StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND CityId = {city.CityId} AND ShiftId = {shiftId}"))
+                    {
+                        foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseId), HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND CityId = {city.CityId} AND StreetId = {street.StreetId} AND ShiftId = {shiftId}"))
+                        {
+                            hospitalAddresses.Add($" г. {city.CityTitle}, ул. {street.StreetTitle}, д. {house.HouseNumber} ");
+                        }
                     }
                 }
             }
 
             return hospitalAddresses;
+        }
+
+        public static string HospitalAddressSelectedValueInitialization(string shiftHospitalAddressId, string shiftHospitalAddressValue)
+        {
+            if (shiftHospitalAddressId == null)
+            {
+                foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityId) FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityTitle = '{StringContainsManager.UserMainInteractionShiftHospitalAddressStringValue(shiftHospitalAddressValue, "г. ", ",")}'"))
+                {
+                    foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetId) FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityId = {city.CityId} AND StreetTitle = '{StringContainsManager.UserMainInteractionShiftHospitalAddressStringValue(shiftHospitalAddressValue, "ул. ", ",")}'"))
+                    {
+                        foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseId) FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityId = {city.CityId} AND StreetId = {street.StreetId} AND HouseNumber = '{StringContainsManager.UserMainInteractionShiftHospitalAddressStringValue(shiftHospitalAddressValue, "д. ", " ")}'"))
+                        {
+                            foreach (var address in DataResponseManager.HospitalAddressesJsonDataDeserialize($"SELECT DISTINCT(HospitalAddressId) FROM HospitalAddresses, Cities, Streets, Houses WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND CityId = {city.CityId} AND StreetId = {street.StreetId} AND HouseId = {house.HouseId}"))
+                            {
+                                return address.HospitalAddressId;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return "";
         }
 
         public static List<string> AppointmentDateComboBoxValueInitialization(string shiftId)
