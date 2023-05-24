@@ -1,5 +1,6 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,20 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                             {
                                 return address.HospitalAddressId;
                             }
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+                foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityId), CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftHospitalAddressId = {shiftHospitalAddressId}"))
+                {
+                    foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetId), StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND CityId = {city.CityId} AND ShiftHospitalAddressId = {shiftHospitalAddressId}"))
+                    {
+                        foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseId), HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND CityId = {city.CityId} AND StreetId = {street.StreetId} AND ShiftHospitalAddressId = {shiftHospitalAddressId}"))
+                        {
+                            return $" г. {city.CityTitle}, ул. {street.StreetTitle}, д. {house.HouseNumber} ";
                         }
                     }
                 }

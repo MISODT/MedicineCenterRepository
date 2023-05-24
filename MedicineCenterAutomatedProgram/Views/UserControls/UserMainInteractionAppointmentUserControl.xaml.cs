@@ -10,28 +10,38 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 {
     public partial class UserMainInteractionAppointmentUserControl : UserControl
     {
-        private string appointmentId;
+        private Appointments appointments;
 
         public UserMainInteractionAppointmentUserControl(Appointments appointment, Shifts shift, Doctors doctor, HealingDirections healingDirection, Cities city, Streets street, Houses house)
         {
             InitializeComponent();
 
-            appointmentId = appointment.AppointmentId;
+
+            appointments = appointment;
+
+
+            appointments.AppointmentId = appointment.AppointmentId;
+
 
             UserMainInteractionAppointmentUserControlShiftDateTextBlock.Text = shift.ShiftDate;
 
             UserMainInteractionAppointmentUserControlShiftTimeTextBlock.Text = $"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}";
 
-            UserMainInteractionAppointmentUserControlState(appointment.AppointmentStatus);
 
             UserMainInteractionAppointmentUserControlDoctorFullNameTextBlock.Text = $"Врач: {doctor.Surname} {doctor.Name} {doctor.Patronymic}";
 
+
             UserMainInteractionAppointmentUserControlShiftHealingDirectionTitleTextBlock.Text = healingDirection.HealingDirectionTitle;
 
-            if(!string.IsNullOrWhiteSpace(appointment.AppointmentDescription))
+
+            UserMainInteractionAppointmentUserControlState(appointment.AppointmentStatus);
+
+
+            if (!string.IsNullOrWhiteSpace(appointment.AppointmentDescription))
             {
                 UserMainInteractionAppointmentUserControlAppointmentDescriptionTextBlock.Text = $"Описание: {appointment.AppointmentDescription}";
             }
+
 
             UserMainInteractionAppointmentUserControlAppointmentHospitalAddressTextBlock.Text = $"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}";
 
@@ -44,25 +54,35 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             {
                 UserMainInteractionAppointmentUserControlBorder.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#888");
 
+                UserMainInteractionAppointmentUserControlEditAppointmentButton.Visibility = Visibility.Visible;
+
                 UserMainInteractionAppointmentUserControlDeleteAppointmentButton.Visibility = Visibility.Visible;
             }
 
             if (appointmentStatus == "Утверждён")
             {
                 UserMainInteractionAppointmentUserControlBorder.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
+
+                UserMainInteractionAppointmentUserControlEditAppointmentButton.Visibility = Visibility.Hidden;
+
+                UserMainInteractionAppointmentUserControlDeleteAppointmentButton.Visibility = Visibility.Hidden;
             }
 
             if (appointmentStatus == "Не утверждён")
             {
                 UserMainInteractionAppointmentUserControlBorder.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                UserMainInteractionAppointmentUserControlEditAppointmentButton.Visibility = Visibility.Hidden;
+
+                UserMainInteractionAppointmentUserControlDeleteAppointmentButton.Visibility = Visibility.Hidden;
             }
         }
 
-        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage(appointmentId, UserMainInteractionAppointmentUserControlAppointmentDescriptionTextBlock.Text));
+        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(appointments));
 
         private void UserMainInteractionAppointmentUserControlDeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointmentId);
+            UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointments.AppointmentId);
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }

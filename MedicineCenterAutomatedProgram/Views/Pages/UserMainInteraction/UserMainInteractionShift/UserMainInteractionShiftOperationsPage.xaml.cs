@@ -1,6 +1,7 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,9 +10,61 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 {
     public partial class UserMainInteractionShiftOperationsPage : Page
     {
-        public UserMainInteractionShiftOperationsPage()
+        private Shifts shifts;
+
+        public UserMainInteractionShiftOperationsPage(Shifts shift)
         {
             InitializeComponent();
+
+            if(shift != null)
+            {
+                shifts = shift;
+
+
+                DateOnly shiftDateOnly = DateOnly.Parse(shift.ShiftDate);
+
+                TimeOnly shiftStartActionTimeOnly = TimeOnly.Parse(shifts.ShiftStartActionTime);
+
+                TimeOnly shiftEndActionTimeOnly = TimeOnly.Parse(shifts.ShiftEndActionTime);
+
+
+                UserMainInteractionShiftOperationsDayOfShiftComboBox.SelectedValue = shiftDateOnly.Day;
+
+                UserMainInteractionShiftOperationsMonthOfShiftComboBox.SelectedIndex = shiftDateOnly.Month - 1;
+
+                UserMainInteractionShiftOperationsYearOfShiftComboBox.SelectedValue = shiftDateOnly.Year;
+
+
+                UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox.SelectedValue = shiftStartActionTimeOnly.Hour;
+
+                UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox.SelectedValue = shiftStartActionTimeOnly.Minute.ToString("D2");
+
+                UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox.SelectedValue = shiftEndActionTimeOnly.Hour;
+
+                UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox.SelectedValue = shiftEndActionTimeOnly.Minute.ToString("D2");
+
+
+                UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.SelectedValue = OuteriorControlsInitializationManager.HealingDirectionComboBoxSelectedValueInitialization(shift.ShiftId, null);
+
+                UserMainInteractionShiftOperationsHospitalOfShiftComboBox.SelectedValue = OuteriorControlsInitializationManager.HospitalAddressSelectedValueInitialization(shift.ShiftHospitalAddressId, null);
+            }
+
+            else
+            {
+                UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox.SelectedIndex = 0;
+
+                UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox.SelectedIndex = 0;
+
+                UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox.SelectedIndex = 0;
+
+                UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox.SelectedIndex = 0;
+
+
+                UserMainInteractionShiftOperationsHospitalOfShiftComboBox.SelectedIndex = 0;
+
+
+                UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.SelectedIndex = 0;
+            }
         }
 
         private void UserMainInteractionAcceptButtonState()
@@ -83,13 +136,28 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            if(UserDataExternalMistakesManager.ExternalUserDataDateOfShiftMistakesHandler(UserMainInteractionShiftOperationsDayOfShiftComboBox, UserMainInteractionShiftOperationsMonthOfShiftComboBox, UserMainInteractionShiftOperationsYearOfShiftComboBox, UserMainInteractionShiftOperationsShiftDateMistakeTextBlock) && 
-                UserDataExternalMistakesManager.ExternalUserDataTimeOfShiftMistakesHandler(UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsShiftTimeMistakeTextBlock))
+            if(shifts == null)
             {
-                UserDataSectionsDataOperations.UserDataMainInteractionNewShiftOperation($"{UserMainInteractionShiftOperationsYearOfShiftComboBox.SelectedValue}-{UserMainInteractionShiftOperationsMonthOfShiftComboBox.SelectedIndex + 1}-{UserMainInteractionShiftOperationsDayOfShiftComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox.SelectedValue}", OuteriorControlsInitializationManager.HealingDirectionComboBoxSelectedValueInitialization(null, UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.SelectedValue.ToString()), OuteriorControlsInitializationManager.HospitalAddressSelectedValueInitialization(null, UserMainInteractionShiftOperationsHospitalOfShiftComboBox.SelectedValue.ToString()));
+                if (UserDataExternalMistakesManager.ExternalUserDataDateOfShiftMistakesHandler(UserMainInteractionShiftOperationsDayOfShiftComboBox, UserMainInteractionShiftOperationsMonthOfShiftComboBox, UserMainInteractionShiftOperationsYearOfShiftComboBox, UserMainInteractionShiftOperationsShiftDateMistakeTextBlock) && 
+                    UserDataExternalMistakesManager.ExternalUserDataTimeOfShiftMistakesHandler(UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsShiftTimeMistakeTextBlock))
+                {
+                    UserDataSectionsDataOperations.UserDataMainInteractionNewShiftOperation($"{UserMainInteractionShiftOperationsYearOfShiftComboBox.SelectedValue}-{UserMainInteractionShiftOperationsMonthOfShiftComboBox.SelectedIndex + 1}-{UserMainInteractionShiftOperationsDayOfShiftComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox.SelectedValue}", OuteriorControlsInitializationManager.HealingDirectionComboBoxSelectedValueInitialization(null, UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.SelectedValue.ToString()), OuteriorControlsInitializationManager.HospitalAddressSelectedValueInitialization(null, UserMainInteractionShiftOperationsHospitalOfShiftComboBox.SelectedValue.ToString()));
 
-                FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+                    FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+                }
             }
+
+            else
+            {
+                if (UserDataExternalMistakesManager.ExternalUserDataDateOfShiftMistakesHandler(UserMainInteractionShiftOperationsDayOfShiftComboBox, UserMainInteractionShiftOperationsMonthOfShiftComboBox, UserMainInteractionShiftOperationsYearOfShiftComboBox, UserMainInteractionShiftOperationsShiftDateMistakeTextBlock) &&
+                    UserDataExternalMistakesManager.ExternalUserDataTimeOfShiftMistakesHandler(UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox, UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox, UserMainInteractionShiftOperationsShiftTimeMistakeTextBlock))
+                {
+                    UserDataSectionsDataOperations.UserDataMainInteractionUpdateShiftOperation($"{shifts.ShiftId}", $"{UserMainInteractionShiftOperationsYearOfShiftComboBox.SelectedValue}-{UserMainInteractionShiftOperationsMonthOfShiftComboBox.SelectedIndex + 1}-{UserMainInteractionShiftOperationsDayOfShiftComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftStartActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftStartActionTimeComboBox.SelectedValue}", $"{UserMainInteractionShiftOperationsHourOfShiftEndActionTimeComboBox.SelectedValue}:{UserMainInteractionShiftOperationsMinuteOfShiftEndActionTimeComboBox.SelectedValue}", OuteriorControlsInitializationManager.HealingDirectionComboBoxSelectedValueInitialization(null, UserMainInteractionShiftOperationsHealingDirectionTitleOfShiftComboBox.SelectedValue.ToString()), OuteriorControlsInitializationManager.HospitalAddressSelectedValueInitialization(null, UserMainInteractionShiftOperationsHospitalOfShiftComboBox.SelectedValue.ToString()));
+
+                    FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+                }
+            }
+            
         }
     }
 }

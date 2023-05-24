@@ -127,7 +127,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             FrameManager.MainWindowFrame.Navigate(new WelcomePage());
         }
 
-        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionNewAppointmentPage(null,  ""));
+        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(null));
 
         private void MainInteractionHomeSectionMyAppointmentsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
 
@@ -143,7 +143,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         }
 
-        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage());
+        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage(null));
 
         private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
 

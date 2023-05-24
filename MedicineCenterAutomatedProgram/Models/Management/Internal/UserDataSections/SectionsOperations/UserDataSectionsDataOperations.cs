@@ -119,6 +119,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Appointments WHERE AppointmentId = {appointmentId}");
         }
 
+        public static void UserDataMainInteractionUpdateShiftOperation(string shiftId, string shiftDate, string shiftStartActionTime, string shiftEndActionTime, string shiftHealingDirectionId, string shiftHospitalAddressId)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"UPDATE Shifts SET ShiftDate = '{shiftDate}', ShiftStartActionTime = '{shiftStartActionTime}', ShiftEndActionTime = '{shiftEndActionTime}', ShiftHealingDirectionId = {shiftHealingDirectionId}, DoctorId = {UserDataSectionsInstance.Doctor.Id}, ShiftHospitalAddressId = {shiftHospitalAddressId} WHERE ShiftId = {shiftId}");
+        }
+
         public static void UserDataRemoveShiftOperation(string shiftId)
         {
             WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Shifts WHERE ShiftId = {shiftId}");

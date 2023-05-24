@@ -1,5 +1,4 @@
-﻿using ControlzEx.Standard;
-using MedicineCenterAutomatedProgram.Models.Management.External;
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
@@ -10,7 +9,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment
 {

@@ -39,7 +39,7 @@
                 <Button Name="UserDataEditProfileButton" Click="UserDataEditProfileButton_Click" Width="150" Height="29" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Style="{DynamicResource UserDataEditProfileButtonStyle}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Edit}"/>
-                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Редактировать" Style="{DynamicResource UserDataIntroductionButtonContentTextBlock}"/>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Редактировать" Style="{DynamicResource DataIntroductionButtonContentTextBlock}"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

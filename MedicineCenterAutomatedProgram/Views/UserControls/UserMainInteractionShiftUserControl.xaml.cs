@@ -2,7 +2,6 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionShift;
 using System;
 using System.Windows;
@@ -12,13 +11,27 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 {
     public partial class UserMainInteractionShiftUserControl : UserControl
     {
-        private string shiftId;
+        private Shifts shifts = new Shifts();
 
         public UserMainInteractionShiftUserControl(Shifts shift, HealingDirections healingDirection, Cities city, Streets street, Houses house)
         {
             InitializeComponent();
 
-            shiftId = shift.ShiftId;
+
+            shifts.ShiftId = shift.ShiftId;
+
+            shifts.ShiftDate = shift.ShiftDate;
+
+            shifts.ShiftStartActionTime = shift.ShiftStartActionTime;
+
+            shifts.ShiftEndActionTime = shift.ShiftEndActionTime;
+
+            shifts.DoctorId = shift.DoctorId;
+
+            shifts.ShiftHealingDicrectionId = shift.ShiftHealingDicrectionId;
+
+            shifts.ShiftHospitalAddressId = shift.ShiftHospitalAddressId;
+
 
             UserMainInteractionShiftUserControlShiftDateTextBlock.Text = shift.ShiftDate;
 
@@ -27,6 +40,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             UserMainInteractionShiftUserControlShiftHealingDirectionTitleTextBlock.Text = healingDirection.HealingDirectionTitle;
 
             UserMainInteractionShiftUserControlShiftHospitalAddressTextBlock.Text = $"г. {city.CityTitle}, ул. {street.StreetTitle} д. {house.HouseNumber}";
+
 
             if (DateTime.Parse(shift.ShiftDate) > DateTime.Now.Date && !UserMainInteractionIsShiftAppointmentExists())
             {
@@ -45,9 +59,9 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 
         private bool UserMainInteractionIsShiftAppointmentExists()
         {
-            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Appointments WHERE ShiftId = AppointmentShiftId AND ShiftId = {shiftId}"))
+            foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId FROM Shifts, Appointments WHERE ShiftId = AppointmentShiftId AND ShiftId = {shifts.ShiftId}"))
             {
-                if (shift.ShiftId == shiftId)
+                if (shift.ShiftId == shifts.ShiftId)
                 {
                     return true;
                 }
@@ -56,14 +70,15 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             return false;
         }
 
-        private void UserMainInteractionShiftUserControlEditShiftButton_Click(object sender, RoutedEventArgs e)
+        private void UserMainInteractionShiftUserControlEditShiftButton_Click(object sender, RoutedEventArgs e) 
         {
-            //FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage(shiftId));
+
+            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage(shifts));
         }
 
         private void UserMainInteractionShiftUserControlDeleteShiftButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shiftId);
+            UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shifts.ShiftId);
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
         }
