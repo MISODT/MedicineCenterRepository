@@ -62,7 +62,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 
         private void UserMainInteractionAppointmentUserControlDeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsDataOperations.UserDataRemoveAppointmentOperation(appointmentId);
+            UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointmentId);
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }

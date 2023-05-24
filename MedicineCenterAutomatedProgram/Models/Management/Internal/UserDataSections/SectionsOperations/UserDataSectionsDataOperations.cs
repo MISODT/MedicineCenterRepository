@@ -114,7 +114,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             }
         }
 
-        public static void UserDataRemoveAppointmentOperation(string appointmentId)
+        public static void UserDataMainInteractionRemoveAppointmentOperation(string appointmentId)
         {
             WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Appointments WHERE AppointmentId = {appointmentId}");
         }
@@ -122,6 +122,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
         public static void UserDataRemoveShiftOperation(string shiftId)
         {
             WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Shifts WHERE ShiftId = {shiftId}");
+        }
+
+        public static void UserDataMainInteractionNewShiftOperation(string shiftDate, string shiftStartActionTime, string shiftEndActionTime, string shiftHealingDirectionId, string shiftHospitalAddressId)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Shifts (ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId) VALUES ('{shiftDate}', '{shiftStartActionTime}', '{shiftEndActionTime}', {shiftHealingDirectionId}, {UserDataSectionsInstance.Doctor.Id}, {shiftHospitalAddressId});");
+
+            MessageBox.Show($"INSERT INTO Shifts (ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId) VALUES ('{shiftDate}', '{shiftStartActionTime}', '{shiftEndActionTime}', {shiftHealingDirectionId}, {UserDataSectionsInstance.Doctor.Id}, {shiftHospitalAddressId});");
         }
     }
 }

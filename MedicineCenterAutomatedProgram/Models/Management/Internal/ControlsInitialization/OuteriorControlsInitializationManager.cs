@@ -20,11 +20,22 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             return healingDirections;
         }
 
-        public static string HealingDirectionComboBoxSelectedValueInitialization(string shiftId)
+        public static string HealingDirectionComboBoxSelectedValueInitialization(string shiftId, string healingDirectionTitle)
         {
-            foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shiftId}"))
+            if(shiftId != null)
             {
-                return healingDirection.HealingDirectionTitle;
+                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shiftId}"))
+                {
+                    return healingDirection.HealingDirectionTitle;
+                }
+            }
+
+            else
+            {
+                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionId FROM HealingDirections WHERE HealingDirectionTitle = '{healingDirectionTitle}'"))
+                {
+                    return healingDirection.HealingDirectionId;
+                }
             }
 
             return "";

@@ -909,7 +909,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             foreach(var appointment in appointmentsCollection)
             {
-                UserDataSectionsDataOperations.UserDataRemoveAppointmentOperation(appointment.AppointmentId);
+                UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointment.AppointmentId);
             }
 
             FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));

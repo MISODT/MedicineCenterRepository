@@ -93,7 +93,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
         public static bool ExternalUserDataDateOfShiftMistakesHandler(ComboBox userDataDayOfShiftComboBox, ComboBox userDataMonthOfShiftComboBox, ComboBox userDataYearOfShiftComboBox, TextBlock userDataDateOfShiftMistakeTextBlock)
         {
-            DateOnly userDataDateOfShift = DateOnly.Parse($"{userDataDayOfShiftComboBox.SelectedValue}.{userDataMonthOfShiftComboBox.SelectedValue}.{userDataYearOfShiftComboBox.SelectedValue}");
+            DateOnly userDataDateOfShift = DateOnly.Parse($"{userDataDayOfShiftComboBox.SelectedValue}.{userDataMonthOfShiftComboBox.SelectedIndex + 1}.{userDataYearOfShiftComboBox.SelectedValue}");
 
             if (DateOnly.Parse(DateTime.Now.Date.ToShortDateString()) == userDataDateOfShift)
             {
