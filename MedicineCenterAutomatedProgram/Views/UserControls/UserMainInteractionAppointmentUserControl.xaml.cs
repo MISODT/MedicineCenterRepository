@@ -20,9 +20,6 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             appointments = appointment;
 
 
-            appointments.AppointmentId = appointment.AppointmentId;
-
-
             UserMainInteractionAppointmentUserControlShiftDateTextBlock.Text = shift.ShiftDate;
 
             UserMainInteractionAppointmentUserControlShiftTimeTextBlock.Text = $"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}";

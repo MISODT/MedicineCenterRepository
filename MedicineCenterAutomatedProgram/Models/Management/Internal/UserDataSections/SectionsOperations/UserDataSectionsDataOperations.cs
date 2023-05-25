@@ -135,5 +135,10 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
 
             MessageBox.Show($"INSERT INTO Shifts (ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId) VALUES ('{shiftDate}', '{shiftStartActionTime}', '{shiftEndActionTime}', {shiftHealingDirectionId}, {UserDataSectionsInstance.Doctor.Id}, {shiftHospitalAddressId});");
         }
+
+        public static void UserDataMainInteractionUpdateAppointmentReceivingStatus(string appointmentId, string appointmentStatus)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"UPDATE Appointments SET AppointmentStatus = '{appointmentStatus}' WHERE AppointmentId = {appointmentId}");
+        }
     }
 }

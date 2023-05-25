@@ -56,7 +56,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="10">
-            <ItemsControl Grid.Row="1" Name="UserMainInteractionShiftsItemsControl" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <ItemsControl Name="UserMainInteractionShiftsItemsControl" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </ScrollViewer>
 
         <TextBlock Grid.Row="1" Name="UserMainInteractionShiftsEmptyTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="Смены отсутствуют" Style="{DynamicResource UserMainInteractionVariablesEmptyTextBlockStyle}"/>

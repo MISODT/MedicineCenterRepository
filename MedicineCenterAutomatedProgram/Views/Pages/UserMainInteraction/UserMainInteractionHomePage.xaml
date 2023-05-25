@@ -65,6 +65,8 @@
                             <Button Name="MainInteractionHomeSectionMyAppointmentsButton" Click="MainInteractionHomeSectionMyAppointmentsButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Мои записи" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
 
                             <Button Name="MainInteractionHomeSectionAppointmentsHistoryButton" Click="MainInteractionHomeSectionAppointmentsHistoryButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="История записей" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+
+                            <Button Name="MainInteractionHomeSectionMedicineCardButton" Click="MainInteractionHomeSectionMedicineCardButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Медицинская карта" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
                         </StackPanel>
                     </Grid>
 
@@ -79,8 +81,20 @@
                             </Border>
 
                             <Button Name="MainInteractionHomeSectionSymptomHelperButton" Click="MainInteractionHomeSectionSymptomHelperButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Помощник по симптомам" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                        </StackPanel>
+                    </Grid>
 
-                            <Button Name="MainInteractionHomeSectionAppointmentReceivingButton" Click="MainInteractionHomeSectionAppointmentReceivingButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Приём записей" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
+                    <Grid Name="MainInteractionHomeSectionsDoctorReceiving" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=InvoiceReceive}"/>
+
+                                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Заявки врача" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Button Name="MainInteractionHomeSectionAppointmentReceivingButton" Click="MainInteractionHomeSectionAppointmentReceivingButton_Click" Width="175" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Просмотр заявок" Style="{DynamicResource MainInteractionHomeSectionButtonStyle}"/>
                         </StackPanel>
                     </Grid>
 

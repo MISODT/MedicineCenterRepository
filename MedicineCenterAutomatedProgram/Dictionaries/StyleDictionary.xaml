@@ -1040,6 +1040,94 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.Static.Background" Color="#F00"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.MouseOver.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.Pressed.Background" Color="#A00"/>
+    <SolidColorBrush x:Key="UserMainInteractionDisagreeVariableButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionDisagreeVariableButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionDisagreeVariableButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionDisagreeVariableButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionDisagreeVariableButton.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionDisagreeVariableButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionDisagreeVariableButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionDisagreeVariableButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionDisagreeVariableButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.Static.Background" Color="#0A0"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.MouseOver.Background" Color="#0A5"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.Pressed.Background" Color="#0A5"/>
+    <SolidColorBrush x:Key="UserMainInteractionAgreeVariableButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionAgreeVariableButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionAgreeVariableButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionAgreeVariableButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionAgreeVariableButton.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAgreeVariableButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAgreeVariableButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionAgreeVariableButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionAgreeVariableButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Background" Color="#DDD"/>
     <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="UserMainInteractionVariablesSortingMinMaxButton.Static.Foreground" Color="#000"/>

@@ -20,7 +20,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             {
                 DataContext = patient;
 
-                MainInteractionHomeSectionAppointmentReceivingButton.Visibility = Visibility.Hidden;
+                MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Hidden;
 
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Hidden;
             }
@@ -29,7 +29,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             {
                 DataContext = doctor;
 
-                MainInteractionHomeSectionAppointmentReceivingButton.Visibility = Visibility.Visible;
+                MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Visible;
 
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Visible;
             }
@@ -133,15 +133,17 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
 
+        private void MainInteractionHomeSectionMedicineCardButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
 
         private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage(null));
 
