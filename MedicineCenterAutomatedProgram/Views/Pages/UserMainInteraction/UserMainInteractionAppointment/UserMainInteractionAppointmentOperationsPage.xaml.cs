@@ -95,10 +95,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentOperationsDescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserMainInteractionAppointmentOperationsDescriptionTextBox.Text = "";
+            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+            
         }
 
-        private void UserMainInteractionAppointmentOperationsClearDescriptionButton_Click(object sender, RoutedEventArgs e) => UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+        private void UserMainInteractionAppointmentOperationsClearDescriptionButton_Click(object sender, RoutedEventArgs e) 
+        {
+            UserMainInteractionAppointmentOperationsDescriptionTextBox.Text = "";
+        }
 
         private void UserMainInteractionAcceptButton_Click(object sender, RoutedEventArgs e)
         {
