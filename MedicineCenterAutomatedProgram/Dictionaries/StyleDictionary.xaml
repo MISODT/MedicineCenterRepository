@@ -266,6 +266,48 @@
         </Setter>
     </Style>
 
+    <SolidColorBrush x:Key="SearchDataButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="SearchDataButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="SearchDataButton.Static.Glyph" Color="#000"/>
+    <SolidColorBrush x:Key="SearchDataButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="SearchDataButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="SearchDataButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="SearchDataButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="SearchDataButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserDataOutProfileButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserDataOutProfileButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserDataOutProfileButton.Static.Glyph}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="5">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource SearchDataButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource SearchDataButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource SearchDataButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource SearchDataButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DataIntroductionButtonContentTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>

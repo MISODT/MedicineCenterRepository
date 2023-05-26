@@ -51,7 +51,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
                     shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
 
-                    foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, Name, Surname, Patronymic FROM Patients, Shifts,Appointments WHERE ShiftId = AppointmentShiftId AND ShiftId = {shift.ShiftId}"))
+                    foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, Name, Surname, Patronymic FROM Patients, Appointments WHERE PatientId = Id AND AppointmentId = {appointment.AppointmentId}"))
                     {
                         foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
                         {

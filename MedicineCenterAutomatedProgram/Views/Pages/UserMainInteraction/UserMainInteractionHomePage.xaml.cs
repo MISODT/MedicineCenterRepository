@@ -138,10 +138,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         }
 
-        private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionSymptomHelperPage());
 
         private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
 
