@@ -308,9 +308,31 @@
         </Setter>
     </Style>
 
+    <Style x:Key="UserMainInteractionDiseaseInfoTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="#222"/>
+    </Style>
+
+    <Style x:Key="DataIntroductionButtonNoticeTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="FontFamily" Value="Latha"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontStretch" Value="Normal"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#888"/>
+    </Style>
+
     <Style x:Key="DataIntroductionButtonContentTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
-        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="TextTrimming" Value="None"/>
         <Setter Property="FontFamily" Value="Latha"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontStretch" Value="Normal"/>
@@ -1031,6 +1053,50 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.Pressed.Background}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionRemoveVariableButton.Pressed.Border}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.Static.Background" Color="#5AF"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.Static.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.Static.Foreground" Color="#000"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.MouseOver.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.MouseOver.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.Pressed.Background" Color="#08F"/>
+    <SolidColorBrush x:Key="UserMainInteractionDiseaseInfoButton.Pressed.Border" Color="Transparent"/>
+
+    <Style x:Key="UserMainInteractionDiseaseInfoButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource UserMainInteractionDiseaseInfoButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UserMainInteractionDiseaseInfoButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource UserMainInteractionDiseaseInfoButton.Static.Foreground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="3">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionDiseaseInfoButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionDiseaseInfoButton.MouseOver.Border}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource UserMainInteractionDiseaseInfoButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource UserMainInteractionDiseaseInfoButton.Pressed.Border}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

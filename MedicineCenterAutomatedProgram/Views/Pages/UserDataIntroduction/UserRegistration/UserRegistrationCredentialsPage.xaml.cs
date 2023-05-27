@@ -48,7 +48,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             UserDataPasswordTextBox.Visibility = Visibility.Hidden;
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
@@ -67,7 +67,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataLoginTextBox, UserDataLoginMistakeTextBlock, "Укажите адрес эл. почты");
 

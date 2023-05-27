@@ -75,7 +75,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             UserMainInteractionAppointmentOperationsTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
         }
 
         private void UserMainInteractionAppointmentOperationsDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,7 +95,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentOperationsDescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
             
         }
 

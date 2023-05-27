@@ -63,7 +63,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
             }
         }
 
-        public static void UserDataTextBoxFieldVisibilityOptions(TextBox userDataFieldTextBox, TextBlock userDataFieldTextBoxHintAssist, Button clearDataFieldButton)
+        public static void UserDataTextBoxFieldClearedVisibilityOptions(TextBox userDataFieldTextBox, TextBlock userDataFieldTextBoxHintAssist, Button clearDataFieldButton)
         {
             if (userDataFieldTextBox.Text != "")
             {
@@ -77,6 +77,19 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
                 userDataFieldTextBoxHintAssist.Visibility = Visibility.Visible;
 
                 clearDataFieldButton.Visibility = Visibility.Hidden;
+            }
+        }
+
+        public static void UserDataTextBoxFieldUnclearedVisibilityOptions(TextBox userDataFieldTextBox, TextBlock userDataFieldTextBoxHintAssist)
+        {
+            if (userDataFieldTextBox.Text != "")
+            {
+                userDataFieldTextBoxHintAssist.Visibility = Visibility.Hidden;
+            }
+
+            else
+            {
+                userDataFieldTextBoxHintAssist.Visibility = Visibility.Visible;
             }
         }
 

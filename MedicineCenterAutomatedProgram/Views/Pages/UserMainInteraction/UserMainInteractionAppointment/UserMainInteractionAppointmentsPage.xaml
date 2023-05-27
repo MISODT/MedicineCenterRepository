@@ -64,6 +64,7 @@
         <Button Grid.Row="2" Name="UserMainInteractionAppointmentsClearButton" Click="UserMainInteractionAppointmentsClearButton_Click" Width="150" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserMainInteractionVariablesClearButtonStyle}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Trash}"/>
+                
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Очистить" Style="{DynamicResource DataIntroductionButtonContentTextBlock}"/>
             </StackPanel>
         </Button>

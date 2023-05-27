@@ -50,7 +50,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
         {
             UserDataPasswordTextBox.Visibility = Visibility.Hidden;
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
             UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
@@ -67,7 +67,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
 
             NavigationNextButtonState();
         }
