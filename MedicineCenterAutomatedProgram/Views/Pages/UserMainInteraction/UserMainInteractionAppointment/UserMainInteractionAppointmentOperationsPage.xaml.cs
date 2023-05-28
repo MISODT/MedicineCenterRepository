@@ -14,7 +14,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
     {
         private Appointments appointments;
 
+
         private List<UserMainInteractionDoctorUserControl> userMainInteractionDoctorUserControlList = new List<UserMainInteractionDoctorUserControl>();
+
 
         private List<Shifts> shiftsList = new List<Shifts>();
 

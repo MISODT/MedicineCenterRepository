@@ -2,6 +2,7 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,9 +21,9 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             appointments = appointment;
 
 
-            UserMainInteractionAppointmentUserControlShiftDateTextBlock.Text = shift.ShiftDate;
+            UserMainInteractionAppointmentUserControlShiftDateTextBlock.Text = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
 
-            UserMainInteractionAppointmentUserControlShiftTimeTextBlock.Text = $"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}";
+            UserMainInteractionAppointmentUserControlShiftTimeTextBlock.Text = $"{TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString()} - {TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString()}";
 
 
             UserMainInteractionAppointmentUserControlDoctorFullNameTextBlock.Text = $"Врач: {doctor.Surname} {doctor.Name} {doctor.Patronymic}";

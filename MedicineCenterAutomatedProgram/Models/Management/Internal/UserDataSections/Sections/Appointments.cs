@@ -8,7 +8,7 @@
 
         public string AppointmentDescription { get; set; }
 
-        public string ShiftId { get; set; }
+        public string AppointmentShiftId { get; set; }
 
         public string PatientId { get; set; }
 
