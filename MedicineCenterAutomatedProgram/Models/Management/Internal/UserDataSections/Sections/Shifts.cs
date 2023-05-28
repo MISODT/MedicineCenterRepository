@@ -10,7 +10,7 @@
 
         public string ShiftEndActionTime { get; set; }
 
-        public string ShiftHealingDicrectionId { get; set; }
+        public string ShiftHealingDirectionId { get; set; }
 
         public string DoctorId { get; set; }
 

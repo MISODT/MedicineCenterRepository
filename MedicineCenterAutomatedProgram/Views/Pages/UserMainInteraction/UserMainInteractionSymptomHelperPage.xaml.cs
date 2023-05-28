@@ -2,7 +2,6 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Views.UserControls;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,9 +11,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 {
     public partial class UserMainInteractionSymptomHelperPage : Page
     {
-        private ObservableCollection<UserMainInteractionDiseaseUserControl> userMainInteractionSymptomHelperStartDiseaseUserControl = new ObservableCollection<UserMainInteractionDiseaseUserControl>();
+        private ObservableCollection<UserMainInteractionDiseaseUserControl> userMainInteractionSymptomHelperStartDiseaseUserControlCollection = new ObservableCollection<UserMainInteractionDiseaseUserControl>();
 
-        private ObservableCollection<UserMainInteractionDiseaseUserControl> userMainInteractionSymptomHelperRunDiseaseUserControl = new ObservableCollection<UserMainInteractionDiseaseUserControl>();
+        private ObservableCollection<UserMainInteractionDiseaseUserControl> userMainInteractionSymptomHelperRunDiseaseUserControlCollection = new ObservableCollection<UserMainInteractionDiseaseUserControl>();
 
 
         private List<Diseases> diseasesList = new List<Diseases>();
@@ -30,7 +29,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionSymptomHelperItemsEmptyHandler()
         {
-            if (userMainInteractionSymptomHelperRunDiseaseUserControl.Count == 0)
+            if (userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Count == 0)
             {
                 UserMainInteractionSymptomHelperItemsEmptyTextBlock.Visibility = Visibility.Visible;
             }
@@ -49,7 +48,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                 {
                     foreach (var symptom in DataResponseManager.SymptomsJsonDataDeserialize($"SELECT SymptomId, SymptomValue FROM Symptoms, Diseases WHERE SymptomId = DiseaseSymptomId AND DiseaseId = {disease.DiseaseId}"))
                     {
-                        userMainInteractionSymptomHelperStartDiseaseUserControl.Add(new UserMainInteractionDiseaseUserControl(disease, symptom, healingDirection));
+                        userMainInteractionSymptomHelperStartDiseaseUserControlCollection.Add(new UserMainInteractionDiseaseUserControl(disease, symptom, healingDirection));
 
                         symptomsList.Add(symptom);
                     }
@@ -71,23 +70,23 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     {
                         if(disease.DiseaseHealingDirectionId == healingDirection.HealingDirectionId && disease.DiseaseSymptomId == symptom.SymptomId)
                         {
-                            if (disease.DiseaseTitle.Contains(UserMainInteractionSymptomHelperSearchTextBox.Text) || symptom.SymptomValue.Contains(UserMainInteractionSymptomHelperSearchTextBox.Text))
+                            if (disease.DiseaseTitle.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || disease.DiseaseTitle.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()) || symptom.SymptomValue.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || symptom.SymptomValue.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()))
                             {
-                                userMainInteractionSymptomHelperRunDiseaseUserControl.Add(new UserMainInteractionDiseaseUserControl(disease, symptom, healingDirection));
+                                userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Add(new UserMainInteractionDiseaseUserControl(disease, symptom, healingDirection));
                             }
                         }
                     }
                 }
             }
 
-            UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperRunDiseaseUserControl;
+            UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperRunDiseaseUserControlCollection;
         }
 
         private void UserMainInteractionSymptomHelperPage_Loaded(object sender, RoutedEventArgs e)
         {
             UserMainInteractionUserMainInteractionSymptomHelperStartItemsControlInitialization();
 
-            UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperStartDiseaseUserControl;
+            UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperStartDiseaseUserControlCollection;
 
 
             UserMainInteractionSymptomHelperItemsEmptyTextBlock.Visibility = Visibility.Hidden;
@@ -97,9 +96,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             UserDataFieldsViewManager.UserDataTextBoxFieldUnclearedVisibilityOptions(UserMainInteractionSymptomHelperSearchTextBox, UserMainInteractionSymptomHelperSearchTextBoxHintAssist);
 
-            if(string.IsNullOrWhiteSpace(UserMainInteractionSymptomHelperSearchTextBox.Text) && userMainInteractionSymptomHelperRunDiseaseUserControl.Count == 0)
+            if(string.IsNullOrWhiteSpace(UserMainInteractionSymptomHelperSearchTextBox.Text) && userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Count == 0)
             {
-                UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperStartDiseaseUserControl;
+                UserMainInteractionSymptomHelperItemsControl.ItemsSource = userMainInteractionSymptomHelperStartDiseaseUserControlCollection;
 
                 UserMainInteractionSymptomHelperItemsEmptyTextBlock.Visibility = Visibility.Hidden;
             }
@@ -109,7 +108,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             if(!string.IsNullOrWhiteSpace(UserMainInteractionSymptomHelperSearchTextBox.Text))
             {
-                userMainInteractionSymptomHelperRunDiseaseUserControl.Clear();
+                userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Clear();
 
                 UserMainInteractionUserMainInteractionSymptomHelperRunItemsControlInitialization();
 

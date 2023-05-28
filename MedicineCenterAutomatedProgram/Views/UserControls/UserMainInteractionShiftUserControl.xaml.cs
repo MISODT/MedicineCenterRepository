@@ -20,22 +20,26 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 
             shifts.ShiftId = shift.ShiftId;
 
+
             shifts.ShiftDate = shift.ShiftDate;
 
             shifts.ShiftStartActionTime = shift.ShiftStartActionTime;
 
             shifts.ShiftEndActionTime = shift.ShiftEndActionTime;
 
+
             shifts.DoctorId = shift.DoctorId;
 
-            shifts.ShiftHealingDicrectionId = shift.ShiftHealingDicrectionId;
+
+            shifts.ShiftHealingDirectionId = shift.ShiftHealingDirectionId;
+
 
             shifts.ShiftHospitalAddressId = shift.ShiftHospitalAddressId;
 
 
-            UserMainInteractionShiftUserControlShiftDateTextBlock.Text = shift.ShiftDate;
+            UserMainInteractionShiftUserControlShiftDateTextBlock.Text = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
 
-            UserMainInteractionShiftUserControlShiftTimeTextBlock.Text = $"{shift.ShiftStartActionTime} - {shift.ShiftEndActionTime}";
+            UserMainInteractionShiftUserControlShiftTimeTextBlock.Text = $"{TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString()} - {TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString()}";
 
             UserMainInteractionShiftUserControlShiftHealingDirectionTitleTextBlock.Text = healingDirection.HealingDirectionTitle;
 

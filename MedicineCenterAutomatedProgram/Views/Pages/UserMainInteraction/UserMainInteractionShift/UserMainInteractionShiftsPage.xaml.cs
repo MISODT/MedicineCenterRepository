@@ -6,9 +6,12 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionShift
 {
@@ -16,9 +19,25 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
     {
         private string userMainInteractionShiftParameterValue;
 
-        private ObservableCollection<UserMainInteractionShiftUserControl> userMainInteractionShiftUserControlCollection = new ObservableCollection<UserMainInteractionShiftUserControl>();
 
-        private ObservableCollection<Shifts> shiftsCollection = new ObservableCollection<Shifts>();
+        private ObservableCollection<UserMainInteractionShiftUserControl> userMainInteractionStartShiftsUserControlCollection = new ObservableCollection<UserMainInteractionShiftUserControl>();
+
+        private ObservableCollection<UserMainInteractionShiftUserControl> userMainInteractionRunShiftsUserControlCollection = new ObservableCollection<UserMainInteractionShiftUserControl>();
+
+
+        private List<Shifts> shiftsList = new List<Shifts>();
+
+
+        private List<HealingDirections> healingDirectionsList = new List<HealingDirections>();
+
+
+        private List<HospitalAddresses> hospitalAddressesList = new List<HospitalAddresses>();
+
+        private List<Cities> citiesList = new List<Cities>();
+
+        private List<Streets> streetsList = new List<Streets>();
+
+        private List<Houses> housesList = new List<Houses>();
 
         public UserMainInteractionShiftsPage(string userMainInteractionShiftParameter)
         {
@@ -30,7 +49,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
                 if (userMainInteractionShiftParameter == "Текущие")
                 {
-                    NowShiftsInitialization();
+                    UserMainInteractionShiftsStartItemsComtrolInitialization();
 
                     UserMainInteractionShiftsClearButton.Visibility = Visibility.Hidden;
                 }
@@ -42,15 +61,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                     UserMainInteractionShiftsClearButton.Visibility = Visibility.Visible;
                 }
 
-                UserMainInteractionShiftsEmptyHandler();
+                UserMainInteractionShiftsItemsEmptyHandler();
             }
 
             InteriorControlsInitializationManager.VariablesSortingParametersComboBoxInitialization(UserMainInteractionShiftsSortingParametersComboBox);
         }
 
-        private void UserMainInteractionShiftsEmptyHandler()
+        private void UserMainInteractionShiftsItemsEmptyHandler()
         {
-            if (userMainInteractionShiftUserControlCollection.Count == 0)
+            if (userMainInteractionStartShiftsUserControlCollection.Count == 0)
             {
                 UserMainInteractionShiftsEmptyTextBlock.Visibility = Visibility.Visible;
 
@@ -65,47 +84,115 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
         }
 
-        private void NowShiftsInitialization()
+        private void UserMainInteractionShiftsStartItemsComtrolInitialization()
         {
             foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id}"))
             {
-                shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
+                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionId, HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
                 {
-                    foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
+                    foreach (var hospitalAddress in DataResponseManager.HospitalAddressesJsonDataDeserialize($"SELECT HospitalAddressId, HospitalAddressCityId, HospitalAddressStreetId, HospitalAddressHouseId FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
                     {
-                        foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
+                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
                         {
-                            foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
+                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
                             {
-                                userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
+                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
+                                {
+                                    userMainInteractionStartShiftsUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
+
+                                    housesList.Add(house);
+                                }
+
+                                streetsList.Add(street);
+                            }
+
+                            citiesList.Add(city);
+                        }
+
+                        hospitalAddressesList.Add(hospitalAddress);
+                    }
+
+                    healingDirectionsList.Add(healingDirection);
+                }
+
+                shiftsList.Add(shift);
+            }
+
+            UserMainInteractionShiftsItemsEmptyHandler();
+        }
+
+        private void UserMainInteractionShiftsRunItemsControlInitialization()
+        {
+            IOrderedEnumerable<Shifts> sortedList = null;
+
+            if(UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения")
+            {
+                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                {
+                    sortedList = shiftsList.OrderByDescending(x => x.ShiftId);
+                }
+
+                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                {
+                    sortedList = shiftsList.OrderBy(x => x.ShiftId);
+                }
+            }
+
+            if(UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате")
+            {
+                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                {
+                    sortedList = shiftsList.OrderByDescending(x => x.ShiftDate);
+                }
+
+                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                {
+                    sortedList = shiftsList.OrderBy(x => x.ShiftDate);
+                }
+            }
+
+            if(sortedList != null)
+            {
+                foreach (var shift in sortedList)
+                {
+                    foreach (var healingDirection in healingDirectionsList)
+                    {
+                        if (shift.ShiftHealingDirectionId == healingDirection.HealingDirectionId)
+                        {
+                            foreach (var hospitalAddress in hospitalAddressesList)
+                            {
+                                foreach (var city in citiesList)
+                                {
+                                    foreach (var street in streetsList)
+                                    {
+                                        foreach (var house in housesList)
+                                        {
+                                            if (hospitalAddress.HospitalAddressCityId == city.CityId && hospitalAddress.HospitalAddressStreetId == street.StreetId && hospitalAddress.HospitalAddressHouseId == house.HouseId && hospitalAddress.HospitalAddressId == shift.ShiftHospitalAddressId)
+                                            {
+                                                userMainInteractionRunShiftsUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
 
-                shiftsCollection.Add(shift);
+                UserMainInteractionShiftsItemsControl.ItemsSource = userMainInteractionRunShiftsUserControlCollection;
             }
 
-            UserMainInteractionShiftsEmptyHandler();
+            else
+            {
+                UserMainInteractionShiftsItemsControl.ItemsSource = userMainInteractionStartShiftsUserControlCollection;
+            }
         }
 
         private void OldShiftsInitialization()
         {
             foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id}"))
             {
-                shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
+                foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionId, HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
                 {
                     foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
                     {
@@ -113,260 +200,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                         {
                             foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
                             {
-                                userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
+                                userMainInteractionStartShiftsUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
                             }
                         }
                     }
                 }
 
-                shiftsCollection.Add(shift);
+                shiftsList.Add(shift);
             }
 
-            UserMainInteractionShiftsEmptyHandler();
-        }
-
-        private void AllShiftsSortingDescendingInitialization()
-        {
-            if(userMainInteractionShiftParameterValue == "Текущие")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftId DESC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            if(userMainInteractionShiftParameterValue == "Старые")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftId DESC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            UserMainInteractionShiftsEmptyHandler();
-        }
-
-        private void AllShiftsSortingAscendingInitialization()
-        {
-            if (userMainInteractionShiftParameterValue == "Текущие")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftId ASC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            if (userMainInteractionShiftParameterValue == "Старые")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftId ASC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            UserMainInteractionShiftsEmptyHandler();
-        }
-
-        private void DateShiftsSortingDescendingInitialization()
-        {
-            if (userMainInteractionShiftParameterValue == "Текущие")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftDate DESC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            if (userMainInteractionShiftParameterValue == "Старые")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftDate DESC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            UserMainInteractionShiftsEmptyHandler();
-        }
-
-        private void DateShiftsSortingAscendingInitialization()
-        {
-            if (userMainInteractionShiftParameterValue == "Текущие")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftDate ASC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            if (userMainInteractionShiftParameterValue == "Старые")
-            {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id} ORDER BY ShiftDate ASC"))
-                {
-                    shift.ShiftDate = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
-
-                    shift.ShiftStartActionTime = TimeOnly.Parse(shift.ShiftStartActionTime).ToShortTimeString();
-
-                    shift.ShiftEndActionTime = TimeOnly.Parse(shift.ShiftEndActionTime).ToShortTimeString();
-
-                    foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
-                    {
-                        foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT CityId, CityTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId}"))
-                        {
-                            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT StreetId, StreetTitle FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND CityId = {city.CityId}"))
-                            {
-                                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT HouseId, HouseNumber FROM HospitalAddresses, Cities, Streets, Houses, Shifts WHERE HospitalAddressCityId = CityId AND HospitalAddressStreetId = StreetId AND HospitalAddressHouseId = HouseId AND ShiftHospitalAddressId = HospitalAddressId AND ShiftId = {shift.ShiftId} AND StreetId = {street.StreetId}"))
-                                {
-                                    userMainInteractionShiftUserControlCollection.Add(new UserMainInteractionShiftUserControl(shift, healingDirection, city, street, house));
-                                }
-                            }
-                        }
-                    }
-
-                    shiftsCollection.Add(shift);
-                }
-            }
-
-            UserMainInteractionShiftsEmptyHandler();
+            UserMainInteractionShiftsItemsEmptyHandler();
         }
 
         private void UserMainInteractionShiftsPage_Loaded(object sender, RoutedEventArgs e) 
@@ -375,103 +218,51 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
 
-            UserMainInteractionShiftsItemsControl.ItemsSource = userMainInteractionShiftUserControlCollection;
+
+            UserMainInteractionShiftsItemsControl.ItemsSource = userMainInteractionStartShiftsUserControlCollection;
         }
 
         private void UserMainInteractionShiftsSortingParametersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
-            {
-                if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения")
-                {
-                    userMainInteractionShiftUserControlCollection.Clear();
+            userMainInteractionRunShiftsUserControlCollection.Clear();
 
-                    shiftsCollection.Clear();
 
-                    AllShiftsSortingDescendingInitialization();
-                }
+            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked = false;
 
-                if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате")
-                {
-                    userMainInteractionShiftUserControlCollection.Clear();
+            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
 
-                    shiftsCollection.Clear();
 
-                    DateShiftsSortingDescendingInitialization();
-                }
-            }
+            UserMainInteractionShiftsSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
 
-            if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
-            {
-                if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения")
-                {
-                    userMainInteractionShiftUserControlCollection.Clear();
+            UserMainInteractionShiftsSortingMaxButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
 
-                    shiftsCollection.Clear();
 
-                    AllShiftsSortingAscendingInitialization();
-                }
-
-                if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате")
-                {
-                    userMainInteractionShiftUserControlCollection.Clear();
-
-                    shiftsCollection.Clear();
-
-                    DateShiftsSortingAscendingInitialization();
-                }
-            }
+            UserMainInteractionShiftsRunItemsControlInitialization();
         }
 
         private void UserMainInteractionShiftsSortingMinButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataFieldsViewManager.UserMainInteractionVariablesSortingMinButtonFieldVisibilityOptions(UserMainInteractionShiftsSortingMinButton, UserMainInteractionShiftsSortingMaxButton);
 
-            if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
-            {
-                userMainInteractionShiftUserControlCollection.Clear();
+            
+            userMainInteractionRunShiftsUserControlCollection.Clear();
 
-                shiftsCollection.Clear();
-
-                AllShiftsSortingDescendingInitialization();
-            }
-
-            if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
-            {
-                userMainInteractionShiftUserControlCollection.Clear();
-
-                shiftsCollection.Clear();
-
-                DateShiftsSortingDescendingInitialization();
-            }
+            UserMainInteractionShiftsRunItemsControlInitialization();
         }
 
         private void UserMainInteractionShiftsSortingMaxButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataFieldsViewManager.UserMainInteractionVariablesSortingMaxButtonFieldVisibilityOptions(UserMainInteractionShiftsSortingMaxButton, UserMainInteractionShiftsSortingMinButton);
 
-            if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
-            {
-                userMainInteractionShiftUserControlCollection.Clear();
+            
+            userMainInteractionRunShiftsUserControlCollection.Clear();
 
-                shiftsCollection.Clear();
-
-                AllShiftsSortingDescendingInitialization();
-            }
-
-            if (UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате" && UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
-            {
-                userMainInteractionShiftUserControlCollection.Clear();
-
-                shiftsCollection.Clear();
-
-                DateShiftsSortingDescendingInitialization();
-            }
+            UserMainInteractionShiftsRunItemsControlInitialization();
         }
 
         private void UserMainInteractionShiftsClearButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var shift in shiftsCollection)
+            foreach (var shift in shiftsList)
             {
                 UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shift.ShiftId);
             }
