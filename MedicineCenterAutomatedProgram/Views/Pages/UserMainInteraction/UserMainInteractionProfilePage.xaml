@@ -95,11 +95,11 @@
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <RadioButton x:Name="SelectMaleGenderRadioButton" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                                    <RadioButton Name="SelectMaleGenderRadioButton" Checked="SelectMaleGenderRadioButton_Checked" Margin="10" Content="Мужской" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
 
-                                    <RadioButton x:Name="SelectFemaleGenderRadioButton" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                                    <RadioButton Name="SelectFemaleGenderRadioButton" Checked="SelectFemaleGenderRadioButton_Checked" Margin="10" Content="Женский" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
 
-                                    <RadioButton x:Name="SelectUndefinedGenderRadioButton" Checked="SelectUndefinedGenderRadioButton_Checked" Margin="10" Content="Не указан" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
+                                    <RadioButton Name="SelectUndefinedGenderRadioButton" Checked="SelectUndefinedGenderRadioButton_Checked" Margin="10" Content="Не указан" Style="{DynamicResource UserDataIntroductionRadioButtonStyle}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

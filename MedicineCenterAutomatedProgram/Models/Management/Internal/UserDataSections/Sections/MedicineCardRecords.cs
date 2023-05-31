@@ -4,7 +4,7 @@
     {
         public string? MedicineCardRecordId { get; set; }
 
-        public string? MedicineCardRecordPatientStatiment { get; set; }
+        public string? MedicineCardRecordPatientStatement { get; set; }
 
         public string? MedicineCardRecordDiseaseId { get; set; }
 
