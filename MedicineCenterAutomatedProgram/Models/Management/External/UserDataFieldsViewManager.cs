@@ -1,7 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.ObjectModel;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.External
 {

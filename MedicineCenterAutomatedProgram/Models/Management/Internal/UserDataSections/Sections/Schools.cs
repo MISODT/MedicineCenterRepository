@@ -4,10 +4,10 @@
     {
         public string SchoolId { get; set; }
 
-        public string? SchoolType { get; set; }
+        public string SchoolType { get; set; }
 
-        public string? SchoolTitle { get; set; }
+        public string SchoolTitle { get; set; }
 
-        public string? SchoolCityId { get; set; }
+        public string SchoolCityId { get; set; }
     }
 }

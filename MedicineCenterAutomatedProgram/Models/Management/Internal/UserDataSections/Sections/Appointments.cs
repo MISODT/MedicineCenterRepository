@@ -6,12 +6,12 @@
 
         public string AppointmentStatus { get; set; }
 
-        public string AppointmentDescription { get; set; }
+        public string? AppointmentDescription { get; set; }
 
         public string AppointmentShiftId { get; set; }
 
-        public string PatientId { get; set; }
+        public string? PatientId { get; set; }
 
-        public string DoctorId { get; set; }
+        public string? DoctorId { get; set; }
     }
 }

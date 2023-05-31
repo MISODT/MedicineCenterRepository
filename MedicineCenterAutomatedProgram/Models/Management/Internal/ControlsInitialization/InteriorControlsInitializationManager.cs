@@ -151,13 +151,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
                 }
 
-                if (userCredentialDataPasswordTextBox.Text.Length > 8 && StringContainsManager.IsStringContainsDigits(userCredentialDataPasswordTextBox.Text))
+                if (userCredentialDataPasswordTextBox.Text.Length > 8 && StringDataHandlerManager.IsStringContainsDigits(userCredentialDataPasswordTextBox.Text))
                 {
                     userCredentialDataPasswordComplexityProgressBar.Value = 2;
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
                 }
 
-                if (userCredentialDataPasswordTextBox.Text.Length > 8 && StringContainsManager.IsStringContainsDigits(userCredentialDataPasswordTextBox.Text) && StringContainsManager.IsStringContainsSymbols(userCredentialDataPasswordTextBox.Text))
+                if (userCredentialDataPasswordTextBox.Text.Length > 8 && StringDataHandlerManager.IsStringContainsDigits(userCredentialDataPasswordTextBox.Text) && StringDataHandlerManager.IsStringContainsSymbols(userCredentialDataPasswordTextBox.Text))
                 {
                     userCredentialDataPasswordComplexityProgressBar.Value = 3;
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
@@ -177,13 +177,13 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
                 }
 
-                if (userCredentialDataPasswordPasswordBox.Password.Length > 8 && StringContainsManager.IsStringContainsDigits(userCredentialDataPasswordPasswordBox.Password))
+                if (userCredentialDataPasswordPasswordBox.Password.Length > 8 && StringDataHandlerManager.IsStringContainsDigits(userCredentialDataPasswordPasswordBox.Password))
                 {
                     userCredentialDataPasswordComplexityProgressBar.Value = 2;
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
                 }
 
-                if (userCredentialDataPasswordPasswordBox.Password.Length > 8 && StringContainsManager.IsStringContainsDigits(userCredentialDataPasswordPasswordBox.Password) && StringContainsManager.IsStringContainsSymbols(userCredentialDataPasswordPasswordBox.Password))
+                if (userCredentialDataPasswordPasswordBox.Password.Length > 8 && StringDataHandlerManager.IsStringContainsDigits(userCredentialDataPasswordPasswordBox.Password) && StringDataHandlerManager.IsStringContainsSymbols(userCredentialDataPasswordPasswordBox.Password))
                 {
                     userCredentialDataPasswordComplexityProgressBar.Value = 3;
                     userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");

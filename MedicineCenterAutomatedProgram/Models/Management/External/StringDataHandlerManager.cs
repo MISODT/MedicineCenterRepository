@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MedicineCenterAutomatedProgram.Models.Management.External
+﻿namespace MedicineCenterAutomatedProgram.Models.Management.External
 {
-    public class StringContainsManager
+    public class StringDataHandlerManager
     {
         public static bool IsStringContainsDigits(string s)
         {
