@@ -108,7 +108,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
 
 
-            if(UserDataSectionsInstance.Patient != null)
+            if (UserDataSectionsInstance.Patient != null)
             {
                 userMainInteractionAppointmentUserParameter = $"Appointments.PatientId = {UserDataSectionsInstance.Patient.Id}";
             }

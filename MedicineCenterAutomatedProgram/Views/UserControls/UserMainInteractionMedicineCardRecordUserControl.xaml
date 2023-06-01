@@ -24,9 +24,9 @@
             <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientFullNameTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="10" FontWeight="Medium" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                <TextBox Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox" Width="350" Height="150" MaxLength="500" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="10 10 0 0" TextWrapping="Wrap" Style="{DynamicResource UserDataTextBoxStyle}"/>
+                <TextBox Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox" Width="350" Height="150" MaxLength="500" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserDataTextBoxStyle}"/>
 
-                <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBlock" Width="350" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Left" Margin="10 10 0 0" TextWrapping="Wrap" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}" Grid.RowSpan="2"/>
+                <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBlock" Width="350" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Left" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}" Grid.RowSpan="2"/>
             </Grid>
             
             <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlShiftHealingDirectionTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="10" FontWeight="Normal" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
@@ -60,6 +60,9 @@
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
                 </StackPanel>
+            </Grid>
+
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
             </Grid>
         </StackPanel>
     </Grid>
