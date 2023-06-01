@@ -23,7 +23,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
                 }
             }
 
-            InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
+            InteriorControlsInitializationManager.ErrorMessageBorderItemsInitialization(errorAlertWindowText);
 
             return false;
         }
@@ -34,7 +34,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
             {
                 if (patient.Login == $"{userDataLogin}{userDataLoginMailDomain}")
                 {
-                    InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
+                    InteriorControlsInitializationManager.ErrorMessageBorderItemsInitialization(errorAlertWindowText);
 
                     return false;
                 }
@@ -44,7 +44,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
             {
                 if (doctor.Login == $"{userDataLogin}{userDataLoginMailDomain}")
                 {
-                    InteriorControlsInitializationManager.AlertMessageBorderItemsInitialization(errorAlertWindowText);
+                    InteriorControlsInitializationManager.ErrorMessageBorderItemsInitialization(errorAlertWindowText);
 
                     return false;
                 }

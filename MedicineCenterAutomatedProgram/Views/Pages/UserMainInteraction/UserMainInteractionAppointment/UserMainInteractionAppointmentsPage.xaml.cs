@@ -356,7 +356,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointment.AppointmentId);
             }
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
+            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
         }
     }
 }

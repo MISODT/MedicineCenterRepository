@@ -37,16 +37,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void SetStartupFramePage()
         {
-            FrameManager.UserMainInteractionHomePageFrame = UserMainInteractionHomePageFrame;
+            FrameManager.UserMainInteractionHomeFrame = UserMainInteractionHomePageFrame;
 
             if(UserDataSectionsInstance.Patient != null)
             {
-                FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+                FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
             }
 
             if(UserDataSectionsInstance.Doctor != null)
             {
-                FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+                FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
             }
         }
 
@@ -127,25 +127,25 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             FrameManager.MainWindowFrame.Navigate(new WelcomePage());
         }
 
-        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(null));
+        private void MainInteractionHomeSectionNewAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(null));
 
-        private void MainInteractionHomeSectionMyAppointmentsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+        private void MainInteractionHomeSectionMyAppointmentsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
 
-        private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
+        private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
 
         private void MainInteractionHomeSectionMedicineCardButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionSymptomHelperPage());
+        private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionSymptomHelperPage());
 
-        private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
+        private void MainInteractionHomeSectionAppointmentReceivingButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
 
-        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftOperationsPage(null));
+        private void MainInteractionHomeSectionNewShiftButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftOperationsPage(null));
 
-        private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+        private void MainInteractionHomeSectionMyShiftsButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
 
-        private void MainInteractionHomeSectionShiftsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
+        private void MainInteractionHomeSectionShiftsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
     }
 }

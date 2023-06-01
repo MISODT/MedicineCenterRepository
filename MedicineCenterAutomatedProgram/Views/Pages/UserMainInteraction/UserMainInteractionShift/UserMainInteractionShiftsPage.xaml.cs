@@ -282,7 +282,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shift.ShiftId);
             }
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
+            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
         }
     }
 }

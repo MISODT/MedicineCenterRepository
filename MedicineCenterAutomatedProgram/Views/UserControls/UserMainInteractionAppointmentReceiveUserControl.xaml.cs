@@ -36,14 +36,14 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
         {
             UserDataSectionsDataOperations.UserDataMainInteractionUpdateAppointmentReceivingStatus(appointments.AppointmentId, "Утверждён");
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
+            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
         }
 
         private void UserMainInteractionAppointmentReceiveUserControlDisagreeAppointmentButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             UserDataSectionsDataOperations.UserDataMainInteractionUpdateAppointmentReceivingStatus(appointments.AppointmentId, "Не утверждён");
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
+            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsReceivingPage());
         }
     }
 }

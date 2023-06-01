@@ -76,13 +76,13 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
             }
         }
 
-        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(appointments));
+        private void UserMainInteractionAppointmentUserControlEditAppointmentButton_Click(object sender, RoutedEventArgs e) => FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentOperationsPage(appointments));
 
         private void UserMainInteractionAppointmentUserControlDeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointments.AppointmentId);
 
-            FrameManager.UserMainInteractionHomePageFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }
     }
 }

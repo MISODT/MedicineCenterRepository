@@ -196,13 +196,22 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
         }
 
-        public static void AlertMessageBorderItemsInitialization(string errorAlertWindowText)
+        public static void ErrorMessageBorderItemsInitialization(string errorAlertWindowText)
         {
             ErrorAlertWindow errorAlertWindow = new ErrorAlertWindow(errorAlertWindowText);
 
             Application.Current.MainWindow.Opacity = 0.6;
 
             errorAlertWindow.ShowDialog();
+        }
+
+        public static void QuestionMessageBorderItemsInitialization(string questionAlertWindowText)
+        {
+            /*QuestionAlertWindow questionAlertWindow = new QuestionAlertWindow(questionAlertWindowText);
+
+            Application.Current.MainWindow.Opacity = 0.6;
+
+            questionAlertWindow.ShowDialog();*/
         }
     }
 }
