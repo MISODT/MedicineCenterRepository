@@ -94,7 +94,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionSymptomHelperSearchTextBox_TextChanged(object sender, TextChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldUnclearedVisibilityOptions(UserMainInteractionSymptomHelperSearchTextBox, UserMainInteractionSymptomHelperSearchTextBoxHintAssist);
+            FieldsViewManager.ChangeTextBoxUnclearedView(UserMainInteractionSymptomHelperSearchTextBox, UserMainInteractionSymptomHelperSearchTextBoxHintAssist);
 
             if(string.IsNullOrWhiteSpace(UserMainInteractionSymptomHelperSearchTextBox.Text) && userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Count == 0)
             {

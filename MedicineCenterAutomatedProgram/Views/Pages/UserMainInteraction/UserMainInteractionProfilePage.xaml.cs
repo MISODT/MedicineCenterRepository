@@ -54,9 +54,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionProfilePage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
 
@@ -108,7 +108,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
 
@@ -122,7 +122,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataSurnameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
 
@@ -136,7 +136,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataPatronymicTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
 
@@ -165,7 +165,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataCityComboBox, UserDataCityTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataCityComboBox, UserDataCityTextBoxHintAssist);
 
             UserDataStreetComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressStreetComboBoxInitialization();
 
@@ -174,7 +174,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataStreetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataStreetComboBox, UserDataStreetTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataStreetComboBox, UserDataStreetTextBoxHintAssist);
 
             UserDataHouseComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressHouseComboBoxInitialization();
 
@@ -183,50 +183,50 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataHouseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataHouseComboBox, UserDataHouseTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataHouseComboBox, UserDataHouseTextBoxHintAssist);
 
             ProfileSaveButtonState();
         }
 
         private void UserDataSchoolCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolCityComboBox, UserDataSchoolCityComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataSchoolCityComboBox, UserDataSchoolCityComboBoxHintAssist);
 
             UserDataSchoolTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.SchoolTypeComboBoxInitialization();
         }
 
         private void UserDataSchoolTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolTypeComboBox, UserDataSchoolTypeComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataSchoolTypeComboBox, UserDataSchoolTypeComboBoxHintAssist);
 
             UserDataSchoolTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.SchoolTitleComboBoxInitialization();
         }
 
-        private void UserDataSchoolTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolTitleComboBox, UserDataSchoolComboBoxHintAssist);
+        private void UserDataSchoolTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataSchoolTitleComboBox, UserDataSchoolComboBoxHintAssist);
 
         private void UserDataUniversityCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityCityComboBox, UserDataUniversityCityComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataUniversityCityComboBox, UserDataUniversityCityComboBoxHintAssist);
 
             UserDataUniversityTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTypeComboBoxInitialization();
         }
 
         private void UserDataUniversityTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityTypeComboBox, UserDataUniversityTypeComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataUniversityTypeComboBox, UserDataUniversityTypeComboBoxHintAssist);
 
             UserDataUniversityTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTitleComboBoxInitialization();
         }
 
-        private void UserDataUniversityTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityTitleComboBox, UserDataUniversityTitleComboBoxHintAssist);
+        private void UserDataUniversityTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityTitleComboBox, UserDataUniversityTitleComboBoxHintAssist);
 
-        private void UserDataUniversityStartEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityStartEducationYearComboBox, UserDataUniversityStartEducationYearComboBoxHintAssist);
+        private void UserDataUniversityStartEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityStartEducationYearComboBox, UserDataUniversityStartEducationYearComboBoxHintAssist);
 
-        private void UserDataUniversityEndEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityEndEducationYearComboBox, UserDataUniversityEndEducationYearComboBoxHintAssist);
+        private void UserDataUniversityEndEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityEndEducationYearComboBox, UserDataUniversityEndEducationYearComboBoxHintAssist);
 
         private void UserDataOldPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataHiddenPasswordFieldVisibilityOptions(UserDataOldPasswordPasswordBoxHintAssist, UserDataOldPasswordPasswordBox, ClearOldPasswordButton);
+            FieldsViewManager.ChangeHiddenPasswordView(UserDataOldPasswordPasswordBoxHintAssist, UserDataOldPasswordPasswordBox, ClearOldPasswordButton);
 
             UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
         }
@@ -238,7 +238,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserDataNewPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataHiddenPasswordFieldVisibilityOptions(UserDataNewPasswordPasswordBoxHintAssist, UserDataNewPasswordPasswordBox, ClearNewPasswordButton);
+            FieldsViewManager.ChangeHiddenPasswordView(UserDataNewPasswordPasswordBoxHintAssist, UserDataNewPasswordPasswordBox, ClearNewPasswordButton);
 
             UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
         }

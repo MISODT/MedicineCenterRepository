@@ -19,7 +19,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
         private void NavigationNextButtonState()
         {
-            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            if (FieldsViewManager.IsPasswordVisible)
             {
                 if (!string.IsNullOrWhiteSpace(UserDataLoginTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPasswordTextBox.Text))
                 {
@@ -50,9 +50,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
         {
             UserDataPasswordTextBox.Visibility = Visibility.Hidden;
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             RememberMeCheckBox.IsChecked = false;
 
@@ -67,7 +67,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
 
             NavigationNextButtonState();
         }
@@ -79,19 +79,19 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
         private void UserDataPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             NavigationNextButtonState();
         }
 
         private void UserDataPasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             NavigationNextButtonState();
         }
 
-        private void ChangeUserDataPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => UserDataFieldsViewManager.ChangeUserDataPasswordVisibility(UserDataPasswordTextBox, UserDataPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
+        private void ChangeUserDataPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => FieldsViewManager.ChangePasswordVisibility(UserDataPasswordTextBox, UserDataPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
 
         private void ClearPasswordButton_Click(object sender, RoutedEventArgs e)
         {
@@ -101,7 +101,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
         private void NavigateConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            if (FieldsViewManager.IsPasswordVisible)
             {
                 if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, "Пользователь не найден"))
                 {

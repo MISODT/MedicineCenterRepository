@@ -46,7 +46,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataCityComboBox, UserDataCityTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataCityComboBox, UserDataCityTextBoxHintAssist);
 
             UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataCityComboBox, UserDataCityMistakeTextBlock, "Укажите город");
 
@@ -57,7 +57,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataStreetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataStreetComboBox, UserDataStreetTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataStreetComboBox, UserDataStreetTextBoxHintAssist);
 
             UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataStreetComboBox, UserDataStreetMistakeTextBlock, "Укажите улицу");
 
@@ -68,7 +68,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataHouseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataHouseComboBox, UserDataHouseTextBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataHouseComboBox, UserDataHouseTextBoxHintAssist);
 
             UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataHouseComboBox, UserDataHouseMistakeTextBlock, "Укажите дом");
 

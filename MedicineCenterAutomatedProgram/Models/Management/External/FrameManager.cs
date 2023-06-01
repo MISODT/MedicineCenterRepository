@@ -6,6 +6,6 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
     {
         public static Frame MainWindowFrame { get; set; }
 
-        public static Frame UserMainInteractionHomeFrame { get; set; }
+        public static Frame HomeFrame { get; set; }
     }
 }

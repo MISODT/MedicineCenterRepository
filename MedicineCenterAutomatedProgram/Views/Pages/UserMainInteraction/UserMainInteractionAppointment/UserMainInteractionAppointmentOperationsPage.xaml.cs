@@ -77,7 +77,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             UserMainInteractionAppointmentOperationsTimeComboBox.ItemsSource = OuteriorControlsInitializationManager.AppointmentTimeComboBoxValueInitialization(AppointmentOperationsDoctorShiftComboBoxIndexInitialization());
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
         }
 
         private void UserMainInteractionAppointmentOperationsDoctorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,7 +97,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentOperationsDescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserMainInteractionAppointmentOperationsDescriptionTextBox, UserMainInteractionAppointmentOperationsDescriptionTextBoxHintAssist, UserMainInteractionAppointmentOperationsClearDescriptionButton);
             
         }
 
@@ -118,7 +118,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserDataSectionsDataOperations.UserDataMainInteractionNewAppointmentOperation(AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionAppointmentOperationsDescriptionTextBox.Text);
             }
 
-            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
+            FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
         }
     }
 }

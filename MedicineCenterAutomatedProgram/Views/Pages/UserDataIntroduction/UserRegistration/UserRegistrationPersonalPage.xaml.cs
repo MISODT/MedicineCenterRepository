@@ -32,9 +32,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserRegistrationPersonalDataPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -52,7 +52,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
 
@@ -66,7 +66,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataSurnameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
 
@@ -80,7 +80,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataPatronymicTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
 
@@ -94,14 +94,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataDayOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataDayOfBirthComboBox, UserDataDayOfBirthComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataDayOfBirthComboBox, UserDataDayOfBirthComboBoxHintAssist);
 
             NavigationNextButtonState();
         }
 
         private void UserDataMonthOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataMonthOfBirthComboBox, UserDataMonthOfBirthComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataMonthOfBirthComboBox, UserDataMonthOfBirthComboBoxHintAssist);
 
             InteriorControlsInitializationManager.DayComboBoxInitialization(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
 
@@ -112,7 +112,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataYearOfBirthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataYearOfBirthComboBox, UserDataYearOfBirthComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataYearOfBirthComboBox, UserDataYearOfBirthComboBoxHintAssist);
 
             UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock);
 

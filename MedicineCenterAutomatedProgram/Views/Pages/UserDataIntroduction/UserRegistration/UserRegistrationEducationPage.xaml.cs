@@ -35,39 +35,39 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataSchoolCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolCityComboBox, UserDataSchoolCityComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataSchoolCityComboBox, UserDataSchoolCityComboBoxHintAssist);
 
             UserDataSchoolTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.SchoolTypeComboBoxInitialization();
         }
 
         private void UserDataSchoolTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolTypeComboBox, UserDataSchoolTypeComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataSchoolTypeComboBox, UserDataSchoolTypeComboBoxHintAssist);
 
             UserDataSchoolTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.SchoolTitleComboBoxInitialization();
         }
 
-        private void UserDataSchoolTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataSchoolTitleComboBox, UserDataSchoolComboBoxHintAssist);
+        private void UserDataSchoolTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataSchoolTitleComboBox, UserDataSchoolComboBoxHintAssist);
 
         private void UserDataUniversityCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityCityComboBox, UserDataUniversityCityComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataUniversityCityComboBox, UserDataUniversityCityComboBoxHintAssist);
 
             UserDataUniversityTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTypeComboBoxInitialization();
         }
 
         private void UserDataUniversityTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityTypeComboBox, UserDataUniversityTypeComboBoxHintAssist);
+            FieldsViewManager.ChangeComboBoxView(UserDataUniversityTypeComboBox, UserDataUniversityTypeComboBoxHintAssist);
 
             UserDataUniversityTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTitleComboBoxInitialization();
         }
 
-        private void UserDataUniversityTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityTitleComboBox, UserDataUniversityTitleComboBoxHintAssist);
+        private void UserDataUniversityTitleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityTitleComboBox, UserDataUniversityTitleComboBoxHintAssist);
 
-        private void UserDataUniversityStartEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityStartEducationYearComboBox, UserDataUniversityStartEducationYearComboBoxHintAssist);
+        private void UserDataUniversityStartEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityStartEducationYearComboBox, UserDataUniversityStartEducationYearComboBoxHintAssist);
 
-        private void UserDataUniversityEndEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UserDataFieldsViewManager.UserDataComboBoxFieldVisibilityOptions(UserDataUniversityEndEducationYearComboBox, UserDataUniversityEndEducationYearComboBoxHintAssist);
+        private void UserDataUniversityEndEducationYearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => FieldsViewManager.ChangeComboBoxView(UserDataUniversityEndEducationYearComboBox, UserDataUniversityEndEducationYearComboBoxHintAssist);
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e) 
         {

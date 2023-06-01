@@ -143,7 +143,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
         public static void PasswordComplexityProgressBarInitialization(TextBox userCredentialDataPasswordTextBox, PasswordBox userCredentialDataPasswordPasswordBox, ProgressBar userCredentialDataPasswordComplexityProgressBar)
         {
-            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            if (FieldsViewManager.IsPasswordVisible)
             {
                 if (userCredentialDataPasswordTextBox.Text.Length > 8)
                 {

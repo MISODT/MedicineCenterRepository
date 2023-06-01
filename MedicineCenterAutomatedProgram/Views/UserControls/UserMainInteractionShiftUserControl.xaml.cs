@@ -77,14 +77,14 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
         private void UserMainInteractionShiftUserControlEditShiftButton_Click(object sender, RoutedEventArgs e) 
         {
 
-            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftOperationsPage(shifts));
+            FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftOperationsPage(shifts));
         }
 
         private void UserMainInteractionShiftUserControlDeleteShiftButton_Click(object sender, RoutedEventArgs e)
         {
             UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shifts.ShiftId);
 
-            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
+            FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
         }
     }
 }

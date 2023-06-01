@@ -168,12 +168,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             if(UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "Все значения")
             {
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                if (FieldsViewManager.IsSortingMinButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderByDescending(x => x.ShiftId);
                 }
 
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                if (FieldsViewManager.IsSortingMaxButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderBy(x => x.ShiftId);
                 }
@@ -181,12 +181,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             if(UserMainInteractionShiftsSortingParametersComboBox.SelectedValue == "По дате")
             {
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                if (FieldsViewManager.IsSortingMinButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderByDescending(x => x.ShiftDate);
                 }
 
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                if (FieldsViewManager.IsSortingMaxButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderBy(x => x.ShiftDate);
                 }
@@ -232,9 +232,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionShiftsPage_Loaded(object sender, RoutedEventArgs e) 
         {
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+            FieldsViewManager.IsSortingMinButtonClicked = false;
 
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+            FieldsViewManager.IsSortingMaxButtonClicked = false;
 
 
             UserMainInteractionShiftsItemsControl.ItemsSource = userMainInteractionStartShiftsUserControlCollection;
@@ -245,9 +245,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             userMainInteractionRunShiftsUserControlCollection.Clear();
 
 
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+            FieldsViewManager.IsSortingMinButtonClicked = false;
 
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+            FieldsViewManager.IsSortingMaxButtonClicked = false;
 
 
             UserMainInteractionShiftsSortingMinButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#DDD");
@@ -260,7 +260,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionShiftsSortingMinButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMinButtonFieldVisibilityOptions(UserMainInteractionShiftsSortingMinButton, UserMainInteractionShiftsSortingMaxButton);
+            FieldsViewManager.ChangeSortingMinButtonFieldView(UserMainInteractionShiftsSortingMinButton, UserMainInteractionShiftsSortingMaxButton);
 
             
             userMainInteractionRunShiftsUserControlCollection.Clear();
@@ -270,7 +270,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionShiftsSortingMaxButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMaxButtonFieldVisibilityOptions(UserMainInteractionShiftsSortingMaxButton, UserMainInteractionShiftsSortingMinButton);
+            FieldsViewManager.ChangeSortingMaxButtonFieldView(UserMainInteractionShiftsSortingMaxButton, UserMainInteractionShiftsSortingMinButton);
 
             
             userMainInteractionRunShiftsUserControlCollection.Clear();
@@ -285,7 +285,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shift.ShiftId);
             }
 
-            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
+            FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));
         }
     }
 }

@@ -190,12 +190,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "Все значения")
             {
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                if (FieldsViewManager.IsSortingMinButtonClicked)
                 {
                     iOrderedEnumerableAppointments = appointmentsList.OrderByDescending(x => x.AppointmentId);
                 }
 
-                else if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                else if (FieldsViewManager.IsSortingMaxButtonClicked)
                 {
                     iOrderedEnumerableAppointments = appointmentsList.OrderBy(x => x.AppointmentId);
                 }
@@ -249,12 +249,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             else if (UserMainInteractionAppointmentsSortingParametersComboBox.SelectedValue == "По дате")
             {
-                if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked)
+                if (FieldsViewManager.IsSortingMinButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderByDescending(x => x.ShiftDate);
                 }
 
-                else if (UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked)
+                else if (FieldsViewManager.IsSortingMaxButtonClicked)
                 {
                     iOrderedEnumerableShifts = shiftsList.OrderBy(x => x.ShiftDate);
                 }
@@ -314,9 +314,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMinButtonClicked = false;
+            FieldsViewManager.IsSortingMinButtonClicked = false;
 
-            UserDataFieldsViewManager.IsUserMainInteractionVariablesSortingMaxButtonClicked = false;
+            FieldsViewManager.IsSortingMaxButtonClicked = false;
 
 
             UserMainInteractionAppointmentsItemsControl.ItemsSource = userMainInteractionStartAppointmentsUserControlCollection;
@@ -331,7 +331,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentsSortingMinButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMinButtonFieldVisibilityOptions(UserMainInteractionAppointmentsSortingMinButton, UserMainInteractionAppointmentsSortingMaxButton);
+            FieldsViewManager.ChangeSortingMinButtonFieldView(UserMainInteractionAppointmentsSortingMinButton, UserMainInteractionAppointmentsSortingMaxButton);
 
 
             userMainInteractionRunAppointmentsUserControlCollection.Clear();
@@ -341,7 +341,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
         private void UserMainInteractionAppointmentsSortingMaxButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserMainInteractionVariablesSortingMaxButtonFieldVisibilityOptions(UserMainInteractionAppointmentsSortingMaxButton, UserMainInteractionAppointmentsSortingMinButton);
+            FieldsViewManager.ChangeSortingMaxButtonFieldView(UserMainInteractionAppointmentsSortingMaxButton, UserMainInteractionAppointmentsSortingMinButton);
 
 
             userMainInteractionRunAppointmentsUserControlCollection.Clear();
@@ -356,7 +356,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointment.AppointmentId);
             }
 
-            FrameManager.UserMainInteractionHomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
+            FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
         }
     }
 }

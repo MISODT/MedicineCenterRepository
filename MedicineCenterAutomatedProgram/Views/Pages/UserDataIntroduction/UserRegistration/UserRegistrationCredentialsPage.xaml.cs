@@ -17,7 +17,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void NavigationNextButtonState()
         {
-            if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+            if (FieldsViewManager.IsPasswordVisible)
             {
                 if (!string.IsNullOrWhiteSpace(UserDataLoginTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataPasswordTextBox.Text) && !string.IsNullOrWhiteSpace(UserDataRepeatPasswordPasswordBox.Password))
                 {
@@ -48,10 +48,10 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             UserDataPasswordTextBox.Visibility = Visibility.Hidden;
 
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             UserDataLoginMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -67,7 +67,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataTextBoxFieldClearedVisibilityOptions(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
+            FieldsViewManager.ChangeTextBoxClearedView(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
 
             UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataLoginTextBox, UserDataLoginMistakeTextBlock, "Укажите адрес эл. почты");
 
@@ -81,7 +81,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock) ;
 
@@ -92,7 +92,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataPasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null,  UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
@@ -101,7 +101,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void ChangeUserDataPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => UserDataFieldsViewManager.ChangeUserDataPasswordVisibility(UserDataPasswordTextBox, UserDataPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
+        private void ChangeUserDataPasswordVisibilityButton_Click(object sender, RoutedEventArgs e) => FieldsViewManager.ChangePasswordVisibility(UserDataPasswordTextBox, UserDataPasswordPasswordBox, ChangeUserDataPasswordVisibilityButton);
 
         private void ClearPasswordButton_Click(object sender, RoutedEventArgs e)
         {
@@ -111,7 +111,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserDataRepeatPasswordPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            UserDataFieldsViewManager.UserDataPasswordFieldVisibilityOptions(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
+            FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
             UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
@@ -127,7 +127,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             if (UserDataInternalMistakesManager.InternalUserDataLoginMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), "Логин уже зарегистрирован"))
             {
-                if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+                if (FieldsViewManager.IsPasswordVisible)
                 {
                     UserDataSectionsDataOperations.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
 

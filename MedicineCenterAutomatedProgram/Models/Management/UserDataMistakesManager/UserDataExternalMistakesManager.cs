@@ -196,7 +196,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
         {
             if (userDataPasswordTextBox != null)
             {
-                if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
+                if (FieldsViewManager.IsPasswordVisible)
                 {
                     if (userDataPasswordTextBox.Text != userDataRepeatPasswordPasswordBox.Password && userDataPasswordTextBox.Text.Length < 8)
                     {
