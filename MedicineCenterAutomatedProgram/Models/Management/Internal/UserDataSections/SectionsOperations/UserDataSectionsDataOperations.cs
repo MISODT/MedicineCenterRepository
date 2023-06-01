@@ -1,5 +1,4 @@
-﻿using ControlzEx.Standard;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System.Windows;
@@ -139,6 +138,34 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
         public static void UserDataMainInteractionUpdateAppointmentReceivingStatus(string appointmentId, string appointmentStatus)
         {
             WebResponseManager.ResponseFromRequestQuery($"UPDATE Appointments SET AppointmentStatus = '{appointmentStatus}' WHERE AppointmentId = {appointmentId}");
+        }
+
+        public static void UserDataRemoveUserOperation(string userId)
+        {
+            if(UserDataSectionsInstance.Patient != null)
+            {
+                WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Patients WHERE Id = {userId}");
+            }
+            
+            if(UserDataSectionsInstance.Doctor != null)
+            {
+                WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Doctors WHERE Id = {userId}");
+            }
+        }
+
+        public static void UserDataMainInteractionNewMedicineCardRecordOperation(string medicineCardRecordPatientStatement, string medicineCardRecordDiseaseId, string medicineCardRecordShiftId, string medicineCardRecordMedicineCardId)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"INSERT INTO MedicineCardRecords (MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId) VALUES ('{medicineCardRecordPatientStatement}', {medicineCardRecordDiseaseId}, {medicineCardRecordShiftId}, {medicineCardRecordMedicineCardId});");
+        }
+
+        public static void UserDataMainInteractionUpdateMedicineCardRecordOperation(string medicineCardRecordId, string medicineCardRecordPatientStatement)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"UPDATE MedicineCardRecords SET MedicineCardRecordPatientStatement = '{medicineCardRecordPatientStatement}' WHERE MedicineCardRecordsId = {medicineCardRecordId}");
+        }
+
+        public static void UserDataMainInteractionRemoveMedicineCardRecordOperation(string medicineCardRecordId)
+        {
+            WebResponseManager.ResponseFromRequestQuery($"DELETE FROM MedicineCardRecords WHERE MedicineCardRecordsId = {medicineCardRecordId}");
         }
     }
 }

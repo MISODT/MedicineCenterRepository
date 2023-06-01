@@ -1,6 +1,7 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
 using System;
 using System.Windows;
 using System.Windows.Controls;

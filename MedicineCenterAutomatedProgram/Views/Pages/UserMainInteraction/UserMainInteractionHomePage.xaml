@@ -55,7 +55,7 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Medicine}"/>
-                                    
+
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись к врачу" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>
@@ -75,7 +75,7 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Tools}"/>
-                                    
+
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Инструменты" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>
@@ -103,7 +103,7 @@
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" Width="175" Height="45" Margin="5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Foreground="#5AF" Content="{materialDesign:PackIcon Kind=Doctor}"/>
-                                    
+
                                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Запись на смену" Style="{DynamicResource MainInteractionButtonContentTextBlock}"/>
                                 </StackPanel>
                             </Border>
@@ -117,10 +117,7 @@
                     </Grid>
                 </StackPanel>
             </Border>
-
         </ScrollViewer>
-
-
 
         <Frame Grid.Column="1" Grid.RowSpan="2" Name="UserMainInteractionHomePageFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>

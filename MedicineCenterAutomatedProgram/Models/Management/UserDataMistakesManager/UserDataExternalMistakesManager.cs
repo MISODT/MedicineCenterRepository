@@ -1,4 +1,5 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal;
+﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace MedicineCenterAutomatedProgram.Models.Management.External
+namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager
 {
     public class UserDataExternalMistakesManager
     {
@@ -108,7 +109,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
                 return false;
             }
 
-            else if(userDataDateOfShift < DateOnly.Parse(DateTime.Now.Date.ToShortDateString()))
+            else if (userDataDateOfShift < DateOnly.Parse(DateTime.Now.Date.ToShortDateString()))
             {
                 userDataDateOfShiftMistakeTextBlock.Visibility = Visibility.Visible;
 
@@ -193,7 +194,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
         public static bool ExternalUserDataPasswordMistakesHandler(TextBox userDataPasswordTextBox, PasswordBox userDataPasswordPasswordBox, PasswordBox userDataOldPasswordPasswordBox, PasswordBox userDataNewPasswordPasswordBox, PasswordBox userDataRepeatPasswordPasswordBox, TextBlock userDataPasswordMistakeTextBlock)
         {
-            if(userDataPasswordTextBox != null)
+            if (userDataPasswordTextBox != null)
             {
                 if (UserDataFieldsViewManager.IsUserDataPasswordVisible)
                 {
@@ -292,7 +293,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
             else
             {
-                if(userDataNewPasswordPasswordBox.Password.Length > 0 || userDataOldPasswordPasswordBox.Password.Length > 0)
+                if (userDataNewPasswordPasswordBox.Password.Length > 0 || userDataOldPasswordPasswordBox.Password.Length > 0)
                 {
                     if (userDataNewPasswordPasswordBox.Password.Length < 8)
                     {

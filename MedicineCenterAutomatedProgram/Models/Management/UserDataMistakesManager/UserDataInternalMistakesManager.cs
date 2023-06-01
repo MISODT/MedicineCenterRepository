@@ -1,7 +1,8 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 
-namespace MedicineCenterAutomatedProgram.Models.Management.Internal
+namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager
 {
     public class UserDataInternalMistakesManager
     {

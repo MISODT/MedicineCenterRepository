@@ -5,6 +5,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
 using System;
 using System.Windows;
 using System.Windows.Controls;

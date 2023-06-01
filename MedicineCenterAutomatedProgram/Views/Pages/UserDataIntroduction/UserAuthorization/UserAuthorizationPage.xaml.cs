@@ -1,8 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction;
 using System.Windows;
 using System.Windows.Controls;
