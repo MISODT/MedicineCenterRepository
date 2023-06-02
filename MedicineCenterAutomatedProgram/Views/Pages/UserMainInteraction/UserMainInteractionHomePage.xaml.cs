@@ -133,10 +133,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void MainInteractionHomeSectionAppointmentsHistoryButton_Click(object sender, RoutedEventArgs e) => FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));
 
-        private void MainInteractionHomeSectionMedicineCardButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void MainInteractionHomeSectionMyMedicineCardButton_Click(object sender, RoutedEventArgs e) => FrameManager.HomeFrame.Navigate(new UserMainInteractionMedicineCard("Моя"));
 
-        }
+        private void MainInteractionHomeSectionPatientMedicineCardsButton_Click(object sender, RoutedEventArgs e) => FrameManager.HomeFrame.Navigate(new UserMainInteractionMedicineCard("Пациентов"));
 
         private void MainInteractionHomeSectionSymptomHelperButton_Click(object sender, RoutedEventArgs e) => FrameManager.HomeFrame.Navigate(new UserMainInteractionSymptomHelperPage());
 

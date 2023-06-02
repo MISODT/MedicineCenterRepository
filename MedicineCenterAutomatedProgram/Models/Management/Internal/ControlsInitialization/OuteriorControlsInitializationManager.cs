@@ -3,11 +3,45 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization
 {
     public class OuteriorControlsInitializationManager
     {
+        public static List<string> DiseasesComboBoxInitialization()
+        {
+            List<string> diseases = new List<string>();
+
+            foreach (var disease in DataResponseManager.DiseasesJsonDataDeserialize("SELECT DiseaseTitle FROM Diseases"))
+            {
+                diseases.Add(disease.DiseaseTitle);
+            }
+
+            return diseases;
+        }
+
+        public static string DiseasesComboBoxSelectedValueInitialization(string medicineCardRecordId, string diseaseTitle)
+        {
+            if (medicineCardRecordId != null)
+            {
+                foreach (var disease in DataResponseManager.DiseasesJsonDataDeserialize($"SELECT DiseaseTitle FROM Diseases, MedicineCardRecords WHERE MedicineCardRecordDiseaseId = DiseaseId AND MedicineCardRecordId = {medicineCardRecordId}"))
+                {
+                    return disease.DiseaseTitle;
+                }
+            }
+
+            else
+            {
+                foreach (var disease in DataResponseManager.DiseasesJsonDataDeserialize($"SELECT DiseaseId, DiseaseTitle FROM Diseases WHERE DiseaseTitle = '{diseaseTitle}'"))
+                {
+                    return disease.DiseaseId;
+                }
+            }
+
+            return "";
+        }
+
         public static List<string> HealingDirectionComboBoxInitialization()
         {
             List<string> healingDirections = new List<string>();

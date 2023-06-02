@@ -1,12 +1,6 @@
-﻿using ControlzEx.Standard;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
-using NPOI.SS.Formula.Functions;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData
 {
@@ -115,6 +109,20 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
             var universitiesDataList = JsonSerializer.Deserialize<List<Universities>>(WebResponseManager.GetJsonResponseFromRequestQuery(universityDataQuery));
 
             return universitiesDataList;
+        }
+
+        public static List<MedicineCards> MedicineCardsJsonDataDeserialize(string medicineCardsDataQuery)
+        {
+            var medicineCardsDataList = JsonSerializer.Deserialize<List<MedicineCards>>(WebResponseManager.GetJsonResponseFromRequestQuery(medicineCardsDataQuery));
+
+            return medicineCardsDataList;
+        }
+
+        public static List<MedicineCardRecords> MedicineCardRecordsJsonDataDeserialize(string medicineCardRecordsDataQuery)
+        {
+            var medicineCardRecordsDataList = JsonSerializer.Deserialize<List<MedicineCardRecords>>(WebResponseManager.GetJsonResponseFromRequestQuery(medicineCardRecordsDataQuery));
+
+            return medicineCardRecordsDataList;
         }
     }
 }

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserMainInteractionMedicineCardRecordUserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -23,19 +24,11 @@
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientFullNameTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="10" FontWeight="Medium" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                <TextBox Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox" Width="350" Height="150" MaxLength="500" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserDataTextBoxStyle}"/>
-
-                <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBlock" Width="350" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Left" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}" Grid.RowSpan="2"/>
-            </Grid>
-            
             <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlShiftHealingDirectionTextBlock" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="10" FontWeight="Normal" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
 
             <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Заболевание" Margin="5" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
-
-                    <ComboBox Name="UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox" Width="245" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
+                    <ComboBox Name="UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox" Width="350" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{DynamicResource UserDataComboBoxStyle}">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}">
                                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -60,10 +53,23 @@
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
                 </StackPanel>
+
+                <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock" Width="350" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Left" Margin="5" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
+            </Grid>
+            
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox" TextChanged="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox_TextChanged" Width="350" Height="150" MaxLength="500" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserDataTextBoxStyle}"/>
+
+                <TextBlock Name="UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBlock" Width="350" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Left" Margin="10 10 10 0" TextWrapping="Wrap" Style="{DynamicResource UserMainInteractionUserControlInfoTextBlockStyle}"/>
             </Grid>
 
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+                <Button Name="UserMainInteractionMedicineCardEditRecordUserControlDiseasesButton" Click="UserMainInteractionMedicineCardEditRecordUserControlDiseasesButton_Click" Width="150" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="1" Padding="5" Content="{materialDesign:PackIcon Kind=Edit}" Style="{DynamicResource UserMainInteractionEditVariableButtonStyle}"/>
+
+                <Button Name="UserMainInteractionMedicineCardDeleteRecordUserControlDiseasesButton" Click="UserMainInteractionMedicineCardDeleteRecordUserControlDiseasesButton_Click" Width="150" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="1" Padding="5" Content="{materialDesign:PackIcon Kind=Delete}" Style="{DynamicResource UserMainInteractionRemoveVariableButtonStyle}"/>
             </Grid>
+
+            <Button Name="UserMainInteractionMedicineCardAgreeRecordUserControlDiseasesButton" Click="UserMainInteractionMedicineCardAgreeRecordUserControlDiseasesButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5" Margin="5" Content="{materialDesign:PackIcon Kind=CheckCircle}" Style="{DynamicResource UserMainInteractionAgreeVariableButtonStyle}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -131,8 +131,6 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
         public static void NewShiftOperation(string shiftDate, string shiftStartActionTime, string shiftEndActionTime, string shiftHealingDirectionId, string shiftHospitalAddressId)
         {
             WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Shifts (ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId) VALUES ('{shiftDate}', '{shiftStartActionTime}', '{shiftEndActionTime}', {shiftHealingDirectionId}, {SectionsInstance.Doctor.Id}, {shiftHospitalAddressId});");
-
-            MessageBox.Show($"INSERT INTO Shifts (ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId) VALUES ('{shiftDate}', '{shiftStartActionTime}', '{shiftEndActionTime}', {shiftHealingDirectionId}, {SectionsInstance.Doctor.Id}, {shiftHospitalAddressId});");
         }
 
         public static void UpdateAppointmentReceivingStatus(string appointmentId, string appointmentStatus)
@@ -158,9 +156,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             WebResponseManager.ResponseFromRequestQuery($"INSERT INTO MedicineCardRecords (MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId) VALUES ('{medicineCardRecordPatientStatement}', {medicineCardRecordDiseaseId}, {medicineCardRecordShiftId}, {medicineCardRecordMedicineCardId});");
         }
 
-        public static void UpdateMedicineCardRecordOperation(string medicineCardRecordId, string medicineCardRecordPatientStatement)
+        public static void UpdateMedicineCardRecordOperation(string medicineCardRecordId, string medicineCardRecordPatientStatement, string medicineCardRecordDiseaseId)
         {
-            WebResponseManager.ResponseFromRequestQuery($"UPDATE MedicineCardRecords SET MedicineCardRecordPatientStatement = '{medicineCardRecordPatientStatement}' WHERE MedicineCardRecordsId = {medicineCardRecordId}");
+            WebResponseManager.ResponseFromRequestQuery($"UPDATE MedicineCardRecords SET MedicineCardRecordPatientStatement = '{medicineCardRecordPatientStatement}', MedicineCardRecordDiseaseId = {medicineCardRecordDiseaseId} WHERE MedicineCardRecordId = {medicineCardRecordId}");
         }
 
         public static void RemoveMedicineCardRecordOperation(string medicineCardRecordId)

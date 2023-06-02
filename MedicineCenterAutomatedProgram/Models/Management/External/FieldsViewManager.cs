@@ -12,6 +12,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.External
 
         public static bool IsSortingMaxButtonClicked { get; set; } = false;
 
+
         public static void ChangeSortingMinButtonFieldView(Button sortingMinButton, Button sortingMaxButton)
         {
             if (!IsSortingMinButtonClicked)

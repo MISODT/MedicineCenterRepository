@@ -60,7 +60,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             UserDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
 
-            if(ExternalMistakesManager.CheckProfilePhotoMistakes(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден"))
+            if(!ExternalMistakesManager.CheckProfilePhotoMistakes(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден"))
             {
                 SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
             }
