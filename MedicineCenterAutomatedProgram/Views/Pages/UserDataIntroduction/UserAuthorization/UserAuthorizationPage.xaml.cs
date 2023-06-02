@@ -58,7 +58,10 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
 
             UserDataLoginMailDomainComboBox.ItemsSource = OuteriorControlsInitializationManager.LoginMailDomainComboBoxInitialization();
 
-            InteriorControlsInitializationManager.MailDomainComboBoxPrimaryInitialization(UserDataLoginMailDomainComboBox);
+            if (UserDataLoginMailDomainComboBox.SelectedItem == null)
+            {
+                UserDataLoginMailDomainComboBox.SelectedIndex = 0;
+            }
 
             NavigationNextButtonState();
         }
@@ -103,26 +106,26 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction
         {
             if (FieldsViewManager.IsPasswordVisible)
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, "Пользователь не найден"))
+                if (InternalMistakesManager.CheckDataMistakes(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text, "Пользователь не найден"))
                 {
-                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsDataOperations.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), UserDataSectionsDataOperations.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
+                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(SectionsOperationsManager.AuthorizePatientOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text), SectionsOperationsManager.AuthorizeDoctorOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text)));
 
                     if (RememberMeCheckBox.IsChecked == true)
                     {
-                        UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
+                        SectionsRememberConfigManager.SealToRememberConfig(SectionsInstance.Patient, SectionsInstance.Doctor);
                     }
                 }
             }
 
             else
             {
-                if (UserDataInternalMistakesManager.InternalUserDataMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, "Пользователь не найден"))
+                if (InternalMistakesManager.CheckDataMistakes(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password, "Пользователь не найден"))
                 {
-                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsDataOperations.UserDataPatientAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), UserDataSectionsDataOperations.UserDataDoctorAuthorizationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
+                    FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(SectionsOperationsManager.AuthorizePatientOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password), SectionsOperationsManager.AuthorizeDoctorOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password)));
 
                     if (RememberMeCheckBox.IsChecked == true)
                     {
-                        UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
+                        SectionsRememberConfigManager.SealToRememberConfig(SectionsInstance.Patient, SectionsInstance.Doctor);
                     }
                 }
             }

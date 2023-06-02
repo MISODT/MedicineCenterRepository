@@ -41,7 +41,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionApointmentsReceiving()
         {
-            foreach (var appointment in DataResponseManager.AppointmentsJsonDataDeserialize($"SELECT AppointmentId FROM Appointments, Shifts WHERE AppointmentShiftId = ShiftId AND Shifts.DoctorId = {UserDataSectionsInstance.Doctor.Id} AND AppointmentStatus = 'Отправлен'"))
+            foreach (var appointment in DataResponseManager.AppointmentsJsonDataDeserialize($"SELECT AppointmentId FROM Appointments, Shifts WHERE AppointmentShiftId = ShiftId AND Shifts.DoctorId = {SectionsInstance.Doctor.Id} AND AppointmentStatus = 'Отправлен'"))
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, ShiftHospitalAddressId FROM Shifts, Appointments WHERE AppointmentShiftId = ShiftId AND AppointmentId = {appointment.AppointmentId}"))
                 {

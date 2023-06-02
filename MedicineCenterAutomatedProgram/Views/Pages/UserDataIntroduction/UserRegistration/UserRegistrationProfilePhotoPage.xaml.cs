@@ -17,18 +17,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void UserRegistrationProfilePhotoPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Uri userImageUri = new Uri(UserDataSectionsInstance.User.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
+            Uri userImageUri = new Uri(SectionsInstance.SectionsBinding.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
 
             UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(SectionsInstance.SectionsBinding));
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserProfilePhotoUri = InteriorControlsInitializationManager.ProfilePhotoImageInitialization(UserDataProfilePhotoImage);
+            SectionsInstance.SectionsBinding.UserProfilePhotoUri = InteriorControlsInitializationManager.InitializeProfilePhotoImage(UserDataProfilePhotoImage);
         }
 
-        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
+        private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(SectionsInstance.SectionsBinding));
     }
 }

@@ -52,9 +52,9 @@ namespace MedicineCenterAutomatedProgram
         {
             FrameManager.MainWindowFrame = MainWindowFrame;
 
-            if (UserDataSectionsRemember.RememberUserDataConfigExists())
+            if (SectionsRememberConfigManager.IsRememberConfigExists())
             {
-                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsRemember.RememberUserDataPatientUnseal(), UserDataSectionsRemember.RememberUserDataDoctorUnseal()));
+                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(SectionsRememberConfigManager.UnsealPatientFromRememberConfig(), SectionsRememberConfigManager.UnsealDoctorFromRememberConfig()));
             }
 
             else

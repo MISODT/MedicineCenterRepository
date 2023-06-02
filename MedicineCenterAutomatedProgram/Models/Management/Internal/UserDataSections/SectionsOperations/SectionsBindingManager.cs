@@ -2,11 +2,12 @@
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations
 {
-    public class UserDataSectionsBinding
+    public class SectionsBindingManager
     {
         public bool UserPositionIsPatient { get; set; }
 
         public bool UserPositionIsDoctor { get; set; }
+
 
         public string UserId { get; set; }
 

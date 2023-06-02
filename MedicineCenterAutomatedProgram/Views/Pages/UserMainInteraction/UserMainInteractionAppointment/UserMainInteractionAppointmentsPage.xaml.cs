@@ -69,7 +69,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserMainInteractionAppointmentsItemsEmptyHandler();
             }
 
-            InteriorControlsInitializationManager.VariablesSortingParametersComboBoxInitialization(UserMainInteractionAppointmentsSortingParametersComboBox);
+            InteriorControlsInitializationManager.InitializeComboBoxSortingParameters(UserMainInteractionAppointmentsSortingParametersComboBox);
         }
 
         private void UserMainInteractionAppointmentsItemsEmptyHandler()
@@ -108,14 +108,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
             }
 
 
-            if (UserDataSectionsInstance.Patient != null)
+            if (SectionsInstance.Patient != null)
             {
-                userMainInteractionAppointmentUserParameter = $"Appointments.PatientId = {UserDataSectionsInstance.Patient.Id}";
+                userMainInteractionAppointmentUserParameter = $"Appointments.PatientId = {SectionsInstance.Patient.Id}";
             }
 
-            if (UserDataSectionsInstance.Doctor != null)
+            if (SectionsInstance.Doctor != null)
             {
-                userMainInteractionAppointmentUserParameter = $"Appointments.DoctorId = {UserDataSectionsInstance.Doctor.Id}";
+                userMainInteractionAppointmentUserParameter = $"Appointments.DoctorId = {SectionsInstance.Doctor.Id}";
             }
 
             foreach (var appointment in DataResponseManager.AppointmentsJsonDataDeserialize($"SELECT AppointmentId, AppointmentStatus, AppointmentDescription, AppointmentShiftId FROM Appointments, Shifts WHERE AppointmentShiftId = ShiftId AND {userMainInteractionAppointmentUserParameter}"))
@@ -353,7 +353,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             foreach(var appointment in appointmentsList)
             {
-                UserDataSectionsDataOperations.UserDataMainInteractionRemoveAppointmentOperation(appointment.AppointmentId);
+                SectionsOperationsManager.RemoveAppointmentOperation(appointment.AppointmentId);
             }
 
             FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Старые"));

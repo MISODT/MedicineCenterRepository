@@ -2,13 +2,13 @@
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations
 {
-    public class UserDataSectionsInstance
+    public class SectionsInstance
     {
         public static Patients? Patient { get; set; }
 
         public static Doctors? Doctor { get; set; }
 
 
-        public static UserDataSectionsBinding User { get; set; } = new UserDataSectionsBinding();
+        public static SectionsBindingManager SectionsBinding { get; set; } = new SectionsBindingManager();
     }
 }

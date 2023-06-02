@@ -9,9 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -67,7 +64,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
                 UserMainInteractionShiftsItemsEmptyHandler();
             }
 
-            InteriorControlsInitializationManager.VariablesSortingParametersComboBoxInitialization(UserMainInteractionShiftsSortingParametersComboBox);
+            InteriorControlsInitializationManager.InitializeComboBoxSortingParameters(UserMainInteractionShiftsSortingParametersComboBox);
         }
 
         private void UserMainInteractionShiftsItemsEmptyHandler()
@@ -91,7 +88,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             if (userMainInteractionShiftParameterValue == "Текущие")
             {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id}"))
+                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate >= '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {SectionsInstance.Doctor.Id}"))
                 {
                     foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionId, HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
                     {
@@ -126,7 +123,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
 
             if (userMainInteractionShiftParameterValue == "Старые")
             {
-                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {UserDataSectionsInstance.Doctor.Id}"))
+                foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, DoctorId, ShiftHospitalAddressId FROM Shifts WHERE ShiftDate < '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}' AND DoctorId = {SectionsInstance.Doctor.Id}"))
                 {
                     foreach (var healingDirection in DataResponseManager.HealingDirectionsJsonDataDeserialize($"SELECT HealingDirectionId, HealingDirectionTitle FROM HealingDirections, Shifts WHERE ShiftHealingDirectionId = HealingDirectionId AND ShiftId = {shift.ShiftId}"))
                     {
@@ -282,7 +279,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             foreach (var shift in shiftsList)
             {
-                UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shift.ShiftId);
+                SectionsOperationsManager.RemoveShiftOperation(shift.ShiftId);
             }
 
             FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftsPage("Старые"));

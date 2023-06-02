@@ -58,18 +58,21 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
             UserDataLoginMailDomainComboBox.ItemsSource = OuteriorControlsInitializationManager.LoginMailDomainComboBoxInitialization();
 
-            InteriorControlsInitializationManager.MailDomainComboBoxPrimaryInitialization(UserDataLoginMailDomainComboBox);
+            if (UserDataLoginMailDomainComboBox.SelectedItem == null)
+            {
+                UserDataLoginMailDomainComboBox.SelectedIndex = 0;
+            }
 
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(SectionsInstance.SectionsBinding));
 
         private void UserDataLoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataLoginTextBox, UserDataLoginTextBoxHintAssist, ClearLoginButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataLoginTextBox, UserDataLoginMistakeTextBlock, "Укажите адрес эл. почты");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataLoginTextBox, UserDataLoginMistakeTextBlock, "Укажите адрес эл. почты");
 
             NavigationNextButtonState();
         }
@@ -83,9 +86,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock) ;
+            ExternalMistakesManager.CheckPasswordMistakes(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock) ;
 
-            InteriorControlsInitializationManager.PasswordComplexityProgressBarInitialization(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
+            InteriorControlsInitializationManager.InitializePasswordComplexityProgressBar(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
 
             NavigationNextButtonState();
         }
@@ -94,9 +97,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataPasswordTextBoxHintAssist, UserDataPasswordPasswordBox, ClearPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null,  UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
+            ExternalMistakesManager.CheckPasswordMistakes(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null,  UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
-            InteriorControlsInitializationManager.PasswordComplexityProgressBarInitialization(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
+            InteriorControlsInitializationManager.InitializePasswordComplexityProgressBar(UserDataPasswordTextBox, UserDataPasswordPasswordBox, PasswordComplexityProgressBar);
 
             NavigationNextButtonState();
         }
@@ -113,7 +116,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangePasswordView(UserDataPasswordTextBox, UserDataRepeatPasswordPasswordBoxHintAssist, UserDataRepeatPasswordPasswordBox, ClearRepeatPasswordButton, ChangeUserDataPasswordVisibilityButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
+            ExternalMistakesManager.CheckPasswordMistakes(UserDataPasswordTextBox, UserDataPasswordPasswordBox, null, null, UserDataRepeatPasswordPasswordBox, UserDataPasswordMistakeTextBlock);
 
             NavigationNextButtonState();
         }
@@ -125,18 +128,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void NavigateConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserDataInternalMistakesManager.InternalUserDataLoginMistakesHandler(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), "Логин уже зарегистрирован"))
+            if (InternalMistakesManager.CheckLoginMistakes(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), "Логин уже зарегистрирован"))
             {
                 if (FieldsViewManager.IsPasswordVisible)
                 {
-                    UserDataSectionsDataOperations.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
+                    SectionsOperationsManager.RegisterUserOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordTextBox.Text);
 
                     FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }
 
                 else
                 {
-                    UserDataSectionsDataOperations.UserDataRegistrationOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
+                    SectionsOperationsManager.RegisterUserOperation(UserDataLoginTextBox.Text, UserDataLoginMailDomainComboBox.SelectedValue.ToString(), UserDataPasswordPasswordBox.Password);
 
                     FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }

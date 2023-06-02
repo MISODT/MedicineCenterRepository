@@ -140,7 +140,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string cityTitle = "";
 
-            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            foreach (var city in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {SectionsInstance.SectionsBinding.UserAddressId}"))
             {
                 cityTitle = city.CityTitle;
             }
@@ -152,7 +152,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string streetTitle = "";
 
-            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.AddressCityTitle}' AND AddressStreetId = StreetId AND AddressHouseId = HouseId AND AddressId = {SectionsInstance.SectionsBinding.UserAddressId}"))
             {
                 streetTitle = street.StreetTitle;
             }
@@ -164,7 +164,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string houseNumber = "";
 
-            foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND StreetTitle = '{UserDataSectionsInstance.User.AddressStreetTitle}' AND AddressHouseId = HouseId AND AddressId = {UserDataSectionsInstance.User.UserAddressId}"))
+            foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.AddressCityTitle}' AND AddressStreetId = StreetId AND StreetTitle = '{SectionsInstance.SectionsBinding.AddressStreetTitle}' AND AddressHouseId = HouseId AND AddressId = {SectionsInstance.SectionsBinding.UserAddressId}"))
             {
                 houseNumber = house.HouseNumber;
             }
@@ -176,9 +176,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolCityTitle = "";
 
-            if(UserDataSectionsInstance.User.UserSchoolId != null)
+            if(SectionsInstance.SectionsBinding.UserSchoolId != null)
             {
-                foreach (var school in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                foreach (var school in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}"))
                 {
                     schoolCityTitle = school.CityTitle;
                 }
@@ -196,9 +196,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolType = "";
 
-            if (UserDataSectionsInstance.User.UserSchoolId != null)
+            if (SectionsInstance.SectionsBinding.UserSchoolId != null)
             {
-                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}"))
                 {
                     schoolType = school.SchoolType;
                 }
@@ -216,9 +216,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string schoolTitle = "";
 
-            if (UserDataSectionsInstance.User.UserSchoolId != null)
+            if (SectionsInstance.SectionsBinding.UserSchoolId != null)
             {
-                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {UserDataSectionsInstance.User.UserSchoolId}"))
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}"))
                 {
                     schoolTitle = school.SchoolTitle;
                 }
@@ -236,9 +236,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityCityTitle = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != null)
+            if (SectionsInstance.SectionsBinding.UserUniversityId != null)
             {
-                foreach (var university in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                foreach (var university in DataResponseManager.CitiesJsonDataDeserialize($"SELECT DISTINCT(CityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}"))
                 {
                     universityCityTitle = university.CityTitle;
                 }
@@ -256,9 +256,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityType = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != null)
+            if (SectionsInstance.SectionsBinding.UserUniversityId != null)
             {
-                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}"))
                 {
                     universityType = university.UniversityType;
                 }
@@ -276,9 +276,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             string universityTitle = "";
 
-            if (UserDataSectionsInstance.User.UserUniversityId != null)
+            if (SectionsInstance.SectionsBinding.UserUniversityId != null)
             {
-                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {UserDataSectionsInstance.User.UserUniversityId}"))
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}"))
                 {
                     universityTitle = university.UniversityTitle;
                 }
@@ -326,7 +326,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             streetsTitleList.Clear();
 
-            if (UserDataSectionsInstance.User.AddressCityTitle == null)
+            if (SectionsInstance.SectionsBinding.AddressCityTitle == null)
             {
                 foreach (var street in DataResponseManager.StreetsJsonDataDeserialize("SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
                 {
@@ -336,7 +336,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
+                foreach (var street in DataResponseManager.StreetsJsonDataDeserialize($"SELECT DISTINCT(StreetTitle) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.AddressCityTitle}' AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
                 {
                     streetsTitleList.Add(street.StreetTitle);
                 }
@@ -351,7 +351,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             housesNumbersList.Clear();
 
-            if (UserDataSectionsInstance.User.AddressStreetTitle == null)
+            if (SectionsInstance.SectionsBinding.AddressStreetTitle == null)
             {
                 foreach (var house in DataResponseManager.HousesJsonDataDeserialize("SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND AddressStreetId = StreetId AND AddressHouseId = HouseId"))
                 {
@@ -361,7 +361,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.AddressCityTitle}' AND AddressStreetId = StreetId AND StreetTitle = '{UserDataSectionsInstance.User.AddressStreetTitle}' AND AddressHouseId = HouseId"))
+                foreach (var house in DataResponseManager.HousesJsonDataDeserialize($"SELECT DISTINCT(HouseNumber) FROM Addresses, Cities, Streets, Houses WHERE AddressCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.AddressCityTitle}' AND AddressStreetId = StreetId AND StreetTitle = '{SectionsInstance.SectionsBinding.AddressStreetTitle}' AND AddressHouseId = HouseId"))
                 {
                     housesNumbersList.Add(house.HouseNumber);
                 }
@@ -390,7 +390,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             schoolTypesList.Clear();
 
-            if (UserDataSectionsInstance.User.SchoolCityTitle == null)
+            if (SectionsInstance.SectionsBinding.SchoolCityTitle == null)
             {
                 foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize("SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId"))
                 {
@@ -400,7 +400,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.SchoolCityTitle}'"))
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolType) FROM Schools, Cities WHERE SchoolCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.SchoolCityTitle}'"))
                 {
                     schoolTypesList.Add(school.SchoolType);
                 }
@@ -415,7 +415,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             schoolTitlesList.Clear();
 
-            if(UserDataSectionsInstance.User.SchoolType == null)
+            if(SectionsInstance.SectionsBinding.SchoolType == null)
             {
                 foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId"))
                 {
@@ -425,7 +425,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolType = '{UserDataSectionsInstance.User.SchoolType}' AND CityTitle = '{UserDataSectionsInstance.User.SchoolCityTitle}'"))
+                foreach (var school in DataResponseManager.SchoolsJsonDataDeserialize($"SELECT DISTINCT(SchoolTitle) FROM Schools, Cities WHERE SchoolCityId = CityId AND SchoolType = '{SectionsInstance.SectionsBinding.SchoolType}' AND CityTitle = '{SectionsInstance.SectionsBinding.SchoolCityTitle}'"))
                 {
                     schoolTitlesList.Add(school.SchoolTitle);
                 }
@@ -454,7 +454,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             universityTypesList.Clear();
 
-            if(UserDataSectionsInstance.User.UniversityCityTitle == null)
+            if(SectionsInstance.SectionsBinding.UniversityCityTitle == null)
             {
                 foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize("SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId"))
                 {
@@ -464,7 +464,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND CityTitle = '{UserDataSectionsInstance.User.UniversityCityTitle}'"))
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityType) FROM Universities, Cities WHERE UniversityCityId = CityId AND CityTitle = '{SectionsInstance.SectionsBinding.UniversityCityTitle}'"))
                 {
                     universityTypesList.Add(university.UniversityType);
                 }
@@ -479,7 +479,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             universityTitlesList.Clear();
 
-            if(UserDataSectionsInstance.User.UniversityType == null)
+            if(SectionsInstance.SectionsBinding.UniversityType == null)
             {
                 foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize("SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId"))
                 {
@@ -489,7 +489,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 
             else
             {
-                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityType = '{UserDataSectionsInstance.User.UniversityType}' AND CityTitle = '{UserDataSectionsInstance.User.UniversityCityTitle}'"))
+                foreach (var university in DataResponseManager.UniversitiesJsonDataDeserialize($"SELECT DISTINCT(UniversityTitle) FROM Universities, Cities WHERE UniversityCityId = CityId AND UniversityType = '{SectionsInstance.SectionsBinding.UniversityType}' AND CityTitle = '{SectionsInstance.SectionsBinding.UniversityCityTitle}'"))
                 {
                     universityTitlesList.Add(university.UniversityTitle);
                 }

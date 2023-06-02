@@ -10,7 +10,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationEducationPage : Page
     {
-        public UserRegistrationEducationPage(UserDataSectionsBinding user)
+        public UserRegistrationEducationPage(SectionsBindingManager user)
         {
             InitializeComponent();
 
@@ -27,11 +27,11 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             UserDataUniversityTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTypeComboBoxInitialization();
             UserDataUniversityTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTitleComboBoxInitialization();
 
-            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityStartEducationYearComboBox, DateTime.Now.Year);
-            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
+            InteriorControlsInitializationManager.InitializeYearComboBox(UserDataUniversityStartEducationYearComboBox, DateTime.Now.Year);
+            InteriorControlsInitializationManager.InitializeYearComboBox(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(SectionsInstance.SectionsBinding));
 
         private void UserDataSchoolCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e) 
         {
-            UserDataSectionsInstance.User.ExtractUserEducationData();
+            SectionsInstance.SectionsBinding.ExtractUserEducationData();
 
             FrameManager.MainWindowFrame.Navigate(new UserRegistrationCredentialsPage()); 
         }

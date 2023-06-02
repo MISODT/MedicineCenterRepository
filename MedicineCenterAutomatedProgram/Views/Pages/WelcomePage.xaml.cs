@@ -16,15 +16,15 @@ namespace MedicineCenterAutomatedProgram.Views.Pages
 
         private void WelcomePage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User = new UserDataSectionsBinding();
+            SectionsInstance.SectionsBinding = new SectionsBindingManager();
 
-            UserDataSectionsInstance.Patient = null;
+            SectionsInstance.Patient = null;
 
-            UserDataSectionsInstance.Doctor = null;
+            SectionsInstance.Doctor = null;
         }
 
         private void AuthorizationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserAuthorizationPage());
 
-        private void RegistrationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(UserDataSectionsInstance.User));
+        private void RegistrationNavigationButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(SectionsInstance.SectionsBinding));
     }
 }

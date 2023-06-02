@@ -10,7 +10,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationPersonalPage : Page
     {
-        public UserRegistrationPersonalPage(UserDataSectionsBinding user)
+        public UserRegistrationPersonalPage(SectionsBindingManager user)
         {
             InitializeComponent();
 
@@ -41,9 +41,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             UserDataPatronymicMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataDateOfBirthMistakeTextBlock.Visibility = Visibility.Hidden;
 
-            InteriorControlsInitializationManager.DayComboBoxInitialization(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
-            InteriorControlsInitializationManager.MonthComboBoxInitialization(UserDataMonthOfBirthComboBox);
-            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataYearOfBirthComboBox, DateTime.Now.Year);
+            InteriorControlsInitializationManager.InitializeDayComboBox(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
+            InteriorControlsInitializationManager.InitializeMonthComboBox(UserDataMonthOfBirthComboBox);
+            InteriorControlsInitializationManager.InitializeYearComboBox(UserDataYearOfBirthComboBox, DateTime.Now.Year);
 
             NavigationNextButtonState();
         }
@@ -54,7 +54,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
 
             NavigationNextButtonState();
         }
@@ -68,7 +68,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
 
             NavigationNextButtonState();
         }
@@ -82,7 +82,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
 
             NavigationNextButtonState();
         }
@@ -103,9 +103,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeComboBoxView(UserDataMonthOfBirthComboBox, UserDataMonthOfBirthComboBoxHintAssist);
 
-            InteriorControlsInitializationManager.DayComboBoxInitialization(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
+            InteriorControlsInitializationManager.InitializeDayComboBox(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox.SelectedIndex + 1);
 
-            InteriorControlsInitializationManager.MonthNumberComboBoxInitialization(UserDataMonthOfBirthComboBox);
+            SectionsInstance.SectionsBinding.UserMonthOfBirthNumber = UserDataMonthOfBirthComboBox.SelectedIndex + 1;
 
             NavigationNextButtonState();
         }
@@ -114,46 +114,46 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeComboBoxView(UserDataYearOfBirthComboBox, UserDataYearOfBirthComboBoxHintAssist);
 
-            UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock);
+            ExternalMistakesManager.CheckDateOfBirthMistakes(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock);
 
             NavigationNextButtonState();
         }
 
         private void SelectMaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGenderIsMale = true;
+            SectionsInstance.SectionsBinding.UserGenderIsMale = true;
 
-            UserDataSectionsInstance.User.UserGender = "Мужской";
+            SectionsInstance.SectionsBinding.UserGender = "Мужской";
 
             NavigationNextButtonState();
         }
 
         private void SelectFemaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGenderIsFemale = true;
+            SectionsInstance.SectionsBinding.UserGenderIsFemale = true;
 
-            UserDataSectionsInstance.User.UserGender = "Женский";
+            SectionsInstance.SectionsBinding.UserGender = "Женский";
 
             NavigationNextButtonState();
         }
 
         private void SelectUndefinedGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGenderIsUndefined = true;
+            SectionsInstance.SectionsBinding.UserGenderIsUndefined = true;
 
-            UserDataSectionsInstance.User.UserGender = "Не указан";
+            SectionsInstance.SectionsBinding.UserGender = "Не указан";
 
             NavigationNextButtonState();
         }
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e)
         {
-            if(UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя") && 
-               UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию") &&
-               UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество") &&
-               UserDataExternalMistakesManager.ExternalUserDataDateOfBirthMistakesHandler(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock))
+            if(ExternalMistakesManager.CheckTextBoxMistakes(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя") && 
+               ExternalMistakesManager.CheckTextBoxMistakes(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию") &&
+               ExternalMistakesManager.CheckTextBoxMistakes(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество") &&
+               ExternalMistakesManager.CheckDateOfBirthMistakes(UserDataDayOfBirthComboBox, UserDataMonthOfBirthComboBox, UserDataYearOfBirthComboBox, UserDataDateOfBirthMistakeTextBlock))
             {
-                FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(UserDataSectionsInstance.User));
+                FrameManager.MainWindowFrame.Navigate(new UserRegistrationLocationPage(SectionsInstance.SectionsBinding));
             }
         }
     }

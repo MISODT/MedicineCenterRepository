@@ -14,7 +14,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 {
     public partial class UserMainInteractionProfilePage : Page
     {
-        public UserMainInteractionProfilePage(UserDataSectionsBinding user)
+        public UserMainInteractionProfilePage(SectionsBindingManager user)
         {
             InitializeComponent();
 
@@ -36,17 +36,17 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         public void UserProfileDataGenderDefinition()
         {
-            if (UserDataSectionsInstance.User.UserGender == "Мужской")
+            if (SectionsInstance.SectionsBinding.UserGender == "Мужской")
             {
                 SelectMaleGenderRadioButton.IsChecked = true;
             }
 
-            if (UserDataSectionsInstance.User.UserGender == "Женский")
+            if (SectionsInstance.SectionsBinding.UserGender == "Женский")
             {
                 SelectFemaleGenderRadioButton.IsChecked = true;
             }
 
-            if (UserDataSectionsInstance.User.UserGender == "Не указан")
+            if (SectionsInstance.SectionsBinding.UserGender == "Не указан")
             {
                 SelectUndefinedGenderRadioButton.IsChecked = true;
             }
@@ -60,9 +60,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             UserDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
 
-            if(UserDataExternalMistakesManager.ExternalUserDataProfilePhotoUriMistakesHandler(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден"))
+            if(ExternalMistakesManager.CheckProfilePhotoMistakes(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден"))
             {
-                UserDataSectionsInstance.User.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+                SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
             }
 
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -95,22 +95,22 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             UserDataUniversityTypeComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTypeComboBoxInitialization();
             UserDataUniversityTitleComboBox.ItemsSource = OuteriorControlsInitializationManager.UniversityTitleComboBoxInitialization();
 
-            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityStartEducationYearComboBox, DateTime.Now.Year);
-            InteriorControlsInitializationManager.YearComboBoxInitialization(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
+            InteriorControlsInitializationManager.InitializeYearComboBox(UserDataUniversityStartEducationYearComboBox, DateTime.Now.Year);
+            InteriorControlsInitializationManager.InitializeYearComboBox(UserDataUniversityEndEducationYearComboBox, DateTime.Now.Year);
 
             UserDataPasswordMistakeTextBlock.Visibility = Visibility.Hidden;
         }
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserProfilePhotoUri = InteriorControlsInitializationManager.ProfilePhotoImageInitialization(UserDataProfilePhotoImage);
+            SectionsInstance.SectionsBinding.UserProfilePhotoUri = InteriorControlsInitializationManager.InitializeProfilePhotoImage(UserDataProfilePhotoImage);
         }
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataNameTextBox, UserDataNameMistakeTextBlock, "Укажите имя");
 
             ProfileSaveButtonState();
         }
@@ -124,7 +124,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataSurnameTextBox, UserDataSurnameMistakeTextBlock, "Укажите фамилию");
 
             ProfileSaveButtonState();
         }
@@ -138,7 +138,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataTextBoxFieldMistakesHandler(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
+            ExternalMistakesManager.CheckTextBoxMistakes(UserDataPatronymicTextBox, UserDataPatronymicMistakeTextBlock, "Укажите отчество");
 
             ProfileSaveButtonState();
         }
@@ -150,17 +150,17 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void SelectMaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGender = "Мужской";
+            SectionsInstance.SectionsBinding.UserGender = "Мужской";
         }
 
         private void SelectFemaleGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGender = "Женский";
+            SectionsInstance.SectionsBinding.UserGender = "Женский";
         }
 
         private void SelectUndefinedGenderRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserGender = "Не указан";
+            SectionsInstance.SectionsBinding.UserGender = "Не указан";
         }
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -228,7 +228,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FieldsViewManager.ChangeHiddenPasswordView(UserDataOldPasswordPasswordBoxHintAssist, UserDataOldPasswordPasswordBox, ClearOldPasswordButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
+            ExternalMistakesManager.CheckPasswordMistakes(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
         }
 
         private void ClearOldPasswordButton_Click(object sender, RoutedEventArgs e)
@@ -240,7 +240,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FieldsViewManager.ChangeHiddenPasswordView(UserDataNewPasswordPasswordBoxHintAssist, UserDataNewPasswordPasswordBox, ClearNewPasswordButton);
 
-            UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
+            ExternalMistakesManager.CheckPasswordMistakes(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock);
         }
 
         private void ClearNewPasswordButton_Click(object sender, RoutedEventArgs e)
@@ -250,79 +250,79 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserProfileDataSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if(UserDataExternalMistakesManager.ExternalUserDataPasswordMistakesHandler(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock))
+            if(ExternalMistakesManager.CheckPasswordMistakes(null, null, UserDataOldPasswordPasswordBox, UserDataNewPasswordPasswordBox, null, UserDataPasswordMistakeTextBlock))
             {
-                UserDataSectionsInstance.User.ExtractUserAddressData();
+                SectionsInstance.SectionsBinding.ExtractUserAddressData();
 
-                UserDataSectionsInstance.User.ExtractUserEducationData();
+                SectionsInstance.SectionsBinding.ExtractUserEducationData();
 
                 if(UserDataOldPasswordPasswordBox.Password != "" && UserDataNewPasswordPasswordBox.Password != "")
                 {
-                    if (UserDataSectionsInstance.User.UserPositionIsPatient)
+                    if (SectionsInstance.SectionsBinding.UserPositionIsPatient)
                     {
-                        WebResponseManager.ResponseFromRequestQuery($"UPDATE Patients SET Password = '{UserDataCryptionManager.UserDataEncrypt(UserDataNewPasswordPasswordBox.Password)}' WHERE Id = {UserDataSectionsInstance.User.UserId}");
+                        WebResponseManager.ResponseFromRequestQuery($"UPDATE Patients SET Password = '{CryptionManager.EncryptData(UserDataNewPasswordPasswordBox.Password)}' WHERE Id = {SectionsInstance.SectionsBinding.UserId}");
                     }
 
-                    if (UserDataSectionsInstance.User.UserPositionIsDoctor)
+                    if (SectionsInstance.SectionsBinding.UserPositionIsDoctor)
                     {
-                        WebResponseManager.ResponseFromRequestQuery($"UPDATE Doctors SET Password = '{UserDataCryptionManager.UserDataEncrypt(UserDataNewPasswordPasswordBox.Password)}' WHERE Id = {UserDataSectionsInstance.User.UserId}");
+                        WebResponseManager.ResponseFromRequestQuery($"UPDATE Doctors SET Password = '{CryptionManager.EncryptData(UserDataNewPasswordPasswordBox.Password)}' WHERE Id = {SectionsInstance.SectionsBinding.UserId}");
                     }
 
-                    UserDataSectionsInstance.User.UserPassword = UserDataCryptionManager.UserDataEncrypt(UserDataNewPasswordPasswordBox.Password);
+                    SectionsInstance.SectionsBinding.UserPassword = CryptionManager.EncryptData(UserDataNewPasswordPasswordBox.Password);
                 }
 
-                UserDataSectionsDataOperations.UserDataUpdateOperation();
+                SectionsOperationsManager.UpdateUserOperation();
 
-                if (UserDataSectionsInstance.Patient != null)
+                if (SectionsInstance.Patient != null)
                 {
-                    UserDataSectionsInstance.Patient = new Patients()
+                    SectionsInstance.Patient = new Patients()
                     {
-                        Id = UserDataSectionsInstance.User.UserId,
-                        ProfilePhotoUri = UserDataSectionsInstance.User.UserProfilePhotoUri,
-                        Name = UserDataSectionsInstance.User.UserName,
-                        Surname = UserDataSectionsInstance.User.UserSurname,
-                        Patronymic = UserDataSectionsInstance.User.UserPatronymic,
-                        DateOfBirth = UserDataSectionsInstance.User.UserDateOfBirth,
-                        Gender = UserDataSectionsInstance.User.UserGender,
-                        AddressId = UserDataSectionsInstance.User.UserAddressId,
-                        SchoolId = UserDataSectionsInstance.User.UserSchoolId,
-                        UniversityId = UserDataSectionsInstance.User.UserUniversityId,
-                        UniversityStartEducationYear = Convert.ToString(UserDataSectionsInstance.User.UserUniversityStartEducationYear),
-                        UniversityEndEducationYear = Convert.ToString(UserDataSectionsInstance.User.UserUniversityEndEducationYear),
-                        Login = UserDataSectionsInstance.User.UserLogin,
-                        Password = UserDataSectionsInstance.User.UserPassword
+                        Id = SectionsInstance.SectionsBinding.UserId,
+                        ProfilePhotoUri = SectionsInstance.SectionsBinding.UserProfilePhotoUri,
+                        Name = SectionsInstance.SectionsBinding.UserName,
+                        Surname = SectionsInstance.SectionsBinding.UserSurname,
+                        Patronymic = SectionsInstance.SectionsBinding.UserPatronymic,
+                        DateOfBirth = SectionsInstance.SectionsBinding.UserDateOfBirth,
+                        Gender = SectionsInstance.SectionsBinding.UserGender,
+                        AddressId = SectionsInstance.SectionsBinding.UserAddressId,
+                        SchoolId = SectionsInstance.SectionsBinding.UserSchoolId,
+                        UniversityId = SectionsInstance.SectionsBinding.UserUniversityId,
+                        UniversityStartEducationYear = Convert.ToString(SectionsInstance.SectionsBinding.UserUniversityStartEducationYear),
+                        UniversityEndEducationYear = Convert.ToString(SectionsInstance.SectionsBinding.UserUniversityEndEducationYear),
+                        Login = SectionsInstance.SectionsBinding.UserLogin,
+                        Password = SectionsInstance.SectionsBinding.UserPassword
                     };
                 }
 
-                if (UserDataSectionsInstance.Doctor != null)
+                if (SectionsInstance.Doctor != null)
                 {
-                    UserDataSectionsInstance.Doctor = new Doctors()
+                    SectionsInstance.Doctor = new Doctors()
                     {
-                        Id = UserDataSectionsInstance.User.UserId,
-                        ProfilePhotoUri = UserDataSectionsInstance.User.UserProfilePhotoUri,
-                        Name = UserDataSectionsInstance.User.UserName,
-                        Surname = UserDataSectionsInstance.User.UserSurname,
-                        Patronymic = UserDataSectionsInstance.User.UserPatronymic,
-                        DateOfBirth = UserDataSectionsInstance.User.UserDateOfBirth,
-                        Gender = UserDataSectionsInstance.User.UserGender,
-                        AddressId = UserDataSectionsInstance.User.UserAddressId,
-                        SchoolId = UserDataSectionsInstance.User.UserSchoolId,
-                        UniversityId = UserDataSectionsInstance.User.UserUniversityId,
-                        UniversityStartEducationYear = Convert.ToString(UserDataSectionsInstance.User.UserUniversityStartEducationYear),
-                        UniversityEndEducationYear = Convert.ToString(UserDataSectionsInstance.User.UserUniversityEndEducationYear),
-                        Login = UserDataSectionsInstance.User.UserLogin,
-                        Password = UserDataSectionsInstance.User.UserPassword
+                        Id = SectionsInstance.SectionsBinding.UserId,
+                        ProfilePhotoUri = SectionsInstance.SectionsBinding.UserProfilePhotoUri,
+                        Name = SectionsInstance.SectionsBinding.UserName,
+                        Surname = SectionsInstance.SectionsBinding.UserSurname,
+                        Patronymic = SectionsInstance.SectionsBinding.UserPatronymic,
+                        DateOfBirth = SectionsInstance.SectionsBinding.UserDateOfBirth,
+                        Gender = SectionsInstance.SectionsBinding.UserGender,
+                        AddressId = SectionsInstance.SectionsBinding.UserAddressId,
+                        SchoolId = SectionsInstance.SectionsBinding.UserSchoolId,
+                        UniversityId = SectionsInstance.SectionsBinding.UserUniversityId,
+                        UniversityStartEducationYear = Convert.ToString(SectionsInstance.SectionsBinding.UserUniversityStartEducationYear),
+                        UniversityEndEducationYear = Convert.ToString(SectionsInstance.SectionsBinding.UserUniversityEndEducationYear),
+                        Login = SectionsInstance.SectionsBinding.UserLogin,
+                        Password = SectionsInstance.SectionsBinding.UserPassword
                     };
                 }
 
-                if (UserDataSectionsRemember.RememberUserDataConfigExists())
+                if (SectionsRememberConfigManager.IsRememberConfigExists())
                 {
-                    UserDataSectionsRemember.RememberUserDataConfigRemove();
+                    SectionsRememberConfigManager.RemoveRememberConfig();
 
-                    UserDataSectionsRemember.RememberUserDataSeal(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor);
+                    SectionsRememberConfigManager.SealToRememberConfig(SectionsInstance.Patient, SectionsInstance.Doctor);
                 }
 
-                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(UserDataSectionsInstance.Patient, UserDataSectionsInstance.Doctor));
+                FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(SectionsInstance.Patient, SectionsInstance.Doctor));
             }
         }
     }

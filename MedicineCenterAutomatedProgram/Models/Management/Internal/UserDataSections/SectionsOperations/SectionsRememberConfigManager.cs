@@ -5,9 +5,9 @@ using System.Text.Json;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations
 {
-    public class UserDataSectionsRemember
+    public class SectionsRememberConfigManager
     {
-        public static string RememberUserDataConfigPath(string configFileName)
+        public static string GetRememberConfigPath(string configFileName)
         {
             string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -16,9 +16,9 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
             return configFilePath;
         }
 
-        public static bool RememberUserDataConfigExists()
+        public static bool IsRememberConfigExists()
         {
-            if (File.Exists(RememberUserDataConfigPath("patient_config.json")) || File.Exists(RememberUserDataConfigPath("doctor_config.json")))
+            if (File.Exists(GetRememberConfigPath("patient_config.json")) || File.Exists(GetRememberConfigPath("doctor_config.json")))
             {
                 return true;
             }
@@ -29,17 +29,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
             }
         }
 
-        public static void RememberUserDataConfigRemove()
+        public static void RemoveRememberConfig()
         {
-            if (RememberUserDataConfigExists())
+            if (IsRememberConfigExists())
             {
-                File.Delete(RememberUserDataConfigPath("patient_config.json"));
+                File.Delete(GetRememberConfigPath("patient_config.json"));
 
-                File.Delete(RememberUserDataConfigPath("doctor_config.json"));
+                File.Delete(GetRememberConfigPath("doctor_config.json"));
             }
         }
 
-        public static void RememberUserDataSeal(Patients patient, Doctors doctor)
+        public static void SealToRememberConfig(Patients patient, Doctors doctor)
         {
             string jsonValueString = "";
 
@@ -47,32 +47,32 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
             {
                 jsonValueString = JsonSerializer.Serialize(patient);
 
-                File.WriteAllText(RememberUserDataConfigPath("patient_config.json"), jsonValueString);
+                File.WriteAllText(GetRememberConfigPath("patient_config.json"), jsonValueString);
 
-                File.SetAttributes(RememberUserDataConfigPath("patient_config.json"), FileAttributes.Hidden);
+                File.SetAttributes(GetRememberConfigPath("patient_config.json"), FileAttributes.Hidden);
             }
 
             if(doctor != null)
             {
                 jsonValueString = JsonSerializer.Serialize(doctor);
 
-                File.WriteAllText(RememberUserDataConfigPath("doctor_config.json"), jsonValueString);
+                File.WriteAllText(GetRememberConfigPath("doctor_config.json"), jsonValueString);
 
-                File.SetAttributes(RememberUserDataConfigPath("doctor_config.json"), FileAttributes.Hidden);
+                File.SetAttributes(GetRememberConfigPath("doctor_config.json"), FileAttributes.Hidden);
             }
         }
 
-        public static Patients? RememberUserDataPatientUnseal()
+        public static Patients? UnsealPatientFromRememberConfig()
         {
-            if (RememberUserDataConfigExists())
+            if (IsRememberConfigExists())
             {
                 if(File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}" + @"\" + "patient_config.json"))
                 {
-                    string configFileText = File.ReadAllText(RememberUserDataConfigPath("patient_config.json"));
+                    string configFileText = File.ReadAllText(GetRememberConfigPath("patient_config.json"));
 
                     Patients patient = JsonSerializer.Deserialize<Patients>(configFileText);
 
-                    UserDataSectionsInstance.Patient = new Patients()
+                    SectionsInstance.Patient = new Patients()
                     {
                         Id = patient.Id,
                         ProfilePhotoUri = patient.ProfilePhotoUri,
@@ -90,7 +90,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
                         Password = patient.Password
                     };
 
-                    return UserDataSectionsInstance.Patient;
+                    return SectionsInstance.Patient;
                 }
 
                 else
@@ -105,17 +105,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
             }
         }
 
-        public static Doctors? RememberUserDataDoctorUnseal()
+        public static Doctors? UnsealDoctorFromRememberConfig()
         {
-            if (RememberUserDataConfigExists())
+            if (IsRememberConfigExists())
             {
                 if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}" + @"\" + "doctor_config.json"))
                 {
-                    string colfigFileText = File.ReadAllText(RememberUserDataConfigPath("doctor_config.json"));
+                    string colfigFileText = File.ReadAllText(GetRememberConfigPath("doctor_config.json"));
 
                     Doctors doctor = JsonSerializer.Deserialize<Doctors>(colfigFileText);
 
-                    UserDataSectionsInstance.Doctor = new Doctors()
+                    SectionsInstance.Doctor = new Doctors()
                     {
                         Id = doctor.Id,
                         ProfilePhotoUri = doctor.ProfilePhotoUri,
@@ -133,7 +133,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSect
                         Password = doctor.Password
                     };
 
-                    return UserDataSectionsInstance.Doctor;
+                    return SectionsInstance.Doctor;
                 }
 
                 else

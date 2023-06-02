@@ -9,7 +9,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationLocationPage : Page
     {
-        public UserRegistrationLocationPage(UserDataSectionsBinding user)
+        public UserRegistrationLocationPage(SectionsBindingManager user)
         {
             InitializeComponent();
 
@@ -42,13 +42,13 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             NavigationNextButtonState();
         }
 
-        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(UserDataSectionsInstance.User));
+        private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(SectionsInstance.SectionsBinding));
 
         private void UserDataCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FieldsViewManager.ChangeComboBoxView(UserDataCityComboBox, UserDataCityTextBoxHintAssist);
 
-            UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataCityComboBox, UserDataCityMistakeTextBlock, "Укажите город");
+            ExternalMistakesManager.CheckComboBoxMistakes(UserDataCityComboBox, UserDataCityMistakeTextBlock, "Укажите город");
 
             UserDataStreetComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressStreetComboBoxInitialization();
 
@@ -59,7 +59,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeComboBoxView(UserDataStreetComboBox, UserDataStreetTextBoxHintAssist);
 
-            UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataStreetComboBox, UserDataStreetMistakeTextBlock, "Укажите улицу");
+            ExternalMistakesManager.CheckComboBoxMistakes(UserDataStreetComboBox, UserDataStreetMistakeTextBlock, "Укажите улицу");
 
             UserDataHouseComboBox.ItemsSource = OuteriorControlsInitializationManager.AddressHouseComboBoxInitialization();
 
@@ -70,18 +70,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             FieldsViewManager.ChangeComboBoxView(UserDataHouseComboBox, UserDataHouseTextBoxHintAssist);
 
-            UserDataExternalMistakesManager.ExternalUserDataComboBoxFieldMistakesHandler(UserDataHouseComboBox, UserDataHouseMistakeTextBlock, "Укажите дом");
+            ExternalMistakesManager.CheckComboBoxMistakes(UserDataHouseComboBox, UserDataHouseMistakeTextBlock, "Укажите дом");
 
             NavigationNextButtonState();
         }
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.ExtractUserAddressData();
+            SectionsInstance.SectionsBinding.ExtractUserAddressData();
 
             NavigationNextButtonState();
 
-            FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(UserDataSectionsInstance.User));
+            FrameManager.MainWindowFrame.Navigate(new UserRegistrationEducationPage(SectionsInstance.SectionsBinding));
         }
     }
 }

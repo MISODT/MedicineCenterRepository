@@ -8,7 +8,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 {
     public partial class UserRegistrationPositionPage : Page
     {
-        public UserRegistrationPositionPage(UserDataSectionsBinding user)
+        public UserRegistrationPositionPage(SectionsBindingManager user)
         {
             InitializeComponent();
 
@@ -34,18 +34,18 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
         private void SelectPatientRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserPositionIsPatient = true;
+            SectionsInstance.SectionsBinding.UserPositionIsPatient = true;
 
-            UserDataSectionsInstance.User.UserPositionIsDoctor = false;
+            SectionsInstance.SectionsBinding.UserPositionIsDoctor = false;
 
             NavigationNextButtonState();
         }
 
         private void SelectDoctorRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsInstance.User.UserPositionIsDoctor = true;
+            SectionsInstance.SectionsBinding.UserPositionIsDoctor = true;
 
-            UserDataSectionsInstance.User.UserPositionIsPatient = false;
+            SectionsInstance.SectionsBinding.UserPositionIsPatient = false;
 
             NavigationNextButtonState();
         }

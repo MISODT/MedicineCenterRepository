@@ -110,12 +110,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMai
         {
             if (appointments != null)
             {
-                UserDataSectionsDataOperations.UserDataMainInteractionUpdateAppointmentOperation(appointments.AppointmentId, AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionAppointmentOperationsDescriptionTextBox.Text);
+                SectionsOperationsManager.UpdateAppointmentOperation(appointments.AppointmentId, AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionAppointmentOperationsDescriptionTextBox.Text);
             }
 
             else
             {
-                UserDataSectionsDataOperations.UserDataMainInteractionNewAppointmentOperation(AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionAppointmentOperationsDescriptionTextBox.Text);
+                SectionsOperationsManager.NewAppointmentOperation(AppointmentOperationsDoctorShiftComboBoxIndexInitialization(), UserMainInteractionAppointmentOperationsDescriptionTextBox.Text);
             }
 
             FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));

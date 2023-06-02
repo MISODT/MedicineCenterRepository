@@ -13,18 +13,18 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
 {
     public class InteriorControlsInitializationManager
     {
-        public static void VariablesSortingParametersComboBoxInitialization(ComboBox variableSortingParametersComboBox)
+        public static void InitializeComboBoxSortingParameters(ComboBox sortingParametersComboBox)
         {
-            List<string> variableSortingParametersList = new List<string>()
+            List<string> sortingParametersList = new List<string>()
             {
                 "Все значения",
                 "По дате"
             };
 
-            variableSortingParametersComboBox.ItemsSource = variableSortingParametersList;
+            sortingParametersComboBox.ItemsSource = sortingParametersList;
         }
 
-        public static string ProfilePhotoImageInitialization(Image profilePhotoImage)
+        public static string InitializeProfilePhotoImage(Image profilePhotoImage)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -49,7 +49,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             }
         }
 
-        public static void HourComboBoxInitialization(ComboBox hourComboBox)
+        public static void InitializeHourComboBox(ComboBox hourComboBox)
         {
             List<int> hoursList = new List<int>();
 
@@ -61,7 +61,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             hourComboBox.ItemsSource = hoursList;
         }
 
-        public static void MinuteComboBoxInitialization(ComboBox minuteComboBox)
+        public static void InitializeMinuteComboBox(ComboBox minuteComboBox)
         {
             List<string> minutesList = new List<string>();
 
@@ -73,7 +73,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             minuteComboBox.ItemsSource = minutesList;
         }
 
-        public static void DayComboBoxInitialization(ComboBox dayComboBox, int monthNumber)
+        public static void InitializeDayComboBox(ComboBox dayComboBox, int monthNumber)
         {
             List<int> daysList = new List<int>();
 
@@ -96,7 +96,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             dayComboBox.ItemsSource = daysList;
         }
 
-        public static void MonthComboBoxInitialization(ComboBox monthComboBox)
+        public static void InitializeMonthComboBox(ComboBox monthComboBox)
         {
             List<string> monthsList = new List<string>()
             {
@@ -113,12 +113,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             monthComboBox.ItemsSource = monthsList;
         }
 
-        public static void MonthNumberComboBoxInitialization(ComboBox monthComboBox)
-        {
-            UserDataSectionsInstance.User.UserMonthOfBirthNumber = monthComboBox.SelectedIndex + 1;
-        }
-
-        public static void YearComboBoxInitialization(ComboBox yearComboBox, int nowYear)
+        public static void InitializeYearComboBox(ComboBox yearComboBox, int nowYear)
         {
             List<int> yearsList = new List<int>();
 
@@ -133,70 +128,62 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             yearComboBox.ItemsSource = yearsList;
         }
 
-        public static void MailDomainComboBoxPrimaryInitialization(ComboBox mailDomainComboBox)
-        {
-            if (mailDomainComboBox.SelectedItem == null)
-            {
-                mailDomainComboBox.SelectedIndex = 0;
-            }
-        }
-
-        public static void PasswordComplexityProgressBarInitialization(TextBox userCredentialDataPasswordTextBox, PasswordBox userCredentialDataPasswordPasswordBox, ProgressBar userCredentialDataPasswordComplexityProgressBar)
+        public static void InitializePasswordComplexityProgressBar(TextBox passwordTextBox, PasswordBox passwordPasswordBox, ProgressBar passwordComplexityProgressBar)
         {
             if (FieldsViewManager.IsPasswordVisible)
             {
-                if (userCredentialDataPasswordTextBox.Text.Length > 8)
+                if (passwordTextBox.Text.Length > 8)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 1;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                    passwordComplexityProgressBar.Value = 1;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
                 }
 
-                if (userCredentialDataPasswordTextBox.Text.Length > 16)
+                if (passwordTextBox.Text.Length > 16)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 2;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
+                    passwordComplexityProgressBar.Value = 2;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
                 }
 
-                if (userCredentialDataPasswordTextBox.Text.Length > 24)
+                if (passwordTextBox.Text.Length > 24)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 3;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
+                    passwordComplexityProgressBar.Value = 3;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
                 }
 
-                if (userCredentialDataPasswordTextBox.Text == "")
+                if (passwordTextBox.Text == "")
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 0;
+                    passwordComplexityProgressBar.Value = 0;
                 }
             }
 
             else
             {
-                if (userCredentialDataPasswordPasswordBox.Password.Length > 8)
+                if (passwordPasswordBox.Password.Length > 8)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 1;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+                    passwordComplexityProgressBar.Value = 1;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
                 }
 
-                if (userCredentialDataPasswordPasswordBox.Password.Length > 16)
+                if (passwordPasswordBox.Password.Length > 16)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 2;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
+                    passwordComplexityProgressBar.Value = 2;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF0");
                 }
 
-                if (userCredentialDataPasswordPasswordBox.Password.Length > 24)
+                if (passwordPasswordBox.Password.Length > 24)
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 3;
-                    userCredentialDataPasswordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
+                    passwordComplexityProgressBar.Value = 3;
+                    passwordComplexityProgressBar.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#0A5");
                 }
 
-                if (userCredentialDataPasswordPasswordBox.Password == "")
+                if (passwordPasswordBox.Password == "")
                 {
-                    userCredentialDataPasswordComplexityProgressBar.Value = 0;
+                    passwordComplexityProgressBar.Value = 0;
                 }
             }
         }
 
-        public static void ErrorMessageBorderItemsInitialization(string errorAlertWindowText)
+        public static void InitializeErrorAlertWindow(string errorAlertWindowText)
         {
             ErrorAlertWindow errorAlertWindow = new ErrorAlertWindow(errorAlertWindowText);
 
@@ -205,7 +192,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             errorAlertWindow.ShowDialog();
         }
 
-        public static void QuestionMessageBorderItemsInitialization(string questionAlertWindowText)
+        public static void InitializeQuestionAlertWindow(string questionAlertWindowText)
         {
             /*QuestionAlertWindow questionAlertWindow = new QuestionAlertWindow(questionAlertWindowText);
 

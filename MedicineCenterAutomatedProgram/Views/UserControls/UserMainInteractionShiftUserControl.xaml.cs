@@ -82,7 +82,7 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 
         private void UserMainInteractionShiftUserControlDeleteShiftButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsDataOperations.UserDataRemoveShiftOperation(shifts.ShiftId);
+            SectionsOperationsManager.RemoveShiftOperation(shifts.ShiftId);
 
             FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
         }

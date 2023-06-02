@@ -39,12 +39,12 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             FrameManager.HomeFrame = UserMainInteractionHomePageFrame;
 
-            if(UserDataSectionsInstance.Patient != null)
+            if(SectionsInstance.Patient != null)
             {
                 FrameManager.HomeFrame.Navigate(new UserMainInteractionAppointmentsPage("Текущие"));
             }
 
-            if(UserDataSectionsInstance.Doctor != null)
+            if(SectionsInstance.Doctor != null)
             {
                 FrameManager.HomeFrame.Navigate(new UserMainInteractionShiftsPage("Текущие"));
             }
@@ -54,75 +54,75 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             SetStartupFramePage();
 
-            if (UserDataSectionsInstance.Patient != null)
+            if (SectionsInstance.Patient != null)
             {
-                if (!File.Exists(UserDataSectionsInstance.Patient.ProfilePhotoUri))
+                if (!File.Exists(SectionsInstance.Patient.ProfilePhotoUri))
                 {
-                    UserDataSectionsInstance.User.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+                    SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
                 }
             }
 
-            if (UserDataSectionsInstance.Doctor != null)
+            if (SectionsInstance.Doctor != null)
             {
-                if (!File.Exists(UserDataSectionsInstance.Doctor.ProfilePhotoUri))
+                if (!File.Exists(SectionsInstance.Doctor.ProfilePhotoUri))
                 {
-                    UserDataSectionsInstance.User.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+                    SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
                 }
             }
         }
 
         private void UserDataEditProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            if(UserDataSectionsInstance.Patient != null)
+            if(SectionsInstance.Patient != null)
             {
-                UserDataSectionsInstance.User = new UserDataSectionsBinding()
+                SectionsInstance.SectionsBinding = new SectionsBindingManager()
                 {
                     UserPositionIsDoctor = true,
-                    UserId = UserDataSectionsInstance.Patient.Id,
-                    UserProfilePhotoUri = UserDataSectionsInstance.Patient.ProfilePhotoUri,
-                    UserName = UserDataSectionsInstance.Patient.Name,
-                    UserSurname = UserDataSectionsInstance.Patient.Surname,
-                    UserPatronymic = UserDataSectionsInstance.Patient.Patronymic,
-                    UserDateOfBirth = UserDataSectionsInstance.Patient.DateOfBirth,
-                    UserGender = UserDataSectionsInstance.Patient.Gender,
-                    UserAddressId = UserDataSectionsInstance.Patient.AddressId,
-                    UserSchoolId = UserDataSectionsInstance.Patient.SchoolId,
-                    UserUniversityId = UserDataSectionsInstance.Patient.UniversityId,
-                    UserUniversityStartEducationYear = Convert.ToInt32(UserDataSectionsInstance.Patient.UniversityStartEducationYear),
-                    UserUniversityEndEducationYear = Convert.ToInt32(UserDataSectionsInstance.Patient.UniversityEndEducationYear),
-                    UserLogin = UserDataSectionsInstance.Patient.Login,
-                    UserPassword = UserDataSectionsInstance.Patient.Password
+                    UserId = SectionsInstance.Patient.Id,
+                    UserProfilePhotoUri = SectionsInstance.Patient.ProfilePhotoUri,
+                    UserName = SectionsInstance.Patient.Name,
+                    UserSurname = SectionsInstance.Patient.Surname,
+                    UserPatronymic = SectionsInstance.Patient.Patronymic,
+                    UserDateOfBirth = SectionsInstance.Patient.DateOfBirth,
+                    UserGender = SectionsInstance.Patient.Gender,
+                    UserAddressId = SectionsInstance.Patient.AddressId,
+                    UserSchoolId = SectionsInstance.Patient.SchoolId,
+                    UserUniversityId = SectionsInstance.Patient.UniversityId,
+                    UserUniversityStartEducationYear = Convert.ToInt32(SectionsInstance.Patient.UniversityStartEducationYear),
+                    UserUniversityEndEducationYear = Convert.ToInt32(SectionsInstance.Patient.UniversityEndEducationYear),
+                    UserLogin = SectionsInstance.Patient.Login,
+                    UserPassword = SectionsInstance.Patient.Password
                 };
             }
 
-            if (UserDataSectionsInstance.Doctor != null)
+            if (SectionsInstance.Doctor != null)
             {
-                UserDataSectionsInstance.User = new UserDataSectionsBinding()
+                SectionsInstance.SectionsBinding = new SectionsBindingManager()
                 {
                     UserPositionIsDoctor = true,
-                    UserId = UserDataSectionsInstance.Doctor.Id,
-                    UserProfilePhotoUri = UserDataSectionsInstance.Doctor.ProfilePhotoUri,
-                    UserName = UserDataSectionsInstance.Doctor.Name,
-                    UserSurname = UserDataSectionsInstance.Doctor.Surname,
-                    UserPatronymic = UserDataSectionsInstance.Doctor.Patronymic,
-                    UserDateOfBirth = UserDataSectionsInstance.Doctor.DateOfBirth,
-                    UserGender = UserDataSectionsInstance.Doctor.Gender,
-                    UserAddressId = UserDataSectionsInstance.Doctor.AddressId,
-                    UserSchoolId = UserDataSectionsInstance.Doctor.SchoolId,
-                    UserUniversityId = UserDataSectionsInstance.Doctor.UniversityId,
-                    UserUniversityStartEducationYear = Convert.ToInt32(UserDataSectionsInstance.Doctor.UniversityStartEducationYear),
-                    UserUniversityEndEducationYear = Convert.ToInt32(UserDataSectionsInstance.Doctor.UniversityEndEducationYear),
-                    UserLogin = UserDataSectionsInstance.Doctor.Login,
-                    UserPassword = UserDataSectionsInstance.Doctor.Password
+                    UserId = SectionsInstance.Doctor.Id,
+                    UserProfilePhotoUri = SectionsInstance.Doctor.ProfilePhotoUri,
+                    UserName = SectionsInstance.Doctor.Name,
+                    UserSurname = SectionsInstance.Doctor.Surname,
+                    UserPatronymic = SectionsInstance.Doctor.Patronymic,
+                    UserDateOfBirth = SectionsInstance.Doctor.DateOfBirth,
+                    UserGender = SectionsInstance.Doctor.Gender,
+                    UserAddressId = SectionsInstance.Doctor.AddressId,
+                    UserSchoolId = SectionsInstance.Doctor.SchoolId,
+                    UserUniversityId = SectionsInstance.Doctor.UniversityId,
+                    UserUniversityStartEducationYear = Convert.ToInt32(SectionsInstance.Doctor.UniversityStartEducationYear),
+                    UserUniversityEndEducationYear = Convert.ToInt32(SectionsInstance.Doctor.UniversityEndEducationYear),
+                    UserLogin = SectionsInstance.Doctor.Login,
+                    UserPassword = SectionsInstance.Doctor.Password
                 };
             }
 
-            FrameManager.MainWindowFrame.Navigate(new UserMainInteractionProfilePage(UserDataSectionsInstance.User));
+            FrameManager.MainWindowFrame.Navigate(new UserMainInteractionProfilePage(SectionsInstance.SectionsBinding));
         }
 
         private void UserDataOutProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            UserDataSectionsRemember.RememberUserDataConfigRemove();
+            SectionsRememberConfigManager.RemoveRememberConfig();
 
             FrameManager.MainWindowFrame.Navigate(new WelcomePage());
         }

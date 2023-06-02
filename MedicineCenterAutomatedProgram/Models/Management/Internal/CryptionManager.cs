@@ -3,13 +3,13 @@ using System.Security.Cryptography;
 using System.Text;
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal
 {
-    public class UserDataCryptionManager
+    public class CryptionManager
     {
-        public static string UserDataEncrypt(string userDataDecryptedText)
+        public static string EncryptData(string decryptedData)
         {
             string hashKey = "M*d$C!nE";
 
-            byte[] encodedData = Encoding.UTF8.GetBytes(userDataDecryptedText);
+            byte[] encodedData = Encoding.UTF8.GetBytes(decryptedData);
 
             using (MD5CryptoServiceProvider mD5CryptoServiceProvider = new MD5CryptoServiceProvider())
             {
@@ -26,11 +26,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal
             }
         }
 
-        public static string UserDataDecrypt(string userDataEncryptedText)
+        public static string DecryptData(string encryptedData)
         {
             string hashKey = "M*d$C!nE";
 
-            byte[] encodedData = Convert.FromBase64String(userDataEncryptedText);
+            byte[] encodedData = Convert.FromBase64String(encryptedData);
 
             using (MD5CryptoServiceProvider mD5CryptoServiceProvider = new MD5CryptoServiceProvider())
             {
