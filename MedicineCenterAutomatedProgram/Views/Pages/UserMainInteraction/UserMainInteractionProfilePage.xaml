@@ -24,7 +24,7 @@
                         <Button Name="SelectUserDataProfilePhotoImageButton" Click="SelectUserDataProfilePhotoImageButton_Click" Width="125" Height="35" Margin="10" Style="{DynamicResource UserDataIntroductionButtonStyle}">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=Image}"/>
-                                
+
                                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Выбрать" Style="{DynamicResource DataIntroductionButtonContentTextBlock}"/>
                             </StackPanel>
                         </Button>
@@ -112,7 +112,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
-                            
+
                             <TextBlock Name="UserDataCityTextBoxLabelHintAssist" Text="Город" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 
@@ -149,7 +149,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
-                            
+
                             <TextBlock Text="Улица" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 
@@ -186,7 +186,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock Margin="5" Style="{DynamicResource UserDataObligatoryFieldSymbolTextBlock}"/>
-                            
+
                             <TextBlock Text="Дом" Style="{DynamicResource UserDataFieldLabelTextBlockStyle}"/>
                         </StackPanel>
 
@@ -528,9 +528,11 @@
         <Button Grid.Row="1" Name="UserProfileDataSaveButton" Click="UserProfileDataSaveButton_Click" Width="125" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource UserDataIntroductionButtonStyle}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="{materialDesign:PackIcon Kind=ContentSave}"/>
-                
+
                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Сохранить" Style="{DynamicResource DataIntroductionButtonContentTextBlock}"/>
             </StackPanel>
         </Button>
+
+        <Button Grid.Row="1" Name="UserProfileDataDeleteProfileButton" Click="UserProfileDataDeleteProfileButton_Click" Width="45" Height="45" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Content="{materialDesign:PackIcon Kind=Delete}" Style="{DynamicResource UserMainInteractionRemoveVariableButtonStyle}"/>
     </Grid>
 </Page>

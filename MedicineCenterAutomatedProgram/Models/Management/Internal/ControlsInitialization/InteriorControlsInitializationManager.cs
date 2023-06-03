@@ -28,6 +28,8 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
+            openFileDialog.Filter = "Files|*.jpg;*.jpeg;*.png";
+
             openFileDialog.ShowDialog();
 
             if (openFileDialog.FileName != "")
@@ -192,13 +194,25 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             errorAlertWindow.ShowDialog();
         }
 
-        public static void InitializeQuestionAlertWindow(string questionAlertWindowText)
+        public static bool InitializeQuestionAlertWindow()
         {
-            /*QuestionAlertWindow questionAlertWindow = new QuestionAlertWindow(questionAlertWindowText);
+            QuestionAlertWindow questionAlertWindow = new QuestionAlertWindow();
 
             Application.Current.MainWindow.Opacity = 0.6;
 
-            questionAlertWindow.ShowDialog();*/
+            questionAlertWindow.ShowDialog();
+
+            if (questionAlertWindow.questionAlertWindowAnswerValue == "Да")
+            {
+                return true;
+            }
+
+            if (questionAlertWindow.questionAlertWindowAnswerValue == "Нет")
+            {
+                return false;
+            }
+
+            return false;
         }
     }
 }

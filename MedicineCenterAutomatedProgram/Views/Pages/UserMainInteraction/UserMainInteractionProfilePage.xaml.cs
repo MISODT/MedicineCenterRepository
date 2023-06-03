@@ -325,5 +325,30 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                 FrameManager.MainWindowFrame.Navigate(new UserMainInteractionHomePage(SectionsInstance.Patient, SectionsInstance.Doctor));
             }
         }
+
+        private void UserProfileDataDeleteProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (InteriorControlsInitializationManager.InitializeQuestionAlertWindow())
+            {
+                if(SectionsInstance.Patient != null)
+                {
+                    SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Patient.Id);
+                }
+
+                if (SectionsInstance.Doctor != null)
+                {
+                    SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Doctor.Id);
+                }
+
+
+                if (SectionsRememberConfigManager.IsRememberConfigExists())
+                {
+                    SectionsRememberConfigManager.RemoveRememberConfig();
+                }
+
+
+                FrameManager.MainWindowFrame.Navigate(new WelcomePage());
+            }
+        }
     }
 }

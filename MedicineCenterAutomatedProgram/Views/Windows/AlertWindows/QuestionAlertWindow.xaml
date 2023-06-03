@@ -1,0 +1,35 @@
+﻿<Window x:Class="MedicineCenterAutomatedProgram.Views.Windows.AlertWindows.QuestionAlertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="QuestionAlertWindow" 
+        Height="130" Width="300"
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        ShowInTaskbar="True"
+        Topmost="False"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="None"
+        Closed="QuestionAlertWindow_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#A00"/>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="Вы уверены, что хотите подтвердить?" Style="{DynamicResource AlertWindowTextBlockStyle}"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <Button Name="QuestionAlertWindowYesButton" Click="QuestionAlertWindowYesButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="30" Margin="1" Content="Да" Style="{DynamicResource AlertWindowButtonStyle}"/>
+
+                <Button Name="QuestionAlertWindowNoButton" Click="QuestionAlertWindowNoButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="30" Margin="1" Content="Нет" Style="{DynamicResource AlertWindowButtonStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

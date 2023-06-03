@@ -12,7 +12,8 @@
         Topmost="False"
         WindowStartupLocation="CenterScreen"
         WindowState="Normal"
-        WindowStyle="None">
+        WindowStyle="None"
+        Closed="ErrorAlertWindow_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

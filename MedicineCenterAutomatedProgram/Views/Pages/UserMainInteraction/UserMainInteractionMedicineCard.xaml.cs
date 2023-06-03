@@ -40,7 +40,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
                 if(userMainInteractionMedicineCardParameterValue == "Пациентов")
                 {
-                    userMainInteractionMedicineCardParameter = $"AND MedicineCards.DoctorId = {SectionsInstance.Doctor.Id} AND MedicineCardRecordShiftId = ShiftId AND Shifts.DoctorId = {SectionsInstance.Doctor.Id}";
+                    userMainInteractionMedicineCardParameter = $"AND MedicineCardRecordShiftId = ShiftId AND Shifts.DoctorId = {SectionsInstance.Doctor.Id}";
                 }
             }
 
@@ -49,8 +49,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                 userMainInteractionMedicineCardParameter = $"AND MedicineCards.PatientId = {SectionsInstance.Patient.Id}";
             }
 
-
-            foreach (var medicineCardRecord in DataResponseManager.MedicineCardRecordsJsonDataDeserialize($"SELECT DISTINCT(MedicineCardRecordId), MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId FROM MedicineCardRecords, MedicineCards, Patients, Doctors, Shifts WHERE MedicineCardRecordMedicineCardId = MedicineCardId {userMainInteractionMedicineCardParameter}"))
+            foreach (var medicineCardRecord in DataResponseManager.MedicineCardRecordsJsonDataDeserialize($"SELECT DISTINCT(MedicineCardRecordId), MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId FROM MedicineCardRecords, MedicineCards, Patients, Doctors, Shifts, Appointments WHERE MedicineCardRecordMedicineCardId = MedicineCardId {userMainInteractionMedicineCardParameter} AND AppointmentShiftId = ShiftId AND AppointmentStatus = 'Утверждён'"))
             {
                 foreach(var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, Name, Surname, Patronymic FROM Patients, MedicineCards, MedicineCardRecords WHERE PatientId = Id AND MedicineCardRecordMedicineCardId = MedicineCardId AND MedicineCardRecordId = {medicineCardRecord.MedicineCardRecordId}"))
                 {

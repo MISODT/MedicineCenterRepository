@@ -151,6 +151,37 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
             }
         }
 
+        public static void NewMedicineCardOperation()
+        {
+            string medicineCardId = "";
+
+            if(SectionsInstance.Patient != null)
+            {
+                foreach(var medicineCard in DataResponseManager.MedicineCardsJsonDataDeserialize($"SELECT MedicineCardId FROM MedicineCards WHERE PatientId = {SectionsInstance.Patient.Id}"))
+                {
+                    medicineCardId = medicineCard.MedicineCardId;
+                }
+
+                if(medicineCardId == "")
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO MedicineCards(PatientId, DoctorId) VALUES ({SectionsInstance.Patient.Id}, NULL)");
+                }
+            }
+
+            if(SectionsInstance.Doctor != null)
+            {
+                foreach (var medicineCard in DataResponseManager.MedicineCardsJsonDataDeserialize($"SELECT MedicineCardId FROM MedicineCards WHERE DoctorId = {SectionsInstance.Doctor.Id}"))
+                {
+                    medicineCardId = medicineCard.MedicineCardId;
+                }
+
+                if (medicineCardId == "")
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"INSERT INTO MedicineCards(PatientId, DoctorId) VALUES (NULL, {SectionsInstance.Doctor.Id})");
+                }
+            }
+        }
+
         public static void NewMedicineCardRecordOperation(string medicineCardRecordPatientStatement, string medicineCardRecordDiseaseId, string medicineCardRecordShiftId, string medicineCardRecordMedicineCardId)
         {
             WebResponseManager.ResponseFromRequestQuery($"INSERT INTO MedicineCardRecords (MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId) VALUES ('{medicineCardRecordPatientStatement}', {medicineCardRecordDiseaseId}, {medicineCardRecordShiftId}, {medicineCardRecordMedicineCardId});");

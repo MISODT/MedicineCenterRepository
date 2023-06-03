@@ -1,4 +1,5 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction.UserMainInteractionAppointment;
@@ -81,6 +82,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
                 }
             }
+
+            SectionsOperationsManager.NewMedicineCardOperation();
         }
 
         private void UserDataEditProfileButton_Click(object sender, RoutedEventArgs e)
