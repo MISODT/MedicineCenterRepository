@@ -20,18 +20,30 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             {
                 DataContext = patient;
 
+
                 MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Hidden;
 
+
+
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Hidden;
+
+
+                MainInteractionHomeSectionPatientMedicineCardsButton.Visibility = Visibility.Collapsed;
             }
 
             if(doctor != null)
             {
                 DataContext = doctor;
 
+
                 MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Visible;
 
+
+
                 MainInteractionHomeSectionsDoctorGrid.Visibility = Visibility.Visible;
+
+
+                MainInteractionHomeSectionPatientMedicineCardsButton.Visibility = Visibility.Visible;
             }
         }
 

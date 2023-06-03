@@ -33,31 +33,24 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             if(SectionsInstance.Patient == null)
             {
-                userMainInteractionPatientId = "NULL";
-
-                userMainInteractionDoctorId = SectionsInstance.Doctor.Id;
-
-
-                if (userMainInteractionMedicineCardParameterValue == "Пациентов")
+                if (userMainInteractionMedicineCardParameterValue == "Моя")
                 {
-                    userMainInteractionMedicineCardParameter = $"AND Shifts.DoctorId = {SectionsInstance.Doctor.Id}";
+                    userMainInteractionMedicineCardParameter = $"AND MedicineCards.DoctorId = {SectionsInstance.Doctor.Id}";
+                }
+
+                if(userMainInteractionMedicineCardParameterValue == "Пациентов")
+                {
+                    userMainInteractionMedicineCardParameter = $"AND MedicineCards.DoctorId = {SectionsInstance.Doctor.Id} AND MedicineCardRecordShiftId = ShiftId AND Shifts.DoctorId = {SectionsInstance.Doctor.Id}";
                 }
             }
 
             if(SectionsInstance.Doctor == null)
             {
-                userMainInteractionDoctorId = "NULL";
-
-                userMainInteractionPatientId = SectionsInstance.Patient.Id;
+                userMainInteractionMedicineCardParameter = $"AND MedicineCards.PatientId = {SectionsInstance.Patient.Id}";
             }
 
 
-            
-
-            MessageBox.Show(userMainInteractionMedicineCardParameter);
-
-
-            foreach (var medicineCardRecord in DataResponseManager.MedicineCardRecordsJsonDataDeserialize($"SELECT DISTINCT(MedicineCardRecordId), MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId FROM MedicineCardRecords, MedicineCards, Patients, Doctors, Shifts WHERE MedicineCardRecordMedicineCardId = MedicineCardId AND MedicineCards.PatientId = {userMainInteractionPatientId} OR MedicineCards.DoctorId = {userMainInteractionDoctorId} {userMainInteractionMedicineCardParameter}"))
+            foreach (var medicineCardRecord in DataResponseManager.MedicineCardRecordsJsonDataDeserialize($"SELECT DISTINCT(MedicineCardRecordId), MedicineCardRecordPatientStatement, MedicineCardRecordDiseaseId, MedicineCardRecordShiftId, MedicineCardRecordMedicineCardId FROM MedicineCardRecords, MedicineCards, Patients, Doctors, Shifts WHERE MedicineCardRecordMedicineCardId = MedicineCardId {userMainInteractionMedicineCardParameter}"))
             {
                 foreach(var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id, Name, Surname, Patronymic FROM Patients, MedicineCards, MedicineCardRecords WHERE PatientId = Id AND MedicineCardRecordMedicineCardId = MedicineCardId AND MedicineCardRecordId = {medicineCardRecord.MedicineCardRecordId}"))
                 {
@@ -69,7 +62,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                             {
                                 foreach (var disease in DataResponseManager.DiseasesJsonDataDeserialize($"SELECT DiseaseId, DiseaseTitle FROM Diseases, MedicineCardRecords WHERE MedicineCardRecordDiseaseId = DiseaseId AND MedicineCardRecordId = {medicineCardRecord.MedicineCardRecordId}"))
                                 {
-                                    userMainInteractionMedicineCardRecordUserControlCollection.Add(new UserMainInteractionMedicineCardRecordUserControl(medicineCardRecord, shift, patient, null, healingDirection, disease));
+                                    userMainInteractionMedicineCardRecordUserControlCollection.Add(new UserMainInteractionMedicineCardRecordUserControl(userMainInteractionMedicineCardParameterValue, medicineCardRecord, shift, patient, null, healingDirection, disease));
                                 }
                             }
                         }
@@ -86,7 +79,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                             {
                                 foreach (var disease in DataResponseManager.DiseasesJsonDataDeserialize($"SELECT DiseaseId, DiseaseTitle FROM Diseases, MedicineCardRecords WHERE MedicineCardRecordDiseaseId = DiseaseId AND MedicineCardRecordId = {medicineCardRecord.MedicineCardRecordId}"))
                                 {
-                                    userMainInteractionMedicineCardRecordUserControlCollection.Add(new UserMainInteractionMedicineCardRecordUserControl(medicineCardRecord, shift, null, doctor, healingDirection, disease));
+                                    userMainInteractionMedicineCardRecordUserControlCollection.Add(new UserMainInteractionMedicineCardRecordUserControl(userMainInteractionMedicineCardParameterValue, medicineCardRecord, shift, null, doctor, healingDirection, disease));
                                 }
                             }
                         }

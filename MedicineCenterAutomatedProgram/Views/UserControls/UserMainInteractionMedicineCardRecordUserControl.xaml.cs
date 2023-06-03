@@ -14,14 +14,14 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
     {
         private MedicineCardRecords medicineCardRecords;
 
-        public UserMainInteractionMedicineCardRecordUserControl(MedicineCardRecords medicineCardRecord, Shifts shift, Patients patient, Doctors doctor, HealingDirections healingDirection, Diseases disease)
+        public UserMainInteractionMedicineCardRecordUserControl(string medicineCardPrameter, MedicineCardRecords medicineCardRecord, Shifts shift, Patients patient, Doctors doctor, HealingDirections healingDirection, Diseases disease)
         {
             InitializeComponent();
 
             medicineCardRecords = medicineCardRecord;
 
 
-            UserMainInteractionMedicineCardRecordUserControlIdTextBlock.Text = $"Запись №{medicineCardRecord.MedicineCardRecordId}";
+            UserMainInteractionMedicineCardRecordUserControlIdTextBlock.Text = $"Запись № {medicineCardRecord.MedicineCardRecordId}";
 
 
             UserMainInteractionMedicineCardRecordUserControlShiftDateTextBlock.Text = DateOnly.Parse(shift.ShiftDate).ToLongDateString();
@@ -44,40 +44,53 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
 
 
             UserMainInteractionMedicineCardRecordUserControlShiftHealingDirectionTextBlock.Text = $"Лечением занимался Врач {healingDirection.HealingDirectionTitle}";
-        }
 
-        private void UserMainInteractionMedicineCardRecordUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if(SectionsInstance.Doctor == null)
+
+            if(medicineCardPrameter == "Моя")
             {
                 UserMainInteractionMedicineCardEditRecordUserControlDiseasesButton.Visibility = Visibility.Collapsed;
 
                 UserMainInteractionMedicineCardDeleteRecordUserControlDiseasesButton.Visibility = Visibility.Collapsed;
 
+
                 UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.Visibility = Visibility.Collapsed;
 
                 UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Visibility = Visibility.Visible;
 
+                if(medicineCardRecords.MedicineCardRecordDiseaseId != null)
+                {
+                    UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Text = $"Заключение врача о заболевании: {OuteriorControlsInitializationManager.DiseasesComboBoxSelectedValueInitialization(medicineCardRecords.MedicineCardRecordId, null)}";
+                }
 
-                UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Text = $"Заключение врача о заболевании: {OuteriorControlsInitializationManager.DiseasesComboBoxSelectedValueInitialization(medicineCardRecords.MedicineCardRecordDiseaseId, null)}";
+                else
+                {
+                    UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Text = $"Заключение врача о заболевании: Не выбрано";
+                }
             }
 
             else
             {
-                UserMainInteractionMedicineCardEditRecordUserControlDiseasesButton.Visibility = Visibility.Visible;
+                if(SectionsInstance.Patient == null)
+                {
+                    UserMainInteractionMedicineCardEditRecordUserControlDiseasesButton.Visibility = Visibility.Visible;
 
-                UserMainInteractionMedicineCardDeleteRecordUserControlDiseasesButton.Visibility = Visibility.Visible;
-
-                UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.Visibility = Visibility.Visible;
-
-                UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Visibility = Visibility.Collapsed;
+                    UserMainInteractionMedicineCardDeleteRecordUserControlDiseasesButton.Visibility = Visibility.Visible;
 
 
-                UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.ItemsSource = OuteriorControlsInitializationManager.DiseasesComboBoxInitialization();
+                    UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.Visibility = Visibility.Visible;
 
-                UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.SelectedValue = OuteriorControlsInitializationManager.DiseasesComboBoxSelectedValueInitialization(medicineCardRecords.MedicineCardRecordId, null);
+                    UserMainInteractionMedicineCardRecordUserControlDiseaseTextBlock.Visibility = Visibility.Collapsed;
+
+
+                    UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.ItemsSource = OuteriorControlsInitializationManager.DiseasesComboBoxInitialization();
+
+                    UserMainInteractionMedicineCardRecordUserControlDiseasesComboBox.SelectedValue = OuteriorControlsInitializationManager.DiseasesComboBoxSelectedValueInitialization(medicineCardRecords.MedicineCardRecordId, null);
+                }
             }
+        }
 
+        private void UserMainInteractionMedicineCardRecordUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
             UserMainInteractionMedicineCardRecordUserControlPatientStatementTextBox.Visibility = Visibility.Hidden;
 
             UserMainInteractionMedicineCardAgreeRecordUserControlDiseasesButton.Visibility = Visibility.Collapsed;
