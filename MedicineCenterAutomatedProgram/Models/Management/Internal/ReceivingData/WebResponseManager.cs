@@ -9,7 +9,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
         {
             string jsonValueString = "";
 
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://localhost/api.php/?dataQuery={requestQueryString}");
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://88.87.92.66/api.php/?dataQuery={requestQueryString}");
 
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
@@ -23,7 +23,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingDat
 
         public static void ResponseFromRequestQuery(string requestQueryString)
         {
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://localhost/api.php/?dataQuery={requestQueryString}");
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create($"http://88.87.92.66/api.php/?dataQuery={requestQueryString}");
 
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
         }
