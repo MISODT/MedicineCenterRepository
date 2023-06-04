@@ -4,6 +4,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -72,6 +73,14 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                         {
                             if (disease.DiseaseTitle.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || disease.DiseaseTitle.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()) || symptom.SymptomValue.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || symptom.SymptomValue.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()))
                             {
+
+                                diseasesList = diseasesList.DistinctBy(x => x.DiseaseId).ToList();
+
+                                healingDirectionsList = healingDirectionsList.DistinctBy(x => x.HealingDirectionId).ToList();
+
+                                symptomsList = symptomsList.DistinctBy(x => x.SymptomId).ToList();
+
+
                                 userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Add(new UserMainInteractionDiseaseUserControl(disease, symptom, healingDirection));
                             }
                         }

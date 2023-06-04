@@ -232,7 +232,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         return false;
                     }
 
-                    if(passwordTextBox.Text.Contains("123") || passwordTextBox.Text.Contains("qwerty"))
+                    else if(passwordTextBox.Text.Contains("123") || passwordTextBox.Text.Contains("qwerty"))
                     {
                         passwordMistakeTextBlock.Visibility = Visibility.Visible;
 
@@ -290,7 +290,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         return false;
                     }
 
-                    if (passwordPasswordBox.Password.Contains("123") || passwordPasswordBox.Password.Contains("qwerty"))
+                    else if (passwordPasswordBox.Password.Contains("123") || passwordPasswordBox.Password.Contains("qwerty"))
                     {
                         passwordMistakeTextBlock.Visibility = Visibility.Visible;
 
@@ -329,7 +329,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         return false;
                     }
 
-                    if (newPasswordPasswordBox.Password.Contains("123") || newPasswordPasswordBox.Password.Contains("qwerty"))
+                    else if (newPasswordPasswordBox.Password.Contains("123") || newPasswordPasswordBox.Password.Contains("qwerty"))
                     {
                         MessageBox.Show(newPasswordPasswordBox.Password.Distinct().Count().ToString());
 
