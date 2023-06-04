@@ -1,9 +1,6 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
-using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
-using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
 {
