@@ -330,24 +330,32 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             if (InteriorControlsInitializationManager.InitializeQuestionAlertWindow())
             {
-                if(SectionsInstance.Patient != null)
+                if (InternalMistakesManager.CheckUserReferencesMistakes())
                 {
-                    SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Patient.Id);
+                    if (SectionsInstance.Patient != null)
+                    {
+                        SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Patient.Id);
+                    }
+
+                    if (SectionsInstance.Doctor != null)
+                    {
+                        SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Doctor.Id);
+                    }
+
+
+                    if (SectionsRememberConfigManager.IsRememberConfigExists())
+                    {
+                        SectionsRememberConfigManager.RemoveRememberConfig();
+                    }
+
+
+                    FrameManager.MainWindowFrame.Navigate(new WelcomePage());
                 }
 
-                if (SectionsInstance.Doctor != null)
+                else
                 {
-                    SectionsOperationsManager.RemoveUserOperation(SectionsInstance.Doctor.Id);
+                    InteriorControlsInitializationManager.InitializeErrorAlertWindow("Завершите записи и/или смены");
                 }
-
-
-                if (SectionsRememberConfigManager.IsRememberConfigExists())
-                {
-                    SectionsRememberConfigManager.RemoveRememberConfig();
-                }
-
-
-                FrameManager.MainWindowFrame.Navigate(new WelcomePage());
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager
 {
@@ -52,6 +54,42 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
             }
 
             return true;
+        }
+
+        public static bool CheckUserReferencesMistakes()
+        {
+            string userId = "";
+
+            if (SectionsInstance.Patient != null)
+            {
+                foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Id FROM Patients, Appointments WHERE Id = PatientId AND Id = {SectionsInstance.Patient.Id}"))
+                {
+                    userId = patient.Id;
+                }
+            }
+
+            if(SectionsInstance.Doctor != null)
+            {
+                foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id FROM Doctors, Appointments WHERE Id = DoctorId AND Id = {SectionsInstance.Doctor.Id}"))
+                {
+                    userId = doctor.Id;
+                }
+
+                foreach (var doctor in DataResponseManager.DoctorsJsonDataDeserialize($"SELECT Id FROM Doctors, Shifts WHERE Id = DoctorId AND Id = {SectionsInstance.Doctor.Id}"))
+                {
+                    userId = doctor.Id;
+                }
+            }
+
+            if(userId == "")
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
     }
 }

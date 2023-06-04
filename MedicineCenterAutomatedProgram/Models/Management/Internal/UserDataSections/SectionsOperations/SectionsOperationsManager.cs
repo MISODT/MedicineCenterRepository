@@ -1,6 +1,8 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
 using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
@@ -142,12 +144,28 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
         {
             if(SectionsInstance.Patient != null)
             {
-                WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Patients WHERE Id = {userId}");
+                foreach(var medicineCard in DataResponseManager.MedicineCardsJsonDataDeserialize($"SELECT MedicineCardId FROM MedicineCards WHERE PatientId = {userId}"))
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM MedicineCardRecords WHERE MedicineCardRecordMedicineCardId = {medicineCard.MedicineCardId}");
+
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM MedicineCards WHERE PatientId = {userId}");
+
+
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Patients WHERE Id = {userId}");
+                }
             }
             
             if(SectionsInstance.Doctor != null)
             {
-                WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Doctors WHERE Id = {userId}");
+                foreach (var medicineCard in DataResponseManager.MedicineCardsJsonDataDeserialize($"SELECT MedicineCardId FROM MedicineCards WHERE DoctorId = {userId}"))
+                {
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM MedicineCardRecords WHERE MedicineCardRecordMedicineCardId = {medicineCard.MedicineCardId}");
+
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM MedicineCards WHERE DoctorId = {userId}");
+
+
+                    WebResponseManager.ResponseFromRequestQuery($"DELETE FROM Doctors WHERE Id = {userId}");
+                }
             }
         }
 
