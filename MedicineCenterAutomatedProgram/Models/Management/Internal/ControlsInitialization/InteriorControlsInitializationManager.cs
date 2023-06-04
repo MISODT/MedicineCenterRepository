@@ -109,7 +109,11 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
                 "Май",
                 "Июнь",
                 "Июль",
-                "Август"
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь"
             };
 
             monthComboBox.ItemsSource = monthsList;

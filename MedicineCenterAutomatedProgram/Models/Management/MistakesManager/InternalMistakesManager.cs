@@ -2,6 +2,7 @@
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager
 {
@@ -9,6 +10,8 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
     {
         public static bool CheckDataMistakes(string login, string loginMailDomain, string password, string errorAlertWindowText)
         {
+            MessageBox.Show($"SELECT Login, Password FROM Patients WHERE Login = '{login}{loginMailDomain}' AND Password = '{CryptionManager.EncryptData(password)}'");
+
             foreach (var patient in DataResponseManager.PatientsJsonDataDeserialize($"SELECT Login, Password FROM Patients WHERE Login = '{login}{loginMailDomain}' AND Password = '{CryptionManager.EncryptData(password)}'"))
             {
                 if (patient.Login == $"{login}{loginMailDomain}" && patient.Password == $"{CryptionManager.EncryptData(password)}")

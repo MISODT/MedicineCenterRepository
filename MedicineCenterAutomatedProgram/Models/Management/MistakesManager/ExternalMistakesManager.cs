@@ -3,6 +3,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -231,6 +232,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         return false;
                     }
 
+                    if(passwordTextBox.Text.Contains("123") || passwordTextBox.Text.Contains("qwerty"))
+                    {
+                        passwordMistakeTextBlock.Visibility = Visibility.Visible;
+
+                        passwordMistakeTextBlock.Text = "Пароль должен быть уникальным";
+
+                        passwordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                        return false;
+                    }
+
                     else
                     {
                         passwordMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -278,6 +290,17 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         return false;
                     }
 
+                    if (passwordPasswordBox.Password.Contains("123") || passwordPasswordBox.Password.Contains("qwerty"))
+                    {
+                        passwordMistakeTextBlock.Visibility = Visibility.Visible;
+
+                        passwordMistakeTextBlock.Text = "Пароль должен быть уникальным";
+
+                        passwordTextBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                        return false;
+                    }
+
                     else
                     {
                         passwordMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -300,6 +323,19 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
                         passwordMistakeTextBlock.Visibility = Visibility.Visible;
 
                         passwordMistakeTextBlock.Text = "Пароль должен быть не короче 8 символов";
+
+                        newPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
+
+                        return false;
+                    }
+
+                    if (newPasswordPasswordBox.Password.Contains("123") || newPasswordPasswordBox.Password.Contains("qwerty"))
+                    {
+                        MessageBox.Show(newPasswordPasswordBox.Password.Distinct().Count().ToString());
+
+                        passwordMistakeTextBlock.Visibility = Visibility.Visible;
+
+                        passwordMistakeTextBlock.Text = "Пароль должен быть уникальным";
 
                         newPasswordPasswordBox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#A00");
 
