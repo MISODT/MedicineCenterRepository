@@ -1,7 +1,13 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+﻿using MedicineCenterAutomatedProgram.Models.Management;
+using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
+using System.Data;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -15,18 +21,57 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             InitializeComponent();
         }
 
+        /*public async void InitializeProfilePhotoImage(Image profilePhotoImage)
+        {
+            string mySqlQuery = "SELECT ProfilePhotoUri FROM Doctors";
+
+            MySqlCommand mySqlCommand = new MySqlCommand(mySqlQuery, WebResponseManager.mySqlConnection);
+
+            if(WebResponseManager.mySqlConnection.State == ConnectionState.Closed)
+            {
+                await WebResponseManager.mySqlConnection.OpenAsync();
+            }
+
+            MySqlDataReader mySqlDataReader = (MySqlDataReader)await mySqlCommand.ExecuteReaderAsync();
+
+            while (await mySqlDataReader.ReadAsync())
+            {
+                await Task.Run(() =>
+                {
+                    Dispatcher.Invoke(() => ByteImageValuesManager.GetImageFromBytes(mySqlDataReader[0].ToString(), profilePhotoImage));
+                });
+            }
+        }*/
+
         private void UserRegistrationProfilePhotoPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Uri userImageUri = new Uri(SectionsInstance.SectionsBinding.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
+            if (SectionsInstance.SectionsBinding.UserProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
+            {
+                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri, UserDataProfilePhotoImage);
+            }
 
-            UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
+            else
+            {
+                Uri userImageUri = new Uri(SectionsInstance.SectionsBinding.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
+
+                UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
+            }
         }
 
         private void NavigateBeforeButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPositionPage(SectionsInstance.SectionsBinding));
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
-            SectionsInstance.SectionsBinding.UserProfilePhotoUri = InteriorControlsInitializationManager.InitializeProfilePhotoImage(UserDataProfilePhotoImage);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Files|*.jpg;*.jpeg;*.png";
+
+            openFileDialog.ShowDialog();
+
+            if (InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog) != null)
+            {
+                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)), UserDataProfilePhotoImage);
+            }
         }
 
         private void NavigateNextButton_Click(object sender, RoutedEventArgs e) => FrameManager.MainWindowFrame.Navigate(new UserRegistrationPersonalPage(SectionsInstance.SectionsBinding));

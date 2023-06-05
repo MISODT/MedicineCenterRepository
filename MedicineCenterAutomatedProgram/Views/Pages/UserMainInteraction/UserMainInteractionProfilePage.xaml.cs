@@ -1,4 +1,5 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+﻿using MedicineCenterAutomatedProgram.Models.Management;
+using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
@@ -6,6 +7,7 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperatio
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
+using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -103,7 +105,16 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void SelectUserDataProfilePhotoImageButton_Click(object sender, RoutedEventArgs e)
         {
-            SectionsInstance.SectionsBinding.UserProfilePhotoUri = InteriorControlsInitializationManager.InitializeProfilePhotoImage(UserDataProfilePhotoImage);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Files|*.jpg;*.jpeg;*.png";
+
+            openFileDialog.ShowDialog();
+
+            if (InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog) != null)
+            {
+                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)), UserDataProfilePhotoImage);
+            }
         }
 
         private void UserDataNameTextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -1,5 +1,4 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System;
@@ -12,6 +11,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 {
     public partial class UserMainInteractionAppointmentsReceivingPage : Page
     {
+        private PeriodicTimer periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+
         private ObservableCollection<UserMainInteractionAppointmentReceiveUserControl> userMainInteractionAppointmentReceiveUserControlCollection = new ObservableCollection<UserMainInteractionAppointmentReceiveUserControl>();
 
         public UserMainInteractionAppointmentsReceivingPage()
@@ -30,8 +31,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private async void UserMainInteractionAppointmentsReceivingUpdate()
         {
-            var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
-
             while (await periodicTimer.WaitForNextTickAsync())
             {
                 UserMainInteractionApointmentsReceiving();

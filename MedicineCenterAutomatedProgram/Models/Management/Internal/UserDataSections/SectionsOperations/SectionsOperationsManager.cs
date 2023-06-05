@@ -1,6 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MySql.Data.MySqlClient;
+using System.Data;
 using System.Windows;
 
 namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations
@@ -78,7 +80,7 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
 
             if (SectionsInstance.SectionsBinding.UserPositionIsDoctor)
             {
-                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Doctors (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');");
+                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Patients (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');");
             }
         }
 

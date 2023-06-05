@@ -1,9 +1,13 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Views.Windows.AlertWindows;
 using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,30 +28,30 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInit
             sortingParametersComboBox.ItemsSource = sortingParametersList;
         }
 
-        public static string InitializeProfilePhotoImage(Image profilePhotoImage)
+        public static BitmapImage InitializeProfilePhotoImage(OpenFileDialog openFileDialog)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Filter = "Files|*.jpg;*.jpeg;*.png";
-
-            openFileDialog.ShowDialog();
-
             if (openFileDialog.FileName != "")
             {
-                Uri selectedImageUri = new Uri($"{openFileDialog.FileName}", UriKind.Absolute);
+                BitmapImage bitmapImage = new BitmapImage();
 
-                profilePhotoImage.Source = new BitmapImage(selectedImageUri);
+                bitmapImage.BeginInit();
 
-                return openFileDialog.FileName.Replace('\\', '/');
+                bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
+
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                bitmapImage.DecodePixelHeight = 250;
+
+                bitmapImage.EndInit();
+
+                ByteImageValuesManager.GetImageByteStringBuilder(bitmapImage);
+
+                return bitmapImage;
             }
 
             else
             {
-                Uri defaultImageUri = new Uri("/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png", UriKind.Relative);
-
-                profilePhotoImage.Source = new BitmapImage(defaultImageUri);
-
-                return "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
+                return null;
             }
         }
 
