@@ -1,9 +1,11 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Views.UserControls;
 using System;
-using System.Windows;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
@@ -19,11 +21,21 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionAppointmentsReceivingPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UserMainInteractionApointmentsReceiving();
+            UserMainInteractionAppointmentsReceivingUpdate();
 
             UserMainInteractionAppointmentReceivesItemsControl.ItemsSource = userMainInteractionAppointmentReceiveUserControlCollection;
 
             UserMainInteractionAppointmentsReceivingEmptyHandler();
+        }
+
+        private async void UserMainInteractionAppointmentsReceivingUpdate()
+        {
+            var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+
+            while (await periodicTimer.WaitForNextTickAsync())
+            {
+                UserMainInteractionApointmentsReceiving();
+            }
         }
 
         private void UserMainInteractionAppointmentsReceivingEmptyHandler()
@@ -41,6 +53,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
         private void UserMainInteractionApointmentsReceiving()
         {
+            userMainInteractionAppointmentReceiveUserControlCollection.Clear();
+
             foreach (var appointment in DataResponseManager.AppointmentsJsonDataDeserialize($"SELECT AppointmentId FROM Appointments, Shifts WHERE AppointmentShiftId = ShiftId AND Shifts.DoctorId = {SectionsInstance.Doctor.Id} AND AppointmentStatus = 'Отправлен'"))
             {
                 foreach (var shift in DataResponseManager.ShiftsJsonDataDeserialize($"SELECT ShiftId, ShiftDate, ShiftStartActionTime, ShiftEndActionTime, ShiftHealingDirectionId, ShiftHospitalAddressId FROM Shifts, Appointments WHERE AppointmentShiftId = ShiftId AND AppointmentId = {appointment.AppointmentId}"))
