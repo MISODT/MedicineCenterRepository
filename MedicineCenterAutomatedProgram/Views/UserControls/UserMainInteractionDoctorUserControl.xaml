@@ -10,7 +10,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse Height="50" Width="50" Margin="5">
                     <Ellipse.Fill>
-                        <ImageBrush x:Name="UserDataProfilePhoto" Stretch="UniformToFill" ImageSource="{Binding ProfilePhotoUri}"/>
+                        <ImageBrush x:Name="UserDataProfilePhoto" Stretch="UniformToFill"/>
                     </Ellipse.Fill>
                 </Ellipse>
 

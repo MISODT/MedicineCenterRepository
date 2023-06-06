@@ -172,27 +172,6 @@ namespace MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManag
             }
         }
 
-        public static bool CheckProfilePhotoMistakes(TextBlock profilePhotoUriTextBlock, TextBlock profilePhotoUriMistakeTextBlock, string profilePhotoUriMistakeText)
-        {
-            if (!File.Exists(profilePhotoUriTextBlock.Text))
-            {
-                profilePhotoUriMistakeTextBlock.Visibility = Visibility.Visible;
-
-                profilePhotoUriMistakeTextBlock.Text = profilePhotoUriMistakeText;
-
-                return false;
-            }
-
-            else
-            {
-                profilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
-
-                profilePhotoUriMistakeTextBlock.Text = "";
-
-                return true;
-            }
-        }
-
         public static bool CheckPasswordMistakes(TextBox passwordTextBox, PasswordBox passwordPasswordBox, PasswordBox oldPasswordPasswordBox, PasswordBox newPasswordPasswordBox, PasswordBox repeatPasswordPasswordBox, TextBlock passwordMistakeTextBlock)
         {
             if (passwordTextBox != null)

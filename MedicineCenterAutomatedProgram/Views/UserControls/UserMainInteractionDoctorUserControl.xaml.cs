@@ -1,5 +1,9 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+﻿using MedicineCenterAutomatedProgram.Models.Management;
+using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
+using NPOI.POIFS.Properties;
+using System;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MedicineCenterAutomatedProgram.Views.UserControls
 {
@@ -9,7 +13,22 @@ namespace MedicineCenterAutomatedProgram.Views.UserControls
         {
             InitializeComponent();
 
+
             DataContext = doctor;
+
+
+            if (doctor.ProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
+            {
+                UserDataProfilePhoto.ImageSource = ByteImageValuesManager.GetImageFromBytes(doctor.ProfilePhotoUri);
+            }
+
+            else
+            {
+                Uri userImageUri = new Uri(doctor.ProfilePhotoUri, UriKind.RelativeOrAbsolute);
+
+                UserDataProfilePhoto.ImageSource = new BitmapImage(userImageUri);
+            }
+
 
             UserDataHealingDirectionTitleTextBlock.Text = healingDirection.HealingDirectionTitle;
         }
