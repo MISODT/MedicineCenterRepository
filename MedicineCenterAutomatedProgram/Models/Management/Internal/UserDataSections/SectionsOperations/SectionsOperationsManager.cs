@@ -73,28 +73,58 @@ namespace MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOper
 
         public static void RegisterUserOperation(string login, string loginMailDomain, string password)
         {
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=88.87.92.66;Database=MedicineCenter;User=any;Password=HFuzTOaG5M");
+
+            string query = "";
+
             if (SectionsInstance.SectionsBinding.UserPositionIsPatient)
             {
-                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Patients (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');");
+                query = $"INSERT INTO Patients (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');";
             }
 
             if (SectionsInstance.SectionsBinding.UserPositionIsDoctor)
             {
-                WebResponseManager.ResponseFromRequestQuery($"INSERT INTO Patients (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');");
+                query = $"INSERT INTO Doctors (ProfilePhotoUri, Name, Surname, Patronymic, DateOfBirth, Gender, AddressId, SchoolId, UniversityId, UniversityStartEducationYear, UniversityEndEducationYear, Login, Password) VALUES ('{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', '{SectionsInstance.SectionsBinding.UserName}', '{SectionsInstance.SectionsBinding.UserSurname}', '{SectionsInstance.SectionsBinding.UserPatronymic}', '{SectionsInstance.SectionsBinding.UserYearOfBirth}-{SectionsInstance.SectionsBinding.UserMonthOfBirthNumber}-{SectionsInstance.SectionsBinding.UserDayOfBirth}', '{SectionsInstance.SectionsBinding.UserGender}', {SectionsInstance.SectionsBinding.UserAddressId}, {SectionsInstance.SectionsBinding.UserSchoolId}, {SectionsInstance.SectionsBinding.UserUniversityId}, {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear}, '{login}{loginMailDomain}', '{CryptionManager.EncryptData(password)}');";
             }
+
+            MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+
+            if(mySqlConnection.State == ConnectionState.Closed)
+            {
+                mySqlConnection.Open();
+            }
+
+            mySqlCommand.ExecuteNonQuery();
+
+            mySqlCommand.Dispose();
         }
 
         public static void UpdateUserOperation()
         {
-            if (SectionsInstance.SectionsBinding.UserPositionIsPatient)
+            MySqlConnection mySqlConnection = new MySqlConnection("Server=88.87.92.66;Database=MedicineCenter;User=any;Password=HFuzTOaG5M");
+
+            string query = "";
+
+            if (SectionsInstance.Patient != null)
             {
-                WebResponseManager.ResponseFromRequestQuery($"UPDATE Patients SET ProfilePhotoUri = '{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', Name = '{SectionsInstance.SectionsBinding.UserName}', Surname = '{SectionsInstance.SectionsBinding.UserSurname}', Patronymic = '{SectionsInstance.SectionsBinding.UserPatronymic}', Gender = '{SectionsInstance.SectionsBinding.UserGender}', AddressId = {SectionsInstance.SectionsBinding.UserAddressId}, SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}, UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}, UniversityStartEducationYear = {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, UniversityEndEducationYear = {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear} WHERE Id = {SectionsInstance.SectionsBinding.UserId}");
+                query = $"UPDATE Patients SET ProfilePhotoUri = '{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', Name = '{SectionsInstance.SectionsBinding.UserName}', Surname = '{SectionsInstance.SectionsBinding.UserSurname}', Patronymic = '{SectionsInstance.SectionsBinding.UserPatronymic}', Gender = '{SectionsInstance.SectionsBinding.UserGender}', AddressId = {SectionsInstance.SectionsBinding.UserAddressId}, SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}, UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}, UniversityStartEducationYear = {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, UniversityEndEducationYear = {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear} WHERE Id = {SectionsInstance.SectionsBinding.UserId}";
             }
 
-            if (SectionsInstance.SectionsBinding.UserPositionIsDoctor)
+            if (SectionsInstance.Doctor != null)
             {
-                WebResponseManager.ResponseFromRequestQuery($"UPDATE Doctors SET ProfilePhotoUri = '{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', Name = '{SectionsInstance.SectionsBinding.UserName}', Surname = '{SectionsInstance.SectionsBinding.UserSurname}', Patronymic = '{SectionsInstance.SectionsBinding.UserPatronymic}', Gender = '{SectionsInstance.SectionsBinding.UserGender}', AddressId = {SectionsInstance.SectionsBinding.UserAddressId}, SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}, UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}, UniversityStartEducationYear = {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, UniversityEndEducationYear = {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear} WHERE Id = {SectionsInstance.SectionsBinding.UserId}");
+                query = $"UPDATE Doctors SET ProfilePhotoUri = '{SectionsInstance.SectionsBinding.UserProfilePhotoUri}', Name = '{SectionsInstance.SectionsBinding.UserName}', Surname = '{SectionsInstance.SectionsBinding.UserSurname}', Patronymic = '{SectionsInstance.SectionsBinding.UserPatronymic}', Gender = '{SectionsInstance.SectionsBinding.UserGender}', AddressId = {SectionsInstance.SectionsBinding.UserAddressId}, SchoolId = {SectionsInstance.SectionsBinding.UserSchoolId}, UniversityId = {SectionsInstance.SectionsBinding.UserUniversityId}, UniversityStartEducationYear = {SectionsInstance.SectionsBinding.UserUniversityStartEducationYear}, UniversityEndEducationYear = {SectionsInstance.SectionsBinding.UserUniversityEndEducationYear} WHERE Id = {SectionsInstance.SectionsBinding.UserId}";
             }
+
+            MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+
+            if (mySqlConnection.State == ConnectionState.Closed)
+            {
+                mySqlConnection.Open();
+            }
+
+            mySqlCommand.ExecuteNonQuery();
+
+            mySqlCommand.Dispose();
         }
 
         public static void UpdateAppointmentOperation(string appointmentId, string shiftId, string appointmentDescription)

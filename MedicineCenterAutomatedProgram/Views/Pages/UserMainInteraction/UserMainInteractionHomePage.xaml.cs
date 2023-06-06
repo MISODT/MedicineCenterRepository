@@ -1,4 +1,5 @@
-﻿using MedicineCenterAutomatedProgram.Models.Management.External;
+﻿using MedicineCenterAutomatedProgram.Models.Management;
+using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataOperations;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.Sections;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
@@ -8,6 +9,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 {
@@ -20,6 +22,19 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             if(patient != null)
             {
                 DataContext = patient;
+
+
+                if (patient.ProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
+                {
+                    UserDataProfilePhotoImage.ImageSource = ByteImageValuesManager.GetImageFromBytes(patient.ProfilePhotoUri);
+                }
+
+                else
+                {
+                    Uri userImageUri = new Uri(patient.ProfilePhotoUri, UriKind.RelativeOrAbsolute);
+
+                    UserDataProfilePhotoImage.ImageSource = new BitmapImage(userImageUri);
+                }
 
 
                 MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Hidden;
@@ -35,6 +50,19 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             if(doctor != null)
             {
                 DataContext = doctor;
+
+
+                if (doctor.ProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
+                {
+                    UserDataProfilePhotoImage.ImageSource = ByteImageValuesManager.GetImageFromBytes(doctor.ProfilePhotoUri);
+                }
+
+                else
+                {
+                    Uri userImageUri = new Uri(doctor.ProfilePhotoUri, UriKind.RelativeOrAbsolute);
+
+                    UserDataProfilePhotoImage.ImageSource = new BitmapImage(userImageUri);
+                }
 
 
                 MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Visible;

@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace MedicineCenterAutomatedProgram.Models.Management
 {
     public class ByteImageValuesManager
     {
-        public static void GetImageFromBytes(string bytesValue, Image imageValue)
+        public static ImageSource GetImageFromBytes(string bytesValue )
         {
             if(bytesValue != null)
             {
@@ -20,7 +21,12 @@ namespace MedicineCenterAutomatedProgram.Models.Management
 
                 image.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 
-                imageValue.Source = image.Source;
+                return image.Source;
+            }
+
+            else
+            {
+                return null;
             }
         }
 

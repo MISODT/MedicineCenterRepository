@@ -28,10 +28,6 @@
                                 <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Text="Выбрать" Style="{DynamicResource DataIntroductionButtonContentTextBlock}"/>
                             </StackPanel>
                         </Button>
-
-                        <TextBlock Name="UserDataProfilePhotoUriTextBlock" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{Binding UserProfilePhotoUri}" TextAlignment="Center" Style="{DynamicResource UserProfileDataTextBlock}"/>
-
-                        <TextBlock Name="UserDataProfilePhotoUriMistakeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" Text="Ошибка: Фото профиля" Style="{DynamicResource UserDataMistakesTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="35 0 0 0">

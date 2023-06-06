@@ -1,13 +1,8 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management.External;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Views.Windows.AlertWindows;
 using Microsoft.Win32;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

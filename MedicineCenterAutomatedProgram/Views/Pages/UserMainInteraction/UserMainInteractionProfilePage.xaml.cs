@@ -8,9 +8,11 @@ using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using MedicineCenterAutomatedProgram.Models.Management.UserDataMistakesManager;
 using Microsoft.Win32;
+using NPOI.POIFS.Properties;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 {
@@ -20,7 +22,21 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             InitializeComponent();
 
+
             DataContext = user;
+
+
+            if (user.UserProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
+            {
+                UserDataProfilePhotoImage.Source = ByteImageValuesManager.GetImageFromBytes(user.UserProfilePhotoUri);
+            }
+
+            else
+            {
+                Uri userImageUri = new Uri(user.UserProfilePhotoUri, UriKind.RelativeOrAbsolute);
+
+                UserDataProfilePhotoImage.Source = new BitmapImage(userImageUri);
+            }
         }
 
         private void ProfileSaveButtonState()
@@ -59,13 +75,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
             FieldsViewManager.ChangeTextBoxClearedView(UserDataNameTextBox, UserDataNameTextBoxHintAssist, ClearNameButton);
             FieldsViewManager.ChangeTextBoxClearedView(UserDataSurnameTextBox, UserDataSurnameTextBoxHintAssist, ClearSurnameButton);
             FieldsViewManager.ChangeTextBoxClearedView(UserDataPatronymicTextBox, UserDataPatronymicTextBoxHintAssist, ClearPatronymicButton);
-
-            UserDataProfilePhotoUriMistakeTextBlock.Visibility = Visibility.Hidden;
-
-            if(!ExternalMistakesManager.CheckProfilePhotoMistakes(UserDataProfilePhotoUriTextBlock, UserDataProfilePhotoUriMistakeTextBlock, "Файл не был найден"))
-            {
-                SectionsInstance.SectionsBinding.UserProfilePhotoUri = "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png";
-            }
 
             UserDataNameMistakeTextBlock.Visibility = Visibility.Hidden;
             UserDataSurnameMistakeTextBlock.Visibility = Visibility.Hidden;
@@ -113,7 +122,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             if (InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog) != null)
             {
-                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)), UserDataProfilePhotoImage);
+                UserDataProfilePhotoImage.Source = ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)));
             }
         }
 

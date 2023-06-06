@@ -1,13 +1,9 @@
 ﻿using MedicineCenterAutomatedProgram.Models.Management;
 using MedicineCenterAutomatedProgram.Models.Management.External;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.ControlsInitialization;
-using MedicineCenterAutomatedProgram.Models.Management.Internal.ReceivingData;
 using MedicineCenterAutomatedProgram.Models.Management.Internal.UserDataSections.SectionsOperations;
 using Microsoft.Win32;
-using MySql.Data.MySqlClient;
 using System;
-using System.Data;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -47,7 +43,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
         {
             if (SectionsInstance.SectionsBinding.UserProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
             {
-                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri, UserDataProfilePhotoImage);
+                UserDataProfilePhotoImage.Source = ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri);
             }
 
             else
@@ -70,7 +66,7 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
 
             if (InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog) != null)
             {
-                ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)), UserDataProfilePhotoImage);
+                UserDataProfilePhotoImage.Source = ByteImageValuesManager.GetImageFromBytes(SectionsInstance.SectionsBinding.UserProfilePhotoUri = ByteImageValuesManager.GetImageByteStringBuilder(InteriorControlsInitializationManager.InitializeProfilePhotoImage(openFileDialog)));
             }
         }
 
