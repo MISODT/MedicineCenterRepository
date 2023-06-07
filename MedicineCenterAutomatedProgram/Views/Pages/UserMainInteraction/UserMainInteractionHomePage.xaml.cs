@@ -29,13 +29,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserDataProfilePhotoImage.ImageSource = ByteImageValuesManager.GetImageFromBytes(patient.ProfilePhotoUri);
                 }
 
-                else
-                {
-                    Uri userImageUri = new Uri(patient.ProfilePhotoUri, UriKind.RelativeOrAbsolute);
-
-                    UserDataProfilePhotoImage.ImageSource = new BitmapImage(userImageUri);
-                }
-
 
                 MainInteractionHomeSectionsDoctorReceiving.Visibility = Visibility.Hidden;
 
@@ -55,13 +48,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                 if (doctor.ProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
                 {
                     UserDataProfilePhotoImage.ImageSource = ByteImageValuesManager.GetImageFromBytes(doctor.ProfilePhotoUri);
-                }
-
-                else
-                {
-                    Uri userImageUri = new Uri(doctor.ProfilePhotoUri, UriKind.RelativeOrAbsolute);
-
-                    UserDataProfilePhotoImage.ImageSource = new BitmapImage(userImageUri);
                 }
 
 

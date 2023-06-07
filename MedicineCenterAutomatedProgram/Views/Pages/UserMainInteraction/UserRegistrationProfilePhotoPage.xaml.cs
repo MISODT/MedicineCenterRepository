@@ -17,28 +17,6 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserDataIntroduction.UserRe
             InitializeComponent();
         }
 
-        /*public async void InitializeProfilePhotoImage(Image profilePhotoImage)
-        {
-            string mySqlQuery = "SELECT ProfilePhotoUri FROM Doctors";
-
-            MySqlCommand mySqlCommand = new MySqlCommand(mySqlQuery, WebResponseManager.mySqlConnection);
-
-            if(WebResponseManager.mySqlConnection.State == ConnectionState.Closed)
-            {
-                await WebResponseManager.mySqlConnection.OpenAsync();
-            }
-
-            MySqlDataReader mySqlDataReader = (MySqlDataReader)await mySqlCommand.ExecuteReaderAsync();
-
-            while (await mySqlDataReader.ReadAsync())
-            {
-                await Task.Run(() =>
-                {
-                    Dispatcher.Invoke(() => ByteImageValuesManager.GetImageFromBytes(mySqlDataReader[0].ToString(), profilePhotoImage));
-                });
-            }
-        }*/
-
         private void UserRegistrationProfilePhotoPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (SectionsInstance.SectionsBinding.UserProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
