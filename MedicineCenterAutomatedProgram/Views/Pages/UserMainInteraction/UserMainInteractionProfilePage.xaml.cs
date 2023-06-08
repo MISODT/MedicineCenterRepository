@@ -21,9 +21,9 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         public UserMainInteractionProfilePage(SectionsBindingManager user)
         {
             InitializeComponent();
-            DataContext = user;
 
-            MessageBox.Show(user.UserProfilePhotoUri);
+
+            DataContext = user;
 
 
             if (user.UserProfilePhotoUri != "/Resources/DefaultImages/DefaultUserDataProfilePhotoImage.png")
