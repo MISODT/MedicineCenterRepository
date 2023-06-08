@@ -32,6 +32,6 @@
             </Button>
         </StackPanel>
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0 0 0" Text="MEDICINE CENTER - Для нас важен каждый из Вас." Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0 0 0" Text="MEDICINE CENTER - Для нас важен каждый из вас." Style="{DynamicResource PageDescriptionTextBlockStyle}"/>
     </Grid>
 </Page>
