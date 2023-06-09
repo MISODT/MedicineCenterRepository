@@ -104,6 +104,30 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
         {
             if(SectionsInstance.Patient != null)
             {
+                string patientSchoolId = "";
+
+                string patientUniversityId = "";
+
+                if(SectionsInstance.Patient.SchoolId == null)
+                {
+                    patientSchoolId = "NULL";
+                }
+
+                else
+                {
+                    patientSchoolId = SectionsInstance.Patient.SchoolId;
+                }
+
+                if(SectionsInstance.Patient.UniversityId == null)
+                {
+                   patientUniversityId = "NULL";
+                }
+
+                else
+                {
+                    patientUniversityId = SectionsInstance.Patient.UniversityId;
+                }
+
                 SectionsInstance.SectionsBinding = new SectionsBindingManager()
                 {
                     UserPositionIsDoctor = true,
@@ -115,8 +139,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserDateOfBirth = SectionsInstance.Patient.DateOfBirth,
                     UserGender = SectionsInstance.Patient.Gender,
                     UserAddressId = SectionsInstance.Patient.AddressId,
-                    UserSchoolId = SectionsInstance.Patient.SchoolId,
-                    UserUniversityId = SectionsInstance.Patient.UniversityId,
+                    UserSchoolId = patientSchoolId,
+                    UserUniversityId = patientUniversityId,
                     UserUniversityStartEducationYear = Convert.ToInt32(SectionsInstance.Patient.UniversityStartEducationYear),
                     UserUniversityEndEducationYear = Convert.ToInt32(SectionsInstance.Patient.UniversityEndEducationYear),
                     UserLogin = SectionsInstance.Patient.Login,
@@ -126,6 +150,30 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
 
             if (SectionsInstance.Doctor != null)
             {
+                string doctorSchoolId = "";
+
+                string doctorUniversityId = "";
+
+                if (SectionsInstance.Doctor.SchoolId == null)
+                {
+                    doctorSchoolId = "NULL";
+                }
+
+                else
+                {
+                    doctorSchoolId = SectionsInstance.Doctor.SchoolId;
+                }
+
+                if (SectionsInstance.Doctor.UniversityId == null)
+                {
+                    doctorUniversityId = "NULL";
+                }
+
+                else
+                {
+                    doctorUniversityId = SectionsInstance.Doctor.UniversityId;
+                }
+
                 SectionsInstance.SectionsBinding = new SectionsBindingManager()
                 {
                     UserPositionIsDoctor = true,
@@ -137,8 +185,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                     UserDateOfBirth = SectionsInstance.Doctor.DateOfBirth,
                     UserGender = SectionsInstance.Doctor.Gender,
                     UserAddressId = SectionsInstance.Doctor.AddressId,
-                    UserSchoolId = SectionsInstance.Doctor.SchoolId,
-                    UserUniversityId = SectionsInstance.Doctor.UniversityId,
+                    UserSchoolId = doctorSchoolId,
+                    UserUniversityId = doctorUniversityId,
                     UserUniversityStartEducationYear = Convert.ToInt32(SectionsInstance.Doctor.UniversityStartEducationYear),
                     UserUniversityEndEducationYear = Convert.ToInt32(SectionsInstance.Doctor.UniversityEndEducationYear),
                     UserLogin = SectionsInstance.Doctor.Login,
