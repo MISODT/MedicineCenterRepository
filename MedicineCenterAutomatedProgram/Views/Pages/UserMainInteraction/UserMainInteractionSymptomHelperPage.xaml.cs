@@ -73,6 +73,8 @@ namespace MedicineCenterAutomatedProgram.Views.Pages.UserMainInteraction
                         {
                             if (disease.DiseaseTitle.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || disease.DiseaseTitle.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()) || symptom.SymptomValue.ToLower().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToLower()) || symptom.SymptomValue.ToUpper().Contains(UserMainInteractionSymptomHelperSearchTextBox.Text.ToUpper()))
                             {
+                                userMainInteractionSymptomHelperRunDiseaseUserControlCollection.Clear();
+
 
                                 diseasesList = diseasesList.DistinctBy(x => x.DiseaseId).ToList();
 
